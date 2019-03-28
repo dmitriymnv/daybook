@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 
 import Colors from '../../constants/Colors';
@@ -9,17 +9,14 @@ interface HeadlineProps {
   style: object;
 }
 
-class Headline extends Component<HeadlineProps> {
-  render() {
-    const { text, style } = this.props;
-    return (
-      <View style={{ ...styles.wrapper, ...style }}>
-        <Text style={styles.headline}>{text}</Text>
-        <View style={styles.decoration} />
-      </View>
-    );
-  }
-}
+const Headline = ({ text, style }: HeadlineProps) => {
+  return (
+    <View style={{ ...styles.wrapper, ...style }}>
+      <Text style={styles.headline}>{text}</Text>
+      <View style={styles.decoration} />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   wrapper: {
