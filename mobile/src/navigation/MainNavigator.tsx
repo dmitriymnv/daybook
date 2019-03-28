@@ -12,39 +12,41 @@ export interface TabBarIconProps {
   name: string;
 }
 
-export default createBottomTabNavigator({
-  Home: {
-    screen: HomeScreen,
-    navigationOptions: {
-      tabBarLabel: 'Главная',
-      tabBarOptions: {
-        activeTintColor: Colors.tintColor
-      },
-      tabBarIcon: ({ focused }: TabBarIconProps) => (
-        <TabBarIcon
-          focused={focused}
-          name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
-        />
-      )
+export default createBottomTabNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
+      navigationOptions: {
+        tabBarLabel: 'Главная',
+        tabBarIcon: ({ focused }: TabBarIconProps) => (
+          <TabBarIcon
+            focused={focused}
+            name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
+          />
+        )
+      }
+    },
+
+    Subscibe: {
+      screen: SubscribeScreen,
+      navigationOptions: {
+        tabBarLabel: 'Подписки',
+        tabBarIcon: ({ focused }: TabBarIconProps) => (
+          <TabBarIcon
+            focused={focused}
+            name={Platform.OS === 'ios' ? 'ios-bookmarks' : 'md-bookmarks'}
+          />
+        )
+      }
     }
   },
-
-  Subscibe: {
-    screen: SubscribeScreen,
-    navigationOptions: {
-      tabBarLabel: 'Подписки',
-      tabBarOptions: {
-        activeTintColor: Colors.tintColor,
-        style: {
-          marginBottom: 10
-        }
+  {
+    tabBarOptions: {
+      activeTintColor: Colors.tintColor,
+      labelStyle: {
+        fontSize: 20
       },
-      tabBarIcon: ({ focused }: TabBarIconProps) => (
-        <TabBarIcon
-          focused={focused}
-          name={Platform.OS === 'ios' ? 'ios-bookmarks' : 'md-bookmarks'}
-        />
-      )
+      showLabel: false
     }
   }
-});
+);
