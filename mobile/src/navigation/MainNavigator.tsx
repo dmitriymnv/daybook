@@ -10,6 +10,7 @@ import Colors from '../constants/Colors';
 export interface TabBarIconProps {
   focused: boolean;
   name: string;
+  style?: object;
 }
 
 export default createBottomTabNavigator(

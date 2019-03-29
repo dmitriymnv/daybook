@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 
 import { wrapper } from '../constants/Style';
-import { categories } from '../constants/App';
+import CategorySelection from '../components/categories/categorySelection';
 import Headline from '../components/common/Headline';
 
 class HomeScreen extends Component {
@@ -10,9 +10,14 @@ class HomeScreen extends Component {
     return (
       <View style={styles.wrapper}>
         <Headline text="Главная" style={styles.headline} />
+        <CategorySelection onClick={this.categorySelectionPressing} />
       </View>
     );
   }
+
+  categorySelectionPressing = (name: string): void => {
+    console.log(1, name);
+  };
 }
 
 const styles = StyleSheet.create({
