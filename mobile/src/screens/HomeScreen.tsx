@@ -4,6 +4,7 @@ import { View, StyleSheet } from 'react-native';
 import { wrapper } from '../constants/Style';
 import CategorySelection from '../components/categories/categorySelection';
 import Headline from '../components/common/Headline';
+import AllJournals from '../components/journals/AllJournals';
 
 class HomeScreen extends Component {
   render() {
@@ -11,6 +12,7 @@ class HomeScreen extends Component {
       <View style={styles.wrapper}>
         <Headline text="Главная" style={styles.headline} />
         <CategorySelection onClick={this.categorySelectionPressing} />
+        <AllJournals />
       </View>
     );
   }

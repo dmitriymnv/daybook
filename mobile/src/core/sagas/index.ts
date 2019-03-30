@@ -1,7 +1,7 @@
 import { all } from 'redux-saga/effects';
 
-import { saga as authSaga } from './auth';
+import { saga as journalSaga } from './journals';
 
 export default function* rootSaga() {
-  yield all([authSaga()]);
+  yield all([journalSaga()]);
 }
