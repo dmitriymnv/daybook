@@ -7,14 +7,12 @@ const db = require('./db');
 const app = express();
 
 db.connect((err) => {
-	// if(err) {
-	// 	throw err;
-	// } else {
-	// 	global.db = db;
-	// }
+	if(err) {
+		throw err;
+	} else {
+		global.db = db;
+	}
 });
-
-global.db = db;
 
 app.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
@@ -23,7 +21,6 @@ app.use(function(req, res, next) {
 });
 
 app.use(BodyParser.json());
-// app.use(BodyParser.urlencoded({ extended: false }));
 
 app.use('/journals', journals);
 
