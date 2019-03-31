@@ -2,24 +2,24 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import axios from 'axios';
 
-import PreviewItemJournal, {
-  PreviewItemJournalProps
-} from './PreviewItemJournal';
 import { apiServer } from '../../core/constants';
+import TableJournals from './table';
 
-interface AllJournalsProps {}
+interface JournalsProps {
+  categories?: string;
+}
 
-class AllJournals extends Component<AllJournalsProps> {
+class Journals extends Component<JournalsProps> {
   state = {
     journals: [],
-    count: null,
+    count: 0,
     errors: null,
     loading: true,
     loaded: false
   };
 
   componentDidMount() {
-    this.AllJournalsRequest({ to: 0 })
+    this.loadingJournalsRequest({ to: 0 })
       .then(({ data }) => {
         this.setState({
           journals: data.result,
@@ -35,7 +35,7 @@ class AllJournals extends Component<AllJournalsProps> {
   }
 
   render() {
-    const { journals, errors, loading, loaded } = this.state;
+    const { journals, count, errors, loading, loaded } = this.state;
     if (loading) {
       return (
         <View>
@@ -43,13 +43,7 @@ class AllJournals extends Component<AllJournalsProps> {
         </View>
       );
     } else if (!loading && loaded) {
-      return (
-        <View>
-          {journals.map(({ title, publisher }: PreviewItemJournalProps, i) => (
-            <PreviewItemJournal key={i} title={title} publisher={publisher} />
-          ))}
-        </View>
-      );
+      return <TableJournals journals={journals} count={count} />;
     } else if (!loaded && !loaded) {
       <View>
         <Text>{errors}</Text>
@@ -57,7 +51,7 @@ class AllJournals extends Component<AllJournalsProps> {
     }
   }
 
-  AllJournalsRequest = ({ to }: { to: number }) =>
+  loadingJournalsRequest = ({ to }: { to: number }) =>
     axios.post(`${apiServer}/journals`, {
       data: {
         to
@@ -65,4 +59,4 @@ class AllJournals extends Component<AllJournalsProps> {
     });
 }
 
-export default AllJournals;
+export default Journals;
