@@ -5,23 +5,27 @@ import { categoriesList } from '../../../constants/App';
 import Button from './Button';
 
 interface SelectMenuProps {
-  onClick: (name: string) => void;
+  style: object;
 }
 
-const SelectMenu = ({ onClick }: SelectMenuProps) => {
+const SelectMenu = ({ style }: SelectMenuProps) => {
   return (
     <ScrollView
       horizontal={true}
       showsHorizontalScrollIndicator={false}
-      style={styles.container}
+      style={{ ...styles.container, ...style }}
     >
       {categoriesList.map(({ name, text, icon }) => (
-        <TouchableOpacity onPress={() => onClick(name)} key={name}>
+        <TouchableOpacity onPress={() => onPress({ name })} key={name}>
           <Button text={text} icon={icon} />
         </TouchableOpacity>
       ))}
     </ScrollView>
   );
+};
+
+const onPress = ({ name }: { name: string }) => {
+  console.log(name);
 };
 
 const styles = StyleSheet.create({

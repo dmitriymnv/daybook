@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { ScrollView, View, TouchableOpacity, StyleSheet } from 'react-native';
 
 import PreviewItemJournal, {
   PreviewItemJournalProps
@@ -20,13 +20,42 @@ class TableJournals extends Component<TableJournalsProps> {
   render() {
     const { journals } = this.props;
     return (
-      <View>
-        {journals.map(({ title, publisher }, i) => (
-          <PreviewItemJournal key={i} title={title} publisher={publisher} />
-        ))}
-      </View>
+      <ScrollView style={styles.scrollContainer}>
+        <View style={styles.container}>
+          {journals.map(({ title, publisher }, i) => (
+            <TouchableOpacity
+              key={i}
+              onPress={() => this.onPress({ title })}
+              style={styles.item}
+            >
+              <PreviewItemJournal title={title} publisher={publisher} />
+            </TouchableOpacity>
+          ))}
+        </View>
+      </ScrollView>
     );
   }
+
+  onPress = ({ title }: { title: string }) => {
+    console.log(title);
+  };
 }
+
+const styles = StyleSheet.create({
+  scrollContainer: {
+    position: 'relative'
+  },
+  container: {
+    flexWrap: 'wrap'
+    // alignItems: 'center',
+    // justifyContent: 'center'
+  },
+  item: {
+    // position: 'relative',
+    // width: '50%',
+    // height: '30%',
+    // marginBottom: 100
+  }
+});
 
 export default TableJournals;

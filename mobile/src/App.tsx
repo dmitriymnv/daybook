@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 
 import AppNavigator from './navigation/AppNavigator';
 import store from './core';
+import Colors from './constants/Colors';
 
 class App extends Component {
   state = {
@@ -48,7 +49,7 @@ class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: Colors.grayColor
   }
 });
 

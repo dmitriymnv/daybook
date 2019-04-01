@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     width: 140,
     height: 45,
     borderRadius: 5,
-    backgroundColor: Colors.ButtonBackgroundCategorySelect
+    backgroundColor: Colors.cardBackroundColor
   },
   title: {
     lineHeight: 45,

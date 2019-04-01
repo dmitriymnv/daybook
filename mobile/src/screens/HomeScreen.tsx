@@ -11,21 +11,22 @@ class HomeScreen extends Component {
     return (
       <View style={styles.wrapper}>
         <Headline text="Главная" style={styles.headline} />
-        <CategorySelection onClick={this.categorySelectionPressing} />
+        <CategorySelection style={styles.category} />
         <Journals />
       </View>
     );
   }
-
-  categorySelectionPressing = (name: string): void => {
-    console.log(1, name);
-  };
 }
 
 const styles = StyleSheet.create({
   wrapper: {
     position: 'relative',
     ...wrapper
+  },
+  category: {
+    position: 'relative',
+    marginBottom: 20,
+    opacity: 0.4
   },
   headline: {
     marginLeft: 20,
