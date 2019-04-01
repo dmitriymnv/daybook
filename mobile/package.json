@@ -13,6 +13,7 @@
   "dependencies": {
     "@expo/samples": "2.1.1",
     "@types/expo__vector-icons": "^9.0.1",
+    "@types/jest": "^24.0.11",
     "@types/react-native": "^0.57.41",
     "@types/react-redux": "^7.0.5",
     "axios": "^0.18.0",
@@ -21,6 +22,7 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-navigation": "^3.5.1",
     "react-redux": "^6.0.1",
+    "react-test-renderer": "^16.8.6",
     "redux": "^4.0.1",
     "redux-saga": "^1.0.2"
   },
