@@ -5,7 +5,7 @@ import { categoriesList } from '../../../constants/App';
 import Button from './Button';
 
 interface SelectMenuProps {
-  style: object;
+  style?: object;
 }
 
 const SelectMenu = ({ style }: SelectMenuProps) => {

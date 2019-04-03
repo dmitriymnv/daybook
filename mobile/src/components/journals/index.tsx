@@ -45,9 +45,11 @@ class Journals extends Component<JournalsProps> {
     } else if (!loading && loaded) {
       return <TableJournals journals={journals} count={count} />;
     } else if (!loaded && !loaded) {
-      <View>
-        <Text>{errors}</Text>
-      </View>;
+      return (
+        <View>
+          <Text>Ошибка</Text>
+        </View>
+      );
     }
   }
 

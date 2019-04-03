@@ -23,13 +23,11 @@ class TableJournals extends Component<TableJournalsProps> {
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.container}>
           {journals.map(({ title, publisher }, i) => (
-            <TouchableOpacity
-              key={i}
-              onPress={() => this.onPress({ title })}
-              style={styles.item}
-            >
-              <PreviewItemJournal title={title} publisher={publisher} />
-            </TouchableOpacity>
+            <PreviewItemJournal
+              key={title}
+              title={title}
+              publisher={publisher}
+            />
           ))}
         </View>
       </ScrollView>
