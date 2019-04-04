@@ -18,7 +18,6 @@ export default createBottomTabNavigator(
     Home: {
       screen: HomeScreen,
       navigationOptions: {
-        tabBarLabel: 'Главная',
         tabBarIcon: ({ focused }: TabBarIconProps) => (
           <TabBarIcon
             focused={focused}
@@ -31,7 +30,6 @@ export default createBottomTabNavigator(
     Subscibe: {
       screen: SubscribeScreen,
       navigationOptions: {
-        tabBarLabel: 'Подписки',
         tabBarIcon: ({ focused }: TabBarIconProps) => (
           <TabBarIcon
             focused={focused}
@@ -44,8 +42,8 @@ export default createBottomTabNavigator(
   {
     tabBarOptions: {
       activeTintColor: Colors.tintColor,
-      labelStyle: {
-        fontSize: 20
+      style: {
+        height: '7%'
       },
       showLabel: false
     }

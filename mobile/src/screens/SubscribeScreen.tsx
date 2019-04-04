@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Platform, TouchableOpacity } from 'react-native';
 
-import { wrapper } from '../constants/Style';
+import { wrapperBottomTabNavigator as wrapper } from '../constants/Style';
 import Headline from '../components/common/Headline';
 import Ionicons from '../navigation/TopBarIcon';
-import { grayColor } from '../constants/Colors';
+import { headSubscribeHomeScreen } from '../constants/Style';
 
 class HomeScreen extends Component {
   render() {
@@ -20,21 +20,23 @@ class HomeScreen extends Component {
             />
           </TouchableOpacity>
         </View>
+
+        <View style={styles.body} />
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-    ...wrapper
-  },
+  wrapper,
   head: {
+    ...headSubscribeHomeScreen,
     flexDirection: 'row',
     alignItems: 'baseline',
-    paddingBottom: 5,
-    borderBottomWidth: 1,
-    borderColor: grayColor
+    height: '8%'
+  },
+  body: {
+    height: '92%'
   },
   headline: {
     marginLeft: 20,

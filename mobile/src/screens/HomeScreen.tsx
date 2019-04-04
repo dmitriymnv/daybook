@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 
-import { wrapper } from '../constants/Style';
+import { wrapperBottomTabNavigator as wrapper } from '../constants/Style';
 import CategorySelection from '../components/categories/categorySelection';
 import Headline from '../components/common/Headline';
 import Journals from '../components/journals';
+import { headSubscribeHomeScreen } from '../constants/Style';
 
 class HomeScreen extends Component {
   render() {
     return (
       <View style={styles.wrapper}>
-        <View>
+        <View style={styles.head}>
           <Headline text="Главная" style={styles.headline} />
-          <CategorySelection style={styles.category} />
+          <CategorySelection />
         </View>
 
-        <View>
+        <View style={styles.body}>
           <Journals />
         </View>
       </View>
@@ -24,12 +25,13 @@ class HomeScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-    display: 'flex',
-    ...wrapper
+  wrapper,
+  head: {
+    ...headSubscribeHomeScreen,
+    height: '20%'
   },
-  category: {
-    marginBottom: 20
+  body: {
+    height: '80%'
   },
   headline: {
     marginLeft: 20,
