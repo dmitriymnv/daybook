@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.post('/', ({ body }, req) => {
 	if(body.data.to == 0) {
-		const journalsRequest = "SELECT title, publisher FROM `journals` ORDER BY `id` DESC LIMIT 10";
+		const journalsRequest = "SELECT title, id FROM `journals` ORDER BY `id` DESC LIMIT 10";
 		const countRequest = "SELECT COUNT(*) count FROM `journals`";
 		let count = null;
 		

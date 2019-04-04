@@ -5,8 +5,12 @@ import PreviewItemJournal, {
   PreviewItemJournalProps
 } from './PreviewItemJournal';
 
+interface JournalTableItem extends PreviewItemJournalProps {
+  id: number;
+}
+
 interface TableJournalsProps {
-  journals: Array<PreviewItemJournalProps>;
+  journals: Array<JournalTableItem>;
   count: number;
 }
 
@@ -22,37 +26,33 @@ class TableJournals extends Component<TableJournalsProps> {
     return (
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.container}>
-          {journals.map(({ title, publisher }, i) => (
-            <PreviewItemJournal
-              key={title}
-              title={title}
-              publisher={publisher}
-            />
+          {journals.map(({ id, title }, i) => (
+            <TouchableOpacity
+              key={i}
+              style={styles.item}
+              onPress={() => this.onPress({ id })}
+            >
+              <PreviewItemJournal title={title} />
+            </TouchableOpacity>
           ))}
         </View>
       </ScrollView>
     );
   }
 
-  onPress = ({ title }: { title: string }) => {
-    console.log(title);
+  onPress = ({ id }: { id: number }) => {
+    console.log(id);
   };
 }
 
 const styles = StyleSheet.create({
-  scrollContainer: {
-    position: 'relative'
-  },
+  scrollContainer: {},
   container: {
+    flexDirection: 'row',
     flexWrap: 'wrap'
-    // alignItems: 'center',
-    // justifyContent: 'center'
   },
   item: {
-    // position: 'relative',
-    // width: '50%',
-    // height: '30%',
-    // marginBottom: 100
+    width: '50%'
   }
 });
 

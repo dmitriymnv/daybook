@@ -1,14 +1,11 @@
 import React from 'react';
 import { Text, View, StyleSheet, Image } from 'react-native';
 
-import Colors from '../../../constants/Colors';
-
 export interface PreviewItemJournalProps {
   title: string;
-  publisher: string;
 }
 
-const PreviewItemJournal = ({ title, publisher }: PreviewItemJournalProps) => (
+const PreviewItemJournal = ({ title }: PreviewItemJournalProps) => (
   <View style={styles.container}>
     <Image
       source={{
@@ -17,28 +14,24 @@ const PreviewItemJournal = ({ title, publisher }: PreviewItemJournalProps) => (
       style={styles.image}
     />
     <Text style={styles.title}>{title}</Text>
-    <Text style={styles.pubsliher}>{publisher}</Text>
   </View>
 );
 
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    width: '100%',
-    padding: 15
+    marginBottom: 40
   },
   image: {
-    // width: '100%',
-    // height: '100%',
+    width: 130,
+    height: 180
   },
   title: {
     marginTop: 10,
+    paddingLeft: 30,
+    paddingRight: 30,
     fontSize: 17,
     fontFamily: 'GoogleSans-Bold'
-  },
-  pubsliher: {
-    fontSize: 10,
-    color: Colors.grayText
   }
 });
 

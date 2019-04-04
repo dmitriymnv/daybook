@@ -1,5 +1,7 @@
 export const wrapper = {
   marginTop: 70
+  // width: '100%',
+  // height: '100%'
 };
 
 export const headerTitle = {

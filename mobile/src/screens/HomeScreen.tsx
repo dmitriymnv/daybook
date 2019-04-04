@@ -10,9 +10,14 @@ class HomeScreen extends Component {
   render() {
     return (
       <View style={styles.wrapper}>
-        <Headline text="Главная" style={styles.headline} />
-        <CategorySelection style={styles.category} />
-        <Journals />
+        <View>
+          <Headline text="Главная" style={styles.headline} />
+          <CategorySelection style={styles.category} />
+        </View>
+
+        <View>
+          <Journals />
+        </View>
       </View>
     );
   }
@@ -20,13 +25,11 @@ class HomeScreen extends Component {
 
 const styles = StyleSheet.create({
   wrapper: {
-    position: 'relative',
+    display: 'flex',
     ...wrapper
   },
   category: {
-    position: 'relative',
-    marginBottom: 20,
-    opacity: 0.4
+    marginBottom: 20
   },
   headline: {
     marginLeft: 20,
