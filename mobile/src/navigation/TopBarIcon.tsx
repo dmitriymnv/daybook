@@ -10,7 +10,7 @@ const TabBarIcon = ({ name, focused, style }: TabBarIconProps) => {
       name={name}
       size={26}
       style={style}
-      color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
+      color={focused ? Colors.tabIconSelected : Colors.darkColor}
     />
   );
 };
