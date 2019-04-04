@@ -1,58 +1,76 @@
-import React, { Component } from 'react';
-import { ScrollView, View, TouchableOpacity, StyleSheet } from 'react-native';
+import React from 'react';
+import {
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  FlatList,
+  ActivityIndicator
+} from 'react-native';
 
 import PreviewItemJournal, {
   PreviewItemJournalProps
 } from './PreviewItemJournal';
+import { tintColor } from '../../../constants/Colors';
 
 interface JournalTableItem extends PreviewItemJournalProps {
   id: number;
 }
 
 interface TableJournalsProps {
-  journals: Array<JournalTableItem>;
-  count: number;
+  data: Array<JournalTableItem>;
+  handleLoadMore: () => void;
+  loading: boolean;
 }
 
-class TableJournals extends Component<TableJournalsProps> {
-  state = {
-    loading: false,
-    loaded: true,
-    count: this.props.count
-  };
+const TableJournals = ({
+  data,
+  handleLoadMore,
+  loading
+}: TableJournalsProps) => {
+  console.log(loading);
+  return (
+    <FlatList
+      data={data}
+      renderItem={renderItem}
+      keyExtractor={({ id }) => id.toString()}
+      ListFooterComponent={() => renderFooter(loading)}
+      onEndReached={handleLoadMore}
+      onEndReachedThreshold={0.5}
+      numColumns={2}
+      contentContainerStyle={styles.list}
+    />
+  );
+};
 
-  render() {
-    const { journals } = this.props;
-    return (
-      <ScrollView style={styles.scrollContainer}>
-        <View style={styles.container}>
-          {journals.map(({ id, title }, i) => (
-            <TouchableOpacity
-              key={i}
-              style={styles.item}
-              onPress={() => this.onPress({ id })}
-            >
-              <PreviewItemJournal title={title} />
-            </TouchableOpacity>
-          ))}
-        </View>
-      </ScrollView>
-    );
-  }
+const renderItem = ({ item: { id, title } }: { item: JournalTableItem }) => {
+  return (
+    <TouchableOpacity onPress={() => onPress(id)} style={styles.item}>
+      <PreviewItemJournal title={title} />
+    </TouchableOpacity>
+  );
+};
 
-  onPress = ({ id }: { id: number }) => {
-    console.log(id);
-  };
-}
+const onPress = (id: number) => {
+  console.log(id);
+};
+
+const renderFooter = (loading: boolean) => {
+  return loading ? (
+    <View style={styles.loader}>
+      <ActivityIndicator size="large" color={tintColor} />
+    </View>
+  ) : null;
+};
 
 const styles = StyleSheet.create({
-  scrollContainer: {},
-  container: {
-    flexDirection: 'row',
-    flexWrap: 'wrap'
+  list: {
+    flexDirection: 'column'
   },
   item: {
     width: '50%'
+  },
+  loader: {
+    padding: 20
   }
 });
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
 import axios from 'axios';
 
 import { apiServer } from '../../core/constants';
@@ -11,54 +10,52 @@ interface JournalsProps {
 
 class Journals extends Component<JournalsProps> {
   state = {
-    journals: [],
+    data: [],
     count: 0,
     errors: null,
-    loading: true,
-    loaded: false
+    loading: true
   };
 
   componentDidMount() {
-    this.loadingJournalsRequest({ to: 0 })
-      .then(({ data }) => {
-        this.setState({
-          journals: data.result,
-          count: data.count,
-          loading: false,
-          loaded: true
-        });
-      })
-      // СДЕЛАТЬ ОБРАБОТКУ ОШИБОК
-      .catch(errors =>
-        this.setState({ errors, loading: false, loaded: false })
-      );
+    this.getData();
   }
 
   render() {
-    const { journals, count, errors, loading, loaded } = this.state;
-    if (loading) {
-      return (
-        <View>
-          <Text>Загрузка...</Text>
-        </View>
-      );
-    } else if (!loading && loaded) {
-      return <TableJournals journals={journals} count={count} />;
-    } else if (!loaded && !loaded) {
-      return (
-        <View>
-          <Text>Ошибка</Text>
-        </View>
-      );
-    }
+    const { data, loading } = this.state;
+    return (
+      <TableJournals
+        data={data}
+        handleLoadMore={this.handleLoadMore}
+        loading={loading}
+      />
+    );
   }
 
-  loadingJournalsRequest = ({ to }: { to: number }) =>
-    axios.post(`${apiServer}/journals`, {
-      data: {
-        to
-      }
-    });
+  getData = async () =>
+    axios
+      .post(`${apiServer}/journals`, {
+        data: {
+          to: this.state.count
+        }
+      })
+      .then(({ data }) => {
+        this.setState({
+          data: [...data.result, ...this.state.data],
+          count: data.count || this.state.count,
+          errors: data.errors || null,
+          loading: false
+        });
+      })
+      .catch(errors => {
+        this.setState({ errors });
+      });
+
+  handleLoadMore = () => {
+    const { data, count } = this.state;
+    if (data.length < count) {
+      this.setState({ loading: true }, () => this.getData());
+    }
+  };
 }
 
 export default Journals;
