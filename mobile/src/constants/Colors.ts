@@ -3,7 +3,6 @@ export const grayColor = '#edeef0';
 
 export default {
   tintColor,
-  grayColor: '#fff',
   cardBackroundColor: grayColor,
   grayText: '#dcdcdc'
 };
