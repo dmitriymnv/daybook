@@ -1,9 +1,14 @@
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createAppContainer, createStackNavigator } from 'react-navigation';
 
 import MainTabNavigator from './MainNavigator';
 
 export default createAppContainer(
-  createSwitchNavigator({
-    Main: MainTabNavigator
+  createStackNavigator({
+    Main: {
+      screen: MainTabNavigator,
+      navigationOptions: {
+        header: null
+      }
+    }
   })
 );
