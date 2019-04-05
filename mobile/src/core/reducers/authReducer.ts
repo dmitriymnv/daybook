@@ -1,11 +1,16 @@
-import { IReducer } from './index';
+import { Reducer } from './index';
+import { AUTH_CHECK_SUCCESS } from '../constants';
 
 const defaultState = {
-  count: 0
+  user: {}
 };
 
-export default (state = defaultState, { type, payload }: IReducer) => {
+export default (state = defaultState, { type, payload }: Reducer) => {
   switch (type) {
+    case AUTH_CHECK_SUCCESS:
+      console.log('Пользователь авторизован');
+      return state;
+
     default:
       return state;
   }

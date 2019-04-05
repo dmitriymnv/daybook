@@ -5,7 +5,9 @@ import { Provider } from 'react-redux';
 
 import AppNavigator from './navigation/AppNavigator';
 import store from './core';
-import Colors from './constants/Colors';
+import { authCheck } from '../src/core/sagas/auth';
+
+store.dispatch(authCheck());
 
 class App extends Component {
   state = {
