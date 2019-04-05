@@ -27,7 +27,6 @@ jest.mock('axios', () => {
   };
   return {
     post: jest.fn(() => {
-      console.log('запрос');
       return Promise.resolve({ data });
     })
   };

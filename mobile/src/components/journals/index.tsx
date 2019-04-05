@@ -31,16 +31,16 @@ class Journals extends Component<JournalsProps> {
     );
   }
 
-  getData = async () =>
-    axios
+  getData = async () => {
+    return axios
       .post(`${apiServer}/journals`, {
         data: {
-          to: this.state.count
+          to: this.state.data.length
         }
       })
       .then(({ data }) => {
         this.setState({
-          data: [...data.result, ...this.state.data],
+          data: [...this.state.data, ...data.result],
           count: data.count || this.state.count,
           errors: data.errors || null,
           loading: false
@@ -49,10 +49,11 @@ class Journals extends Component<JournalsProps> {
       .catch(errors => {
         this.setState({ errors });
       });
+  };
 
   handleLoadMore = () => {
-    const { data, count } = this.state;
-    if (data.length < count) {
+    const { data, count, loading } = this.state;
+    if (data.length < count && !loading) {
       this.setState({ loading: true }, () => this.getData());
     }
   };

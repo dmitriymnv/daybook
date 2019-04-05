@@ -27,7 +27,6 @@ const TableJournals = ({
   handleLoadMore,
   loading
 }: TableJournalsProps) => {
-  console.log(loading);
   return (
     <FlatList
       data={data}
