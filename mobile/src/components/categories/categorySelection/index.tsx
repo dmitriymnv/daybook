@@ -24,9 +24,7 @@ const SelectMenu = ({ style }: SelectMenuProps) => {
   );
 };
 
-const onPress = ({ name }: { name: string }) => {
-  console.log(name);
-};
+const onPress = ({ name }: { name: string }) => {};
 
 const styles = StyleSheet.create({
   container: {
