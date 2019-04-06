@@ -15,7 +15,7 @@ class SignInScreen extends Component<SignInScreenProps> {
       <View style={styles.container}>
         <View style={styles.head} />
 
-        <View style={styles.body}>Password</View>
+        <View style={styles.body} />
       </View>
     );
   }
