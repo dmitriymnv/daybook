@@ -1,23 +1,43 @@
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 
 import MainTabNavigator from './MainNavigator';
-import SignUpScreen from '../screens/SignUpScreen';
-import SignInScreen from '../screens/SignInScreen';
+import SignInEmailScreen from '../screens/auth/signin/Email';
+import SigninPasswordScreen from '../screens/auth/signin/Password';
 import ProfileScreen from '../screens/ProfileScreen';
+
+const SigninStack = createStackNavigator(
+  {
+    Email: {
+      screen: SignInEmailScreen,
+      navigationOptions: () => ({
+        header: null
+      })
+    },
+    Password: {
+      screen: SigninPasswordScreen,
+      navigationOptions: () => ({
+        header: null
+      })
+    }
+  },
+  {
+    initialRouteName: 'Email'
+  }
+);
 
 export default createAppContainer(
   createStackNavigator({
     Main: {
       screen: MainTabNavigator,
-      navigationOptions: {
+      navigationOptions: () => ({
         header: null
-      }
-    },
-    Signup: {
-      screen: SignUpScreen
+      })
     },
     Signin: {
-      screen: SignInScreen
+      screen: SigninStack,
+      navigationOptions: () => ({
+        title: 'Авторизация'
+      })
     },
     Profile: {
       screen: ProfileScreen
