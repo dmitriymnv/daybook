@@ -1,10 +1,10 @@
 import React from 'react';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-import { title } from '../../constants/Style';
 import { ButtonProps } from './index';
+import { tintColor } from '../../constants/Colors';
 
-const WithountBackground = ({ text, onPress, style }: ButtonProps) => {
+const Default = ({ text, onPress, style }: ButtonProps) => {
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -17,11 +17,15 @@ const WithountBackground = ({ text, onPress, style }: ButtonProps) => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: tintColor,
     padding: 20
   },
   text: {
-    ...title
+    textAlign: 'center',
+    fontFamily: 'GoogleSans-Bold',
+    fontSize: 18,
+    color: '#ffffff'
   }
 });
 
-export default WithountBackground;
+export default Default;

@@ -7,5 +7,6 @@ export default {
   tabIconSelected: tintColor,
   darkColor: '#000a12',
   grayColor: grayColor,
-  grayText: '#dcdcdc'
+  grayText: '#dcdcdc',
+  errorText: 'red'
 };

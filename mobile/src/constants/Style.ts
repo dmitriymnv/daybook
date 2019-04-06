@@ -1,4 +1,4 @@
-import { grayColor } from './Colors';
+import Colors, { grayColor } from './Colors';
 
 export const wrapperBottomTabNavigator = {
   flex: 1,
@@ -17,4 +17,9 @@ export const headerTitle = {
 
 export const title = {
   fontFamily: 'GoogleSans-Regular'
+};
+
+export const textError = {
+  height: 17,
+  color: Colors.errorText
 };
