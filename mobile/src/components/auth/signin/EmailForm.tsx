@@ -30,15 +30,13 @@ class SignInForm extends Component<SignInFormProps> {
       return (
         <View>
           <Text style={styles.title}>Ваша электронная почта</Text>
-          <View style={styles.body}>
+          <View>
             <Input
               value={email}
               keyboardType="email-address"
               onChangeText={this.onChange('email')}
             />
-            <View style={styles.error}>
-              <Text style={styles.textError}>{error}</Text>
-            </View>
+            {!!error && <Text style={styles.textError}>{error}</Text>}
           </View>
           <DefaultButton onPress={this.onPress} text={'Далее'} />
         </View>
@@ -99,16 +97,10 @@ class SignInForm extends Component<SignInFormProps> {
 
 const styles = StyleSheet.create({
   title,
-  body: {
-    flexDirection: 'column'
-  },
-  error: {
-    width: '100%',
-    justifyContent: 'center',
-    height: 35,
-    marginBottom: 15
-  },
-  textError
+  textError: {
+    ...textError,
+    marginBottom: 10
+  }
 });
 
 export default SignInForm;

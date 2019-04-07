@@ -20,5 +20,7 @@ export const title = {
 };
 
 export const textError = {
-  color: Colors.errorText
+  color: Colors.errorText,
+  paddingTop: 10,
+  paddingBottom: 10
 };
