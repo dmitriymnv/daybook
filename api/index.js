@@ -2,6 +2,7 @@ const express = require('express');
 const BodyParser = require('body-parser');
 
 const journals = require('./routes/journals');
+const auth = require('./routes/auth');
 const db = require('./db');
 
 const app = express();
@@ -23,5 +24,6 @@ app.use(function(req, res, next) {
 app.use(BodyParser.json());
 
 app.use('/journals', journals);
+app.use('/auth', auth);
 
 app.listen(3030, () => console.log('Сервер запущен!'));

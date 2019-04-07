@@ -9,7 +9,12 @@ interface SignInScreenProps {
 class SignInScreen extends Component<SignInScreenProps> {
   render() {
     const {
-      navigation: { navigate }
+      navigation: {
+        navigate,
+        state: {
+          params: { email }
+        }
+      }
     } = this.props;
     return (
       <View style={styles.container}>

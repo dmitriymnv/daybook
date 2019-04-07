@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, ActivityIndicator } from 'react-native';
+import Axios from 'axios';
+import { isEmail } from 'validator';
 
 import Input from '../../common/Input';
 import { title, textError } from '../../../constants/Style';
 import DefaultButton from '../../button/Default';
+import { apiServer } from '../../../core/constants';
 
 interface SignInFormProps {
   onPress: ({ email }: { email: string }) => any;
@@ -26,10 +29,16 @@ class SignInForm extends Component<SignInFormProps> {
     if (!loading) {
       return (
         <View>
-          <Text style={styles.title}>Логин</Text>
-          <View>
-            <Input value={email} onChangeText={this.onChange('email')} />
-            <Text style={styles.error}>{error}</Text>
+          <Text style={styles.title}>Ваша электронная почта</Text>
+          <View style={styles.body}>
+            <Input
+              value={email}
+              keyboardType="email-address"
+              onChangeText={this.onChange('email')}
+            />
+            <View style={styles.error}>
+              <Text style={styles.textError}>{error}</Text>
+            </View>
           </View>
           <DefaultButton onPress={this.onPress} text={'Далее'} />
         </View>
@@ -39,14 +48,29 @@ class SignInForm extends Component<SignInFormProps> {
     }
   }
 
-  onPress = () => {
+  onPress = async () => {
     this.setState({ loading: true });
     const validation: string = this.validation();
+
     if (validation.length) {
-      this.setState({ error: validation, loading: false });
+      this.setState({ error: validation });
     } else {
-      this.props.onPress({ email: this.state.data.email });
+      const {
+        data: { email }
+      } = this.state;
+
+      await Axios.post(`${apiServer}/auth/emailCheck`, {
+        data: { email }
+      }).then(({ data }: { data: { email: boolean } }) => {
+        if (data.email) {
+          this.props.onPress({ email });
+        } else if (!data.email) {
+          this.setState({ error: 'Электронная почта не найдена' });
+        }
+      });
     }
+
+    this.setState({ loading: false });
   };
 
   validation = () => {
@@ -55,8 +79,8 @@ class SignInForm extends Component<SignInFormProps> {
     } = this.state;
     let error = '';
 
-    if (email.length < 3) {
-      error = 'Слишком короткий логин';
+    if (!isEmail(email)) {
+      error = 'Укажите электронную почту в формате example@example.com';
     } else {
     }
 
@@ -75,10 +99,16 @@ class SignInForm extends Component<SignInFormProps> {
 
 const styles = StyleSheet.create({
   title,
+  body: {
+    flexDirection: 'column'
+  },
   error: {
-    ...textError,
+    width: '100%',
+    justifyContent: 'center',
+    height: 35,
     marginBottom: 15
-  }
+  },
+  textError
 });
 
 export default SignInForm;

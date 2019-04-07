@@ -20,6 +20,5 @@ export const title = {
 };
 
 export const textError = {
-  height: 17,
   color: Colors.errorText
 };

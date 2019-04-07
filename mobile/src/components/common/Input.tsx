@@ -1,21 +1,28 @@
 import React from 'react';
-import { TextInput, StyleSheet } from 'react-native';
+import { TextInput, StyleSheet, KeyboardTypeOptions } from 'react-native';
 
 import { tintColor } from '../../constants/Colors';
 
 interface InputProps {
   value: string;
   onChangeText: (type: string) => any;
+  keyboardType?: KeyboardTypeOptions;
 }
 
-const Input = ({ value, onChangeText }: InputProps) => {
+const Input = ({ value, keyboardType, onChangeText }: InputProps) => {
   return (
-    <TextInput onChangeText={onChangeText} value={value} style={styles.input} />
+    <TextInput
+      onChangeText={onChangeText}
+      keyboardType={keyboardType}
+      value={value}
+      style={styles.input}
+    />
   );
 };
 
 const styles = StyleSheet.create({
   input: {
+    width: '100%',
     marginTop: 10,
     marginBottom: 10,
     paddingTop: 5,
