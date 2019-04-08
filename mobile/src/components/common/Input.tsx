@@ -7,15 +7,25 @@ interface InputProps {
   value: string;
   onChangeText: (type: string) => any;
   keyboardType?: KeyboardTypeOptions;
+  autoFocus?: boolean;
+  secureTextEntry?: boolean;
 }
 
-const Input = ({ value, keyboardType, onChangeText }: InputProps) => {
+const Input = ({
+  value,
+  keyboardType = 'default',
+  onChangeText,
+  autoFocus = false,
+  secureTextEntry
+}: InputProps) => {
   return (
     <TextInput
       onChangeText={onChangeText}
       keyboardType={keyboardType}
       value={value}
       style={styles.input}
+      autoFocus={autoFocus}
+      secureTextEntry={secureTextEntry}
     />
   );
 };

@@ -40,5 +40,5 @@ export const categoriesList = [
       ios: 'ios-car',
       md: 'md-car'
     }
-  },
+  }
 ];

@@ -1,19 +1,19 @@
-const express = require("express");
+const express = require('express');
 
 const router = express.Router();
 
-router.post("/", ({ body }, req) => {
+router.post('/', ({ body }, req) => {
   const { to } = body.data;
   if (to == 0) {
     const journalsRequest =
-      "SELECT title, id FROM `journals` ORDER BY `id` DESC LIMIT 10";
-    const countRequest = "SELECT COUNT(*) count FROM `journals`";
+      'SELECT title, id FROM `journals` ORDER BY `id` DESC LIMIT 10';
+    const countRequest = 'SELECT COUNT(*) count FROM `journals`';
 
     db.query(countRequest, (err, result) => {
       if (err) {
         console.warn(err);
         req.statusCode(400).json({
-          errors: "Ошибка с получением данных, пожалуйста попробуйте позже"
+          errors: 'Ошибка с получением данных, пожалуйста попробуйте позже'
         });
       } else {
         let { count } = result[0];
@@ -21,7 +21,7 @@ router.post("/", ({ body }, req) => {
           if (err) {
             console.warn(err);
             req.statusCode(400).json({
-              errors: "Ошибка с получением данных, пожалуйста попробуйте позже"
+              errors: 'Ошибка с получением данных, пожалуйста попробуйте позже'
             });
           } else {
             req.json({ count, result });
@@ -34,7 +34,7 @@ router.post("/", ({ body }, req) => {
     db.query(journalsRequest, (err, result) => {
       if (err) {
         req.statusCode(400).json({
-          errors: "Ошибка с получением данных, пожалуйста попробуйте позже"
+          errors: 'Ошибка с получением данных, пожалуйста попробуйте позже'
         });
       } else {
         req.json({ result });

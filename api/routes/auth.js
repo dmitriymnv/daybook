@@ -1,8 +1,8 @@
-const express = require("express");
+const express = require('express');
 
 const router = express.Router();
 
-router.post("/emailCheck", ({ body }, req) => {
+router.post('/emailCheck', ({ body }, req) => {
   const { email } = body.data;
   const emailRequest = `SELECT \`email\` FROM \`users\` WHERE \`email\` = '${email.toLowerCase()}'`;
 
@@ -10,7 +10,7 @@ router.post("/emailCheck", ({ body }, req) => {
     if (err) {
       console.warn(err);
       req.statusCode(400).json({
-        errors: "Ошибка с получением данных, пожалуйста попробуйте позже"
+        errors: 'Ошибка с получением данных, пожалуйста попробуйте позже'
       });
     } else {
       if (result[0]) {

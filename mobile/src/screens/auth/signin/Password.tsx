@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 
+import PasswordForm from '../../../components/auth/signin/PasswordForm';
+
 interface SignInScreenProps {
   navigation: NavigationScreenProp<any, any>;
 }
@@ -20,10 +22,16 @@ class SignInScreen extends Component<SignInScreenProps> {
       <View style={styles.container}>
         <View style={styles.head} />
 
-        <View style={styles.body} />
+        <View style={styles.body}>
+          <PasswordForm submit={this.onSubmit} email={email} />
+        </View>
       </View>
     );
   }
+
+  onSubmit = (data: object) => {
+    console.log(data);
+  };
 }
 
 const styles = StyleSheet.create({
