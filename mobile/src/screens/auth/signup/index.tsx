@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
+
+import SignUpForm from '../../../components/auth/signup/SignUpForm';
 
 class SignUpScreen extends Component {
-  static navigationOptions = () => ({
-    title: 'Регистрация'
-  });
-
   render() {
     return (
-      <View>
-        <Text>Email /signup-email</Text>
+      <View style={styles.container}>
+        <SignUpForm />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginLeft: 20,
+    marginRight: 20
+  }
+});
 
 export default SignUpScreen;
