@@ -9,7 +9,7 @@ class SignUpScreen extends Component {
   render() {
     return (
       <View>
-        <Text>Регистрация</Text>
+        <Text>Email /signup-email</Text>
       </View>
     );
   }

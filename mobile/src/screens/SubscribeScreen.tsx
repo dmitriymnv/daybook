@@ -49,7 +49,7 @@ const authCheck = ({
   if (userToken) {
     navigate('Profile');
   } else {
-    navigate('Signin');
+    navigate('SignIn');
   }
 };
 

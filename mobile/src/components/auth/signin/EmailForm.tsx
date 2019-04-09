@@ -9,7 +9,7 @@ import DefaultButton from '../../button/Default';
 import { apiServer } from '../../../core/constants';
 
 interface SignInFormProps {
-  onPress: ({ email }: { email: string }) => any;
+  submit: ({ email }: { email: string }) => any;
 }
 
 class SignInForm extends Component<SignInFormProps> {
@@ -61,7 +61,7 @@ class SignInForm extends Component<SignInFormProps> {
         data: { email }
       }).then(({ data }: { data: { email: boolean } }) => {
         if (data.email) {
-          this.props.onPress({ email });
+          this.props.submit({ email });
         } else if (!data.email) {
           this.setState({ error: 'Электронная почта не найдена' });
         }

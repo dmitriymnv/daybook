@@ -19,14 +19,14 @@ class SignInScreen extends Component<SignInScreenProps> {
         <View style={styles.head}>
           <ButtonWithountBackground
             text={'Регистрация'}
-            onPress={() => navigate('Signup')}
+            onPress={() => navigate('SignUp')}
             style={styles.buttonSignup}
           />
         </View>
 
         <View style={styles.body}>
           <EmailForm
-            onPress={({ email }: { email: string }) =>
+            submit={({ email }: { email: string }) =>
               navigate('Password', { email })
             }
           />
