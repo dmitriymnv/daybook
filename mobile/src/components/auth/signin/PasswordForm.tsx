@@ -7,6 +7,7 @@ import Input from '../../common/Input';
 import { title, textError } from '../../../constants/Style';
 import DefaultButton from '../../button/Default';
 import { apiServer } from '../../../core/constants';
+import Validation from '../../common/Validation';
 
 interface SignInFormProps {
   submit: (data: object) => any;
@@ -52,11 +53,22 @@ class SignInForm extends Component<SignInFormProps> {
 
   onPress = async () => {
     this.setState({ loading: true });
-    const validation: string = this.validation();
 
-    if (validation.length) {
-      this.setState({ error: validation });
-    } else {
+    const {
+      data: { password }
+    } = this.state;
+
+    const validation = Validation({
+      value: password,
+      type: 'password',
+      setStateError: (error: string) => {
+        this.setState({
+          error
+        });
+      }
+    });
+
+    if (validation) {
       const { data } = this.state;
       await Axios.post(`${apiServer}/auth/signin`, {
         data

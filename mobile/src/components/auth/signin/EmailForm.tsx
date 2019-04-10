@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, ActivityIndicator } from 'react-native';
 import Axios from 'axios';
-import { isEmail } from 'validator';
 
 import Input from '../../common/Input';
 import { title, textError } from '../../../constants/Style';
 import DefaultButton from '../../button/Default';
 import { apiServer } from '../../../core/constants';
+import Validation from '../../common/Validation';
 
 interface SignInFormProps {
   submit: ({ email }: { email: string }) => any;
@@ -48,15 +48,22 @@ class SignInForm extends Component<SignInFormProps> {
 
   onPress = async () => {
     this.setState({ loading: true });
-    const validation: string = this.validation();
 
-    if (validation.length) {
-      this.setState({ error: validation });
-    } else {
-      const {
-        data: { email }
-      } = this.state;
+    const {
+      data: { email }
+    } = this.state;
 
+    const validation = Validation({
+      value: email,
+      type: 'email',
+      setStateError: (error: string) => {
+        this.setState({
+          error
+        });
+      }
+    });
+
+    if (validation) {
       await Axios.post(`${apiServer}/auth/emailCheck`, {
         data: { email }
       }).then(({ data }: { data: { email: boolean } }) => {
@@ -69,20 +76,6 @@ class SignInForm extends Component<SignInFormProps> {
     }
 
     this.setState({ loading: false });
-  };
-
-  validation = () => {
-    const {
-      data: { email }
-    } = this.state;
-    let error = '';
-
-    if (!isEmail(email)) {
-      error = 'Укажите электронную почту в формате example@example.com';
-    } else {
-    }
-
-    return error;
   };
 
   onChange = (type: string) => (value: string) => {

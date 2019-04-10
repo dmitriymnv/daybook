@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, StyleSheet, CheckBox } from 'react-native';
-import { isEmail, matches } from 'validator';
 
 import { Input as InputStyle } from '../../../constants/Style';
 import { title, textError } from '../../../constants/Style';
+import Validation from '../../common/Validation';
 
 class SignUpForm extends Component {
   state = {
     data: {
       email: '',
-      password: ''
+      password: '',
+      confirmPassword: ''
     },
-    confirmPassword: '',
     userAgreement: true,
     errors: {
       email: '',
@@ -24,8 +24,7 @@ class SignUpForm extends Component {
 
   render() {
     const {
-      data: { email, password },
-      confirmPassword,
+      data: { email, password, confirmPassword },
       userAgreement,
       errors
     } = this.state;
@@ -80,98 +79,27 @@ class SignUpForm extends Component {
     );
   }
 
-  validation = (field: string) => {
-    const {
-      data: { email, password },
-      confirmPassword,
-      userAgreement
-    } = this.state;
-    switch (field) {
-      case 'email':
-        const emailCheck = isEmail(email);
-        if (emailCheck) {
-          this.setState({
-            errors: {
-              ...this.state.errors,
-              ['email']: ''
-            }
-          });
-        } else {
-          this.setState({
-            errors: {
-              ...this.state.errors,
-              ['email']:
-                'Укажите электронную почту в формате example@example.com'
-            }
-          });
+  validation = (field: any) => {
+    const { data, userAgreement } = this.state;
+
+    const setStateError = (errorText: string, type: string) => {
+      this.setState({
+        errors: {
+          ...this.state.errors,
+          [type]: errorText
         }
-        break;
-      case 'password':
-        const passwordCheck = matches(
-          password,
-          /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}/
-        );
-        if (passwordCheck) {
-          this.setState({
-            errors: {
-              ...this.state.errors,
-              ['password']: ''
-            }
-          });
-        } else {
-          this.setState({
-            errors: {
-              ...this.state.errors,
-              ['password']:
-                'Пароль должен содержать не менее восьми знаков, включать буквы, цифры и специальные символы'
-            }
-          });
-        }
-      case 'confirmPassword':
-        const confirmPasswordCheck = password === confirmPassword;
-        if (confirmPasswordCheck) {
-          this.setState({
-            errors: {
-              ...this.state.errors,
-              ['confirmPassword']: ''
-            }
-          });
-        } else {
-          this.setState({
-            errors: {
-              ...this.state.errors,
-              ['confirmPassword']: 'Введёные пароли должны совпадать'
-            }
-          });
-        }
-        break;
-      case 'userAgreement':
-        if (userAgreement) {
-          this.setState({
-            errors: {
-              ...this.state.errors,
-              ['userAgreement']: true
-            }
-          });
-        } else {
-          this.setState({
-            errors: {
-              ...this.state.errors,
-              ['userAgreement']: false
-            }
-          });
-        }
-      default:
-        break;
+      });
+    };
+
+    Validation({ value: data, type: field, setStateError });
+
+    if (field === 'password') {
+      Validation({ value: data, type: 'confirmPassword', setStateError });
     }
   };
 
   onChange = (type: string) => (value: string) => {
-    if (type === 'confirmPassword') {
-      this.setState({
-        confirmPassword: value
-      });
-    } else if (type === 'userAgreement') {
+    if (type === 'userAgreement') {
       this.setState({
         userAgreement: !this.state.userAgreement
       });
