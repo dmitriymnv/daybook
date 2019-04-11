@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, StyleSheet, CheckBox } from 'react-native';
+import {
+  Text,
+  View,
+  TextInput,
+  StyleSheet,
+  CheckBox,
+  ActivityIndicator
+} from 'react-native';
 
 import { Input as InputStyle } from '../../../constants/Style';
 import { title, textError } from '../../../constants/Style';
 import Validation from '../../common/Validation';
+import DefaultButton from '../../button/Default';
 
 class SignUpForm extends Component {
   state = {
@@ -26,60 +34,75 @@ class SignUpForm extends Component {
     const {
       data: { email, password, confirmPassword },
       userAgreement,
-      errors
+      errors,
+      loading
     } = this.state;
-    console.log(this.state);
-    return (
-      <View>
+    if (!loading) {
+      return (
         <View>
-          <Text style={styles.title}>Ваша электронная почта</Text>
-          <TextInput
-            value={email}
-            keyboardType="email-address"
-            onChangeText={this.onChange('email')}
-            onBlur={() => this.validation('email')}
-            style={InputStyle}
-          />
-          {!!errors.email && (
-            <Text style={styles.textError}>{errors.email}</Text>
-          )}
+          <View>
+            <Text style={styles.title}>Ваша электронная почта</Text>
+            <TextInput
+              value={email}
+              keyboardType="email-address"
+              onChangeText={this.onChange('email')}
+              onBlur={() => this.validation('email')}
+              style={InputStyle}
+            />
+            {!!errors.email && (
+              <Text style={styles.textError}>{errors.email}</Text>
+            )}
+          </View>
+          <View>
+            <Text style={styles.title}>Придумайте пароль</Text>
+            <TextInput
+              value={password}
+              keyboardType="default"
+              onChangeText={this.onChange('password')}
+              onBlur={() => this.validation('password')}
+              style={InputStyle}
+            />
+            {!!errors.password && (
+              <Text style={styles.textError}>{errors.password}</Text>
+            )}
+          </View>
+          <View>
+            <Text style={styles.title}>Повторите пароль</Text>
+            <TextInput
+              value={confirmPassword}
+              keyboardType="default"
+              onChangeText={this.onChange('confirmPassword')}
+              onBlur={() => this.validation('confirmPassword')}
+              style={InputStyle}
+            />
+            {!!errors.confirmPassword && (
+              <Text style={styles.textError}>{errors.confirmPassword}</Text>
+            )}
+          </View>
+          <View style={styles.userAgreement}>
+            <CheckBox
+              value={userAgreement}
+              onChange={this.onChange('userAgreement')}
+              onValueChange={() => this.validation('userAgreement')}
+            />
+            <Text>
+              Я принимаю условия Пользовательского соглашения и даю своё
+              согласие Яндексу на обработку моей персональной информации на
+              условиях, определенных Политикой конфиденциальности.
+            </Text>
+          </View>
+
+          <DefaultButton onPress={this.onPress} text={'Зарегистрироваться'} />
         </View>
-        <View>
-          <Text style={styles.title}>Придумайте пароль</Text>
-          <TextInput
-            value={password}
-            keyboardType="default"
-            onChangeText={this.onChange('password')}
-            onBlur={() => this.validation('password')}
-            style={InputStyle}
-          />
-          {!!errors.password && (
-            <Text style={styles.textError}>{errors.password}</Text>
-          )}
-        </View>
-        <View>
-          <Text style={styles.title}>Повторите пароль</Text>
-          <TextInput
-            value={confirmPassword}
-            keyboardType="default"
-            onChangeText={this.onChange('confirmPassword')}
-            onBlur={() => this.validation('confirmPassword')}
-            style={InputStyle}
-          />
-          {!!errors.confirmPassword && (
-            <Text style={styles.textError}>{errors.confirmPassword}</Text>
-          )}
-        </View>
-        <View>
-          <CheckBox
-            value={userAgreement}
-            onChange={this.onChange('userAgreement')}
-            onValueChange={() => this.validation('userAgreement')}
-          />
-        </View>
-      </View>
-    );
+      );
+    } else {
+      return <ActivityIndicator size="large" />;
+    }
   }
+
+  onPress = () => {
+    this.setState({ loading: true });
+  };
 
   validation = (field: any) => {
     const { data, userAgreement } = this.state;
@@ -92,15 +115,6 @@ class SignUpForm extends Component {
         }
       });
     };
-
-    switch (field) {
-      case 'password':
-        Validation({ value: data, type: 'confirmPassword', setStateError });
-
-      default:
-        Validation({ value: data, type: field, setStateError });
-        break;
-    }
 
     if (field === 'userAgreement') {
       Validation({ value: !userAgreement, type: field, setStateError });
@@ -134,6 +148,10 @@ const styles = StyleSheet.create({
   textError: {
     ...textError,
     marginBottom: 10
+  },
+  userAgreement: {
+    flexDirection: 'row',
+    marginBottom: 20
   }
 });
 
