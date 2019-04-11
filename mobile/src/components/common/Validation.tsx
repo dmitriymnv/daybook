@@ -7,9 +7,9 @@ interface validationUsers {
 }
 
 interface validationProps {
-  value: string | validationUsers;
-  type: 'email' | 'password' | 'confirmPassword';
-  setStateError: (errorText: string, type: string) => any;
+  value: string | boolean | validationUsers;
+  type: 'email' | 'password' | 'confirmPassword' | 'userAgreement';
+  setStateError: (error: string | boolean, type: string) => any;
 }
 
 const validation = ({
@@ -52,6 +52,10 @@ const validation = ({
         ? setStateError('', type)
         : setStateError('Введёные пароли должны совпадать', type);
       return confirmPasswordCheck;
+
+    case 'userAgreement':
+      value ? setStateError(false, type) : setStateError(true, type);
+      break;
 
     default:
       return undefined;

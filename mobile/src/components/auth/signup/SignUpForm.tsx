@@ -28,6 +28,7 @@ class SignUpForm extends Component {
       userAgreement,
       errors
     } = this.state;
+    console.log(this.state);
     return (
       <View>
         <View>
@@ -72,7 +73,8 @@ class SignUpForm extends Component {
         <View>
           <CheckBox
             value={userAgreement}
-            onValueChange={this.onChange('userAgreement')}
+            onChange={this.onChange('userAgreement')}
+            onValueChange={() => this.validation('userAgreement')}
           />
         </View>
       </View>
@@ -82,16 +84,29 @@ class SignUpForm extends Component {
   validation = (field: any) => {
     const { data, userAgreement } = this.state;
 
-    const setStateError = (errorText: string, type: string) => {
+    const setStateError = (error: string | boolean, type: string) => {
       this.setState({
         errors: {
           ...this.state.errors,
-          [type]: errorText
+          [type]: error
         }
       });
     };
 
-    Validation({ value: data, type: field, setStateError });
+    switch (field) {
+      case 'password':
+        Validation({ value: data, type: 'confirmPassword', setStateError });
+
+      default:
+        Validation({ value: data, type: field, setStateError });
+        break;
+    }
+
+    if (field === 'userAgreement') {
+      Validation({ value: !userAgreement, type: field, setStateError });
+    } else {
+      Validation({ value: data, type: field, setStateError });
+    }
 
     if (field === 'password') {
       Validation({ value: data, type: 'confirmPassword', setStateError });
