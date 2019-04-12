@@ -27,6 +27,7 @@ class SignUpForm extends Component {
       confirmPassword: '',
       userAgreement: false
     },
+    formValid: false,
     loading: false
   };
 
@@ -35,6 +36,7 @@ class SignUpForm extends Component {
       data: { email, password, confirmPassword },
       userAgreement,
       errors,
+      formValid,
       loading
     } = this.state;
     if (!loading) {
@@ -59,7 +61,6 @@ class SignUpForm extends Component {
               value={password}
               keyboardType="default"
               onChangeText={this.onChange('password')}
-              onBlur={() => this.validation('password')}
               style={InputStyle}
             />
             {!!errors.password && (
@@ -72,7 +73,6 @@ class SignUpForm extends Component {
               value={confirmPassword}
               keyboardType="default"
               onChangeText={this.onChange('confirmPassword')}
-              onBlur={() => this.validation('confirmPassword')}
               style={InputStyle}
             />
             {!!errors.confirmPassword && (
@@ -83,7 +83,6 @@ class SignUpForm extends Component {
             <CheckBox
               value={userAgreement}
               onChange={this.onChange('userAgreement')}
-              onValueChange={() => this.validation('userAgreement')}
             />
             <Text>
               Я принимаю условия Пользовательского соглашения и даю своё
@@ -92,7 +91,11 @@ class SignUpForm extends Component {
             </Text>
           </View>
 
-          <DefaultButton onPress={this.onPress} text={'Зарегистрироваться'} />
+          <DefaultButton
+            onPress={this.onPress}
+            text={'Зарегистрироваться'}
+            disabled={!formValid}
+          />
         </View>
       );
     } else {
@@ -104,20 +107,44 @@ class SignUpForm extends Component {
     this.setState({ loading: true });
   };
 
+  onChange = (type: string) => (value: string) => {
+    if (type === 'userAgreement') {
+      this.setState(
+        {
+          userAgreement: !this.state.userAgreement
+        },
+        () => this.validation(type)
+      );
+    } else {
+      this.setState(
+        {
+          data: {
+            ...this.state.data,
+            [type]: value
+          }
+        },
+        () => this.validation(type)
+      );
+    }
+  };
+
   validation = (field: any) => {
     const { data, userAgreement } = this.state;
 
     const setStateError = (error: string | boolean, type: string) => {
-      this.setState({
-        errors: {
-          ...this.state.errors,
-          [type]: error
-        }
-      });
+      this.setState(
+        {
+          errors: {
+            ...this.state.errors,
+            [type]: error
+          }
+        },
+        () => this.validateForm()
+      );
     };
 
     if (field === 'userAgreement') {
-      Validation({ value: !userAgreement, type: field, setStateError });
+      Validation({ value: userAgreement, type: field, setStateError });
     } else {
       Validation({ value: data, type: field, setStateError });
     }
@@ -127,20 +154,24 @@ class SignUpForm extends Component {
     }
   };
 
-  onChange = (type: string) => (value: string) => {
-    if (type === 'userAgreement') {
+  validateForm() {
+    const { email: emailData, password: passwordData } = this.state.data;
+    const {
+      email,
+      password,
+      confirmPassword,
+      userAgreement
+    } = this.state.errors;
+    if (emailData.length === 0 || passwordData.length === 0) {
       this.setState({
-        userAgreement: !this.state.userAgreement
+        formValid: false
       });
     } else {
       this.setState({
-        data: {
-          ...this.state.data,
-          [type]: value
-        }
+        formValid: !email && !password && !confirmPassword && !userAgreement
       });
     }
-  };
+  }
 }
 
 const styles = StyleSheet.create({

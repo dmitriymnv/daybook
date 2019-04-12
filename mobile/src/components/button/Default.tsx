@@ -4,11 +4,12 @@ import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { ButtonProps } from './index';
 import { tintColor } from '../../constants/Colors';
 
-const Default = ({ text, onPress, style }: ButtonProps) => {
+const Default = ({ text, onPress, style, disabled }: ButtonProps) => {
   return (
     <TouchableOpacity
       onPress={onPress}
       style={{ ...styles.container, ...style }}
+      disabled={disabled}
     >
       <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>
