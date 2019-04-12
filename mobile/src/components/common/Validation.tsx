@@ -31,12 +31,10 @@ const validation = ({
 
     case 'password':
       const valueMax = typeValueString ? value : value.password;
-      const passwordCheck =
-        !valueMax.match(/\s/) &&
-        matches(
-          valueMax,
-          /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}/
-        );
+      const passwordCheck = matches(
+        valueMax,
+        /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}/
+      );
       passwordCheck
         ? setStateError('', type)
         : setStateError(

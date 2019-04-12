@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import Axios from 'axios';
-import { matches } from 'validator';
 
-import Input from '../../common/Input';
 import { title, textError } from '../../../constants/Style';
 import DefaultButton from '../../button/Default';
 import { apiServer } from '../../../core/constants';
 import Validation from '../../common/Validation';
+import InputLabel from '../../common/InputLabel';
 
 interface SignInFormProps {
   submit: (data: object) => any;
@@ -21,6 +20,7 @@ class SignInForm extends Component<SignInFormProps> {
       password: ''
     },
     error: '',
+    formValid: false,
     loading: false
   };
 
@@ -28,22 +28,27 @@ class SignInForm extends Component<SignInFormProps> {
     const {
       data: { password },
       error,
+      formValid,
       loading
     } = this.state;
     if (!loading) {
       return (
         <View>
-          <Text style={styles.title}>Ваша пароль</Text>
-          <View>
-            <Input
-              value={password}
-              onChangeText={this.onChange('password')}
-              autoFocus={true}
-              secureTextEntry={true}
-            />
-            {!!error && <Text style={styles.textError}>{error}</Text>}
-          </View>
-          <DefaultButton onPress={this.onPress} text={'Войти'} />
+          <InputLabel
+            title="Ваш пароль"
+            error={error}
+            input={{
+              value: password,
+              keyboardType: 'default',
+              secureTextEntry: true,
+              onChangeText: this.onChange
+            }}
+          />
+          <DefaultButton
+            onPress={this.onPress}
+            text={'Войти'}
+            disabled={!formValid}
+          />
         </View>
       );
     } else {
@@ -54,66 +59,65 @@ class SignInForm extends Component<SignInFormProps> {
   onPress = async () => {
     this.setState({ loading: true });
 
-    const {
-      data: { password }
-    } = this.state;
-
-    const validation = Validation({
-      value: password,
-      type: 'password',
-      setStateError: (error: string) => {
-        this.setState({
-          error
-        });
-      }
-    });
-
-    if (validation) {
-      const { data } = this.state;
-      await Axios.post(`${apiServer}/auth/signin`, {
-        data
+    const { data } = this.state;
+    await Axios.post(`${apiServer}/auth/signin`, {
+      data
+    })
+      .then(({ data }) => {
+        this.props.submit(data);
       })
-        .then(({ data }) => {
-          this.props.submit(data);
-        })
-        .catch(({ response: { status } }) => {
-          if (status == 404) {
-            this.setState({
-              error: 'Проблема с доступом к интернету, попробуйте позже'
-            });
-          }
-        });
-    }
+      .catch(({ response: { status } }) => {
+        if (status == 404) {
+          this.setState({
+            error: 'Проблема с доступом к интернету, попробуйте позже'
+          });
+        }
+      });
 
     this.setState({ loading: false });
   };
 
-  validation = () => {
+  onChange = (value: string) => {
+    this.setState(
+      {
+        data: {
+          password: value
+        }
+      },
+      () => this.validation()
+    );
+  };
+
+  validation() {
+    const { password } = this.state.data;
+
+    const setStateError = (error: string | boolean) => {
+      this.setState(
+        {
+          error
+        },
+        () => this.validateForm()
+      );
+    };
+    Validation({ value: password, type: 'password', setStateError });
+  }
+
+  validateForm() {
     const {
-      data: { password }
+      data: { password },
+      error
     } = this.state;
-    let error = '';
 
-    if (
-      !matches(
-        password,
-        /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}/
-      )
-    ) {
-      error = 'Пароль указан в неверном формате!';
+    if (!password.length) {
+      this.setState({
+        formValid: false
+      });
+    } else {
+      this.setState({
+        formValid: !error
+      });
     }
-
-    return error;
-  };
-
-  onChange = (type: string) => (value: string) => {
-    this.setState({
-      data: {
-        ...this.state.data,
-        [type]: value
-      }
-    });
-  };
+  }
 }
 
 const styles = StyleSheet.create({

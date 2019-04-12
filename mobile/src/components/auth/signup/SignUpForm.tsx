@@ -2,16 +2,14 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  TextInput,
   StyleSheet,
   CheckBox,
   ActivityIndicator
 } from 'react-native';
 
-import { Input as InputStyle } from '../../../constants/Style';
-import { title, textError } from '../../../constants/Style';
 import Validation from '../../common/Validation';
 import DefaultButton from '../../button/Default';
+import InputLabel from '../../common/InputLabel';
 
 class SignUpForm extends Component {
   state = {
@@ -42,43 +40,34 @@ class SignUpForm extends Component {
     if (!loading) {
       return (
         <View>
-          <View>
-            <Text style={styles.title}>Ваша электронная почта</Text>
-            <TextInput
-              value={email}
-              keyboardType="email-address"
-              onChangeText={this.onChange('email')}
-              onBlur={() => this.validation('email')}
-              style={InputStyle}
-            />
-            {!!errors.email && (
-              <Text style={styles.textError}>{errors.email}</Text>
-            )}
-          </View>
-          <View>
-            <Text style={styles.title}>Придумайте пароль</Text>
-            <TextInput
-              value={password}
-              keyboardType="default"
-              onChangeText={this.onChange('password')}
-              style={InputStyle}
-            />
-            {!!errors.password && (
-              <Text style={styles.textError}>{errors.password}</Text>
-            )}
-          </View>
-          <View>
-            <Text style={styles.title}>Повторите пароль</Text>
-            <TextInput
-              value={confirmPassword}
-              keyboardType="default"
-              onChangeText={this.onChange('confirmPassword')}
-              style={InputStyle}
-            />
-            {!!errors.confirmPassword && (
-              <Text style={styles.textError}>{errors.confirmPassword}</Text>
-            )}
-          </View>
+          <InputLabel
+            title="Ваша электронная почта"
+            error={errors.email}
+            input={{
+              value: email,
+              keyboardType: 'email-address',
+              onChangeText: this.onChange('email')
+            }}
+          />
+          <InputLabel
+            title="Придумайте пароль"
+            error={errors.password}
+            input={{
+              value: password,
+              keyboardType: 'default',
+              secureTextEntry: true,
+              onChangeText: this.onChange('password')
+            }}
+          />
+          <InputLabel
+            title="Повторите пароль"
+            error={errors.confirmPassword}
+            input={{
+              value: confirmPassword,
+              keyboardType: 'default',
+              onChangeText: this.onChange('confirmPassword')
+            }}
+          />
           <View style={styles.userAgreement}>
             <CheckBox
               value={userAgreement}
@@ -175,11 +164,6 @@ class SignUpForm extends Component {
 }
 
 const styles = StyleSheet.create({
-  title,
-  textError: {
-    ...textError,
-    marginBottom: 10
-  },
   userAgreement: {
     flexDirection: 'row',
     marginBottom: 20
