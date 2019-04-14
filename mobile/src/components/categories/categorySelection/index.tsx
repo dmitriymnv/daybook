@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'row',
-    marginTop: 30
+    marginTop: 20
   }
 });
 

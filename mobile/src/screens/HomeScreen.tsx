@@ -12,7 +12,10 @@ class HomeScreen extends Component {
     return (
       <View style={styles.wrapper}>
         <View style={styles.head}>
-          <Headline text="Главная" style={styles.headline} />
+          <View style={styles.headline}>
+            <Headline text="Главная" />
+          </View>
+
           <CategorySelection />
         </View>
 
@@ -28,14 +31,13 @@ const styles = StyleSheet.create({
   wrapper,
   head: {
     ...headSubscribeHomeScreen,
-    height: '20%'
+    height: '18%'
   },
   body: {
-    height: '80%'
+    height: '82%'
   },
   headline: {
-    marginLeft: 20,
-    marginRight: 20
+    alignItems: 'flex-start'
   }
 });
 

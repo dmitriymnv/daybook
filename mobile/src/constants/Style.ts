@@ -7,7 +7,8 @@ export const wrapperBottomTabNavigator = {
 };
 export const headSubscribeHomeScreen = {
   borderBottomWidth: 1,
-  borderColor: grayColor
+  borderColor: grayColor,
+  paddingLeft: 20
 };
 
 export const headerTitle = {

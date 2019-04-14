@@ -19,16 +19,15 @@ const HomeScreen = ({
   userToken
 }: HomeScreenProps) => {
   return (
-    <View style={styles.wrapper}>
+    <View style={wrapper}>
       <View style={styles.head}>
-        <Headline text="Подписки" style={styles.headline} />
+        <Headline text="Подписки" />
         <TouchableOpacity
           style={styles.icon}
           onPress={() => authCheck({ navigate, userToken })}
         >
           <Ionicons
             name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'}
-            style={styles.ion}
             focused={false}
           />
         </TouchableOpacity>
@@ -54,32 +53,20 @@ const authCheck = ({
 };
 
 const styles = StyleSheet.create({
-  wrapper,
   head: {
     ...headSubscribeHomeScreen,
-    flexDirection: 'row',
+    display: 'flex',
+    justifyContent: 'space-between',
     alignItems: 'baseline',
-    height: '8%'
+    flexDirection: 'row',
+    height: '8%',
+    paddingRight: 20
   },
   body: {
     height: '92%'
   },
-  headline: {
-    marginLeft: 20,
-    marginRight: 20,
-    flexBasis: '70%'
-  },
   icon: {
-    position: 'relative',
-    flexBasis: '30%',
-    height: 50,
-    paddingRight: 40,
-    textAlign: 'right'
-  },
-  ion: {
-    paddingLeft: 20,
-    paddingRight: 20,
-    textAlign: 'right'
+    paddingLeft: 40
   }
 });
 
