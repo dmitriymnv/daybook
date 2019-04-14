@@ -45,3 +45,7 @@ export const dispabledButton = {
 export const activeButton = {
   backgroundColor: tintColor
 };
+
+export const checkBox = {
+  borderColor: tintColor
+};

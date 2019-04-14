@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  CheckBox,
-  ActivityIndicator
-} from 'react-native';
+import { View, StyleSheet, ActivityIndicator } from 'react-native';
+import { CheckBox } from 'react-native-elements';
 
 import Validation from '../../common/Validation';
 import DefaultButton from '../../button/Default';
 import InputLabel from '../../common/InputLabel';
+import { tintColor } from '../../../constants/Colors';
+import { title } from '../../../constants/Style';
 
 class SignUpForm extends Component {
   state = {
@@ -68,18 +65,25 @@ class SignUpForm extends Component {
               onChangeText: this.onChange('confirmPassword')
             }}
           />
-          <View style={styles.userAgreement}>
-            <CheckBox
-              value={userAgreement}
-              onChange={this.onChange('userAgreement')}
-            />
-            <Text>
-              Я принимаю условия Пользовательского соглашения и даю своё
-              согласие Яндексу на обработку моей персональной информации на
-              условиях, определенных Политикой конфиденциальности.
-            </Text>
-          </View>
-
+          <CheckBox
+            checked={userAgreement}
+            onPress={() => {
+              this.setState(
+                {
+                  userAgreement: !userAgreement
+                },
+                () => this.validation('userAgreement')
+              );
+            }}
+            title="Я принимаю условия Пользовательского соглашения и даю своё
+            согласие DayBook на обработку моей персональной информации на
+            условиях, определенных Политикой конфиденциальности."
+            containerStyle={styles.userAgreement}
+            checkedColor={tintColor}
+            textStyle={{
+              fontWeight: '300'
+            }}
+          />
           <DefaultButton
             onPress={this.onPress}
             text={'Зарегистрироваться'}
@@ -96,28 +100,23 @@ class SignUpForm extends Component {
     this.setState({ loading: true });
   };
 
-  onChange = (type: string) => (value: string) => {
-    if (type === 'userAgreement') {
-      this.setState(
-        {
-          userAgreement: !this.state.userAgreement
-        },
-        () => this.validation(type)
-      );
-    } else {
-      this.setState(
-        {
-          data: {
-            ...this.state.data,
-            [type]: value
-          }
-        },
-        () => this.validation(type)
-      );
-    }
+  onChange = (
+    type: 'userAgreement' | 'email' | 'password' | 'confirmPassword'
+  ) => (value: string) => {
+    this.setState(
+      {
+        data: {
+          ...this.state.data,
+          [type]: value
+        }
+      },
+      () => this.validation(type)
+    );
   };
 
-  validation = (field: any) => {
+  validation = (
+    field: 'userAgreement' | 'email' | 'password' | 'confirmPassword'
+  ) => {
     const { data, userAgreement } = this.state;
 
     const setStateError = (error: string | boolean, type: string) => {
@@ -165,7 +164,9 @@ class SignUpForm extends Component {
 
 const styles = StyleSheet.create({
   userAgreement: {
-    flexDirection: 'row',
+    marginLeft: 0,
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
     marginBottom: 20
   }
 });
