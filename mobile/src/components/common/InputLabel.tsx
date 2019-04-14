@@ -7,7 +7,11 @@ import {
   TextInputProps
 } from 'react-native';
 
-import { title, textError, Input as InputStyle } from '../../constants/Style';
+import {
+  title as titleStyle,
+  textError,
+  Input as InputStyle
+} from '../../constants/Style';
 
 interface InputLabelProps {
   title: string;
@@ -20,7 +24,7 @@ const InputLabel = ({ title, error, input }: InputLabelProps) => {
 
   return (
     <View>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={titleStyle}>{title}</Text>
       <TextInput style={InputStyle} {...input} />
       {errorText}
     </View>
@@ -28,7 +32,6 @@ const InputLabel = ({ title, error, input }: InputLabelProps) => {
 };
 
 const styles = StyleSheet.create({
-  title,
   error: {
     ...textError,
     marginBottom: 10

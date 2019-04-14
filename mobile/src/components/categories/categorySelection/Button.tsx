@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.cardBackroundColor
   },
   title: {
-    lineHeight: 45,
-    ...title
+    ...title,
+    lineHeight: 45
   },
   icon: {
     lineHeight: 45,

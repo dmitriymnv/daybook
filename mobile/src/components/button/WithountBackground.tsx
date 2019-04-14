@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-import { title } from '../../constants/Style';
+import { title as titleStyle } from '../../constants/Style';
 import { ButtonProps } from './index';
 
 const WithountBackground = ({ text, onPress, style }: ButtonProps) => {
@@ -10,7 +10,7 @@ const WithountBackground = ({ text, onPress, style }: ButtonProps) => {
       onPress={onPress}
       style={{ ...styles.container, ...style }}
     >
-      <Text style={styles.text}>{text}</Text>
+      <Text style={titleStyle}>{text}</Text>
     </TouchableOpacity>
   );
 };
@@ -18,9 +18,6 @@ const WithountBackground = ({ text, onPress, style }: ButtonProps) => {
 const styles = StyleSheet.create({
   container: {
     padding: 20
-  },
-  text: {
-    ...title
   }
 });
 

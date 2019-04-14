@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import Axios from 'axios';
 
-import { title, textError } from '../../../constants/Style';
 import DefaultButton from '../../button/Default';
 import { apiServer } from '../../../core/constants';
 import Validation from '../../common/Validation';
@@ -119,13 +118,5 @@ class SignInForm extends Component<SignInFormProps> {
     }
   }
 }
-
-const styles = StyleSheet.create({
-  title,
-  textError: {
-    ...textError,
-    marginBottom: 10
-  }
-});
 
 export default SignInForm;

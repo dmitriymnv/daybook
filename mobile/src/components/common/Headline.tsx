@@ -11,20 +11,14 @@ interface HeadlineProps {
 
 const Headline = ({ text, style }: HeadlineProps) => {
   return (
-    <View style={{ ...styles.wrapper, ...style }}>
-      <Text style={styles.headline}>{text}</Text>
+    <View style={{ ...style }}>
+      <Text style={headerTitle}>{text}</Text>
       {/* <View style={styles.decoration} /> */}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  wrapper: {
-    // width: 100
-  },
-  headline: {
-    ...headerTitle
-  },
   decoration: {
     position: 'absolute',
     left: 0,
