@@ -37,3 +37,11 @@ export const Input = {
   borderColor: tintColor,
   borderRadius: 1
 };
+
+export const dispabledButton = {
+  backgroundColor: grayColor
+};
+
+export const activeButton = {
+  backgroundColor: tintColor
+};

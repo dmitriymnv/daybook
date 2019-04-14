@@ -2,13 +2,14 @@ import React from 'react';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 import { ButtonProps } from './index';
-import { tintColor } from '../../constants/Colors';
+import { dispabledButton, activeButton } from '../../constants/Style';
 
 const Default = ({ text, onPress, style, disabled }: ButtonProps) => {
+  const styleStatus = disabled ? styles.disabled : styles.active;
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={{ ...styles.container, ...style }}
+      style={{ ...styles.default, ...styleStatus, ...style }}
       disabled={disabled}
     >
       <Text style={styles.text}>{text}</Text>
@@ -17,9 +18,14 @@ const Default = ({ text, onPress, style, disabled }: ButtonProps) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: tintColor,
+  default: {
     padding: 20
+  },
+  active: {
+    ...activeButton
+  },
+  disabled: {
+    ...dispabledButton
   },
   text: {
     textAlign: 'center',
