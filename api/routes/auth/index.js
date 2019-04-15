@@ -1,5 +1,7 @@
 const express = require('express');
 
+const signup = require('./signup');
+
 const router = express.Router();
 
 router.post('/emailCheck', ({ body }, req) => {
@@ -21,5 +23,7 @@ router.post('/emailCheck', ({ body }, req) => {
     }
   });
 });
+
+router.use('/signup', signup);
 
 module.exports = router;

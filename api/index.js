@@ -15,6 +15,8 @@ db.connect(err => {
   }
 });
 
+app.set('port', process.env.PORT || 8080);
+
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
@@ -23,10 +25,12 @@ app.use(function(req, res, next) {
   );
   next();
 });
-
 app.use(BodyParser.json());
 
+//routes
 app.use('/journals', journals);
 app.use('/auth', auth);
 
-app.listen(3030, () => console.log('Сервер запущен!'));
+//middleware
+
+app.listen(8080);
