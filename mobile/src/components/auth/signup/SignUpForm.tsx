@@ -6,9 +6,13 @@ import Validation from '../../common/Validation';
 import DefaultButton from '../../button/Default';
 import InputLabel from '../../common/InputLabel';
 import { tintColor } from '../../../constants/Colors';
-import { title } from '../../../constants/Style';
+import { ResponseAPIError } from '../../../core/constants';
 
-class SignUpForm extends Component {
+interface SignUpFormProps {
+  onSubmit: ({ email, password }: { email: string; password: string }) => void;
+}
+
+class SignUpForm extends Component<SignUpFormProps> {
   state = {
     data: {
       email: '',
@@ -98,6 +102,25 @@ class SignUpForm extends Component {
 
   onPress = () => {
     this.setState({ loading: true });
+
+    const { email, password } = this.state.data;
+
+    this.props
+      .onSubmit({ email, password })
+      .catch(({ code, error_code, error_message }: ResponseAPIError) => {
+        if (code === 400) {
+          if (error_code === 1) {
+            this.setState({
+              errors: {
+                ...this.state.errors,
+                email: error_message
+              }
+            });
+          }
+        }
+      });
+
+    this.setState({ loading: false });
   };
 
   onChange = (

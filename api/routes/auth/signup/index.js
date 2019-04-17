@@ -2,31 +2,19 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 
 const { toAuthJSON } = require('../../../models/User');
+const { checkEmail } = require('../../../Common/Auth');
 
 const router = express.Router();
 
-async function checkEmail(email, resEmail) {
-  db.query(
-    `SELECT \`email\` FROM \`users\` WHERE \`email\` = '${email.toLowerCase()}'`,
-    (err, result) => {
-      if (err) {
-      } else {
-        if (result[0]) {
-          resEmail(true);
-        } else {
-          resEmail(false);
-        }
-      }
-    }
-  );
-}
-
-router.post('/', ({ body: { data: { email, password } } }, req) => {
+router.post('/', ({ body: { data: { email, password } } }, res) => {
   checkEmail(email, resEmail => {
     if (resEmail) {
-      req.json({
-        status: false,
-        error: 'Данная электронная почта уже используется'
+      res.json({
+        error: {
+          code: 400,
+          error_message: 'Данная электронная почта уже используется',
+          error_code: 1
+        }
       });
     } else {
       const passwordHash = bcrypt.hashSync(password, 10);
@@ -35,8 +23,7 @@ router.post('/', ({ body: { data: { email, password } } }, req) => {
       db.query(request, (err, result) => {
         if (err) {
         } else {
-          req.json({
-            status: true,
+          res.json({
             data: {
               token: toAuthJSON({ email })
             }

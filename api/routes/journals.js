@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-router.post('/', ({ body }, req) => {
+router.post('/', ({ body }, res) => {
   const { to } = body.data;
   if (to == 0) {
     const journalsRequest =
@@ -12,7 +12,7 @@ router.post('/', ({ body }, req) => {
     db.query(countRequest, (err, result) => {
       if (err) {
         console.warn(err);
-        req.statusCode(400).json({
+        res.statusCode(400).json({
           errors: 'Ошибка с получением данных, пожалуйста попробуйте позже'
         });
       } else {
@@ -20,11 +20,11 @@ router.post('/', ({ body }, req) => {
         db.query(journalsRequest, (err, result) => {
           if (err) {
             console.warn(err);
-            req.statusCode(400).json({
+            res.statusCode(400).json({
               errors: 'Ошибка с получением данных, пожалуйста попробуйте позже'
             });
           } else {
-            req.json({ count, result });
+            res.json({ count, result });
           }
         });
       }
@@ -33,11 +33,11 @@ router.post('/', ({ body }, req) => {
     const journalsRequest = `SELECT title, id FROM \`journals\` ORDER BY \`id\` DESC LIMIT 10 OFFSET ${to}`;
     db.query(journalsRequest, (err, result) => {
       if (err) {
-        req.statusCode(400).json({
+        res.statusCode(400).json({
           errors: 'Ошибка с получением данных, пожалуйста попробуйте позже'
         });
       } else {
-        req.json({ result });
+        res.json({ result });
       }
     });
   }
