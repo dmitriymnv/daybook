@@ -7,9 +7,14 @@ import DefaultButton from '../../button/Default';
 import InputLabel from '../../common/InputLabel';
 import { tintColor } from '../../../constants/Colors';
 import { ResponseAPIError } from '../../../core/constants';
-
 interface SignUpFormProps {
-  onSubmit: ({ email, password }: { email: string; password: string }) => void;
+  onSubmit: ({
+    email,
+    password
+  }: {
+    email: string;
+    password: string;
+  }) => Promise<any>;
 }
 
 class SignUpForm extends Component<SignUpFormProps> {

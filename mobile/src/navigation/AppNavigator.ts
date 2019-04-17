@@ -6,6 +6,7 @@ import { SignInStack, SignUpStack } from '../screens/auth/index';
 
 export default createAppContainer(
   createStackNavigator({
+    // bottom navigator
     Main: {
       screen: MainTabNavigator,
       navigationOptions: () => ({
