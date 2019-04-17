@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 import Axios from 'axios';
 
 import SignUpForm from '../../../components/auth/signup/SignUpForm';
-import { apiServer, ResponseAPIError } from '../../../core/constants';
+import {
+  apiServer,
+  ResponseAPIError,
+  authModuleName
+} from '../../../core/constants';
+import { SignIn } from '../../../core/sagas/auth';
+
+interface SignUpScreenProps {
+  SignIn: (data: object) => void;
+}
 
 interface ResponseAPISignUp {
   data: {
@@ -14,7 +24,7 @@ interface ResponseAPISignUp {
   };
 }
 
-class SignUpScreen extends Component {
+class SignUpScreen extends Component<SignUpScreenProps> {
   render() {
     return (
       <View style={styles.container}>
@@ -36,7 +46,7 @@ class SignUpScreen extends Component {
       if (!!error) {
         throw error;
       } else {
-        console.log('Регистрация успешна', data);
+        this.props.SignIn(data);
       }
     });
   };
@@ -50,4 +60,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SignUpScreen;
+export default connect(
+  () => ({}),
+  { SignIn }
+)(SignUpScreen);
