@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
+import { NavigationScreenProp, NavigationProp } from 'react-navigation';
 import { connect } from 'react-redux';
 import Axios from 'axios';
 
@@ -13,6 +14,7 @@ import { SignIn } from '../../../core/sagas/auth';
 
 interface SignUpScreenProps {
   SignIn: (data: object) => void;
+  navigation: NavigationScreenProp<Navigator>;
 }
 
 interface ResponseAPISignUp {
@@ -47,6 +49,7 @@ class SignUpScreen extends Component<SignUpScreenProps> {
         throw error;
       } else {
         this.props.SignIn(data);
+        this.props.navigation.navigate('Profile');
       }
     });
   };
@@ -61,6 +64,6 @@ const styles = StyleSheet.create({
 });
 
 export default connect(
-  () => ({}),
+  () => {},
   { SignIn }
 )(SignUpScreen);

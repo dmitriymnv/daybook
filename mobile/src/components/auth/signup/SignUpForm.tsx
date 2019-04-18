@@ -123,9 +123,8 @@ class SignUpForm extends Component<SignUpFormProps> {
             });
           }
         }
+        this.setState({ loading: false });
       });
-
-    this.setState({ loading: false });
   };
 
   onChange = (

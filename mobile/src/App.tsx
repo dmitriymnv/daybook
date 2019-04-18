@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { AppLoading, Font } from 'expo';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, AsyncStorage } from 'react-native';
 import { Provider } from 'react-redux';
 
 import AppNavigator from './navigation/AppNavigator';
@@ -8,7 +8,6 @@ import store from './core';
 import { authCheck } from '../src/core/sagas/auth';
 
 store.dispatch(authCheck());
-
 class App extends Component {
   state = {
     loading: true

@@ -7,8 +7,7 @@ import {
   AUTH_CHECK_SUCCESS,
   AUTH_CHECK_ERROR,
   SIGN_IN_REQUEST,
-  SIGN_IN_SUCCESS,
-  SIGN_IN_ERRROR
+  SIGN_IN_SUCCESS
 } from '../constants';
 
 export function authCheck() {
@@ -26,14 +25,24 @@ export function SignIn(data: object) {
 
 export function* SignInSaga() {
   while (true) {
-    const action = yield take(SIGN_IN_REQUEST);
-    const { token } = action.payload.data;
+    const {
+      payload: {
+        data: { token }
+      }
+    }: {
+      payload: { data: { token: string } };
+    } = yield take(SIGN_IN_REQUEST);
 
-    const decodedToken = decode(token);
+    const { email }: { email: string } = decode(token);
+
+    yield AsyncStorage.setItem('user', JSON.stringify({ token, email }));
 
     yield put({
       type: SIGN_IN_SUCCESS,
-      payload: { ...decodedToken, token }
+      payload: {
+        email,
+        token
+      }
     });
   }
 }

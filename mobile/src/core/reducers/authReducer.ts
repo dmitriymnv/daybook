@@ -9,7 +9,7 @@ const defaultState = {
 export default (state = defaultState, { type, payload }: Reducer) => {
   switch (type) {
     case SIGN_IN_SUCCESS:
-      return { ...payload.email, ...payload.token };
+      return { ...state, ...payload };
 
     default:
       return state;

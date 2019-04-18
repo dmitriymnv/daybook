@@ -6,7 +6,7 @@ import ButtonWithountBackground from '../../../components/button/WithountBackgro
 import EmailForm from '../../../components/auth/signin/EmailForm';
 
 interface SignInScreenProps {
-  navigation: NavigationScreenProp<any, any>;
+  navigation: NavigationScreenProp<Navigator>;
 }
 
 class SignInScreen extends Component<SignInScreenProps> {

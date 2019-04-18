@@ -5,14 +5,13 @@ import { NavigationScreenProp } from 'react-navigation';
 import PasswordForm from '../../../components/auth/signin/PasswordForm';
 
 interface SignInScreenProps {
-  navigation: NavigationScreenProp<any, any>;
+  navigation: NavigationScreenProp<any>;
 }
 
 class SignInScreen extends Component<SignInScreenProps> {
   render() {
     const {
       navigation: {
-        navigate,
         state: {
           params: { email }
         }
