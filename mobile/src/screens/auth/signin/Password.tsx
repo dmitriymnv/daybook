@@ -10,26 +10,19 @@ interface SignInScreenProps {
 
 class SignInScreen extends Component<SignInScreenProps> {
   render() {
-    const {
-      navigation: {
-        state: {
-          params: { email }
-        }
-      }
-    } = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.head} />
 
         <View style={styles.body}>
-          <PasswordForm submit={this.onSubmit} email={email} />
+          <PasswordForm onSubmit={this.onSubmit} />
         </View>
       </View>
     );
   }
 
-  onSubmit = (data: object) => {
-    console.log(data);
+  onSubmit = ({ data: { password } }: { data: { password: string } }) => {
+    console.log(password);
   };
 }
 

@@ -1,58 +1,53 @@
 import { isEmail, matches } from 'validator';
 
-interface validationUsers {
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
-
-interface validationProps {
-  value: string | boolean | validationUsers;
+interface ValidationProps {
+  value: ValidationUsers;
   type: 'email' | 'password' | 'confirmPassword' | 'userAgreement';
   setStateError: (error: string | boolean, type: string) => any;
 }
 
-const validation = ({
-  value,
+interface ValidationUsers {
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+  userAgreement?: boolean;
+}
+
+const Validation = ({
+  value: { email = '', password = '', confirmPassword, userAgreement },
   type,
   setStateError
-}: validationProps): boolean | undefined => {
-  const typeValueString = typeof value == 'string';
+}: ValidationProps): void => {
   switch (type) {
     case 'email':
-      const emailCheck = isEmail(typeValueString ? value : value.email);
-      emailCheck
+      isEmail(email)
         ? setStateError('', type)
         : setStateError(
             'Укажите электронную почту в формате example@example.com',
             type
           );
-      return emailCheck;
+      break;
 
     case 'password':
-      const valueMax = typeValueString ? value : value.password;
-      const passwordCheck = matches(
-        valueMax,
+      matches(
+        password,
         /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}/
-      );
-      passwordCheck
+      )
         ? setStateError('', type)
         : setStateError(
             'Пароль должен содержать не менее восьми знаков, включать буквы, цифры и специальные символы',
             type
           );
-
-      return passwordCheck;
+      break;
 
     case 'confirmPassword':
-      const confirmPasswordCheck = value.password === value.confirmPassword;
-      confirmPasswordCheck
+      password === confirmPassword
         ? setStateError('', type)
         : setStateError('Введёные пароли должны совпадать', type);
-      return confirmPasswordCheck;
+      break;
 
     case 'userAgreement':
-      value ? setStateError(false, type) : setStateError(true, type);
+      userAgreement ? setStateError(false, type) : setStateError(true, type);
       break;
 
     default:
@@ -60,4 +55,4 @@ const validation = ({
   }
 };
 
-export default validation;
+export default Validation;

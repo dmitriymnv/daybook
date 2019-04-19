@@ -25,15 +25,15 @@ class SignInScreen extends Component<SignInScreenProps> {
         </View>
 
         <View style={styles.body}>
-          <EmailForm
-            submit={({ email }: { email: string }) =>
-              navigate('Password', { email })
-            }
-          />
+          <EmailForm onSubmit={this.onSubmit} />
         </View>
       </View>
     );
   }
+
+  onSubmit = ({ data: { email } }: { data: { email: string } }) => {
+    this.props.navigation.navigate('Password', { email });
+  };
 }
 
 const styles = StyleSheet.create({
