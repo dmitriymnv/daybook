@@ -3,7 +3,17 @@ import React from 'react';
 import InputLabel from '../../common/InputLabel';
 import Form from '../../common/Form';
 
-const PasswordForm = ({ data, errors, onChange }: any) => {
+interface PasswordFormProps {
+  data: {
+    password: string;
+  };
+  errors: {
+    password: string;
+  };
+  onChange: (type: string) => undefined;
+}
+
+const PasswordForm = ({ data, errors, onChange }: PasswordFormProps) => {
   return (
     <InputLabel
       title="Ваш пароль"

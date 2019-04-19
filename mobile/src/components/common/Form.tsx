@@ -1,4 +1,4 @@
-import React, { Component, StatelessComponent } from 'react';
+import React, { Component } from 'react';
 import { View, ActivityIndicator } from 'react-native';
 
 import Validation from './Validation';
@@ -6,7 +6,7 @@ import DefaultButton from '../button/Default';
 import { ResponseAPIError } from '../../core/constants';
 
 interface FormProps {
-  WrappedComponent: StatelessComponent;
+  WrappedComponent: any;
   fields: {
     email?: string;
     password?: string;
@@ -27,7 +27,7 @@ interface FormHOCProps {
     data,
     setError
   }: {
-    data: { email?: string; password?: string };
+    data: any;
     setError?: ({ code, error_message, error_code }: ResponseAPIError) => void;
   }) => void;
 }

@@ -3,7 +3,17 @@ import React from 'react';
 import InputLabel from '../../common/InputLabel';
 import Form from '../../common/Form';
 
-const EmailForm = ({ data, errors, onChange }: any) => {
+interface EmailFormProps {
+  data: {
+    email: string;
+  };
+  errors: {
+    email: string;
+  };
+  onChange: (type: string) => undefined;
+}
+
+const EmailForm = ({ data, errors, onChange }: EmailFormProps) => {
   return (
     <InputLabel
       title="Ваша электронная почта"
