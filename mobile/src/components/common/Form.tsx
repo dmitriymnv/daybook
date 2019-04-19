@@ -53,6 +53,7 @@ const Form = ({ WrappedComponent, fields, errors, buttonText }: FormProps) => {
         return (
           <View>
             <WrappedComponent
+              {...this.props}
               data={data}
               errors={errors}
               onChange={this.onChange}

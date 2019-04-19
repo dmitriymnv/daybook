@@ -1,7 +1,7 @@
 {
   "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 9860,
+  "packagerPort": null,
+  "packagerPid": null,
   "expoServerNgrokUrl": "https://ni-yzg.anonymous.mobile.exp.direct",
   "packagerNgrokUrl": "https://packager.ni-yzg.anonymous.mobile.exp.direct",
   "ngrokPid": 4252,
