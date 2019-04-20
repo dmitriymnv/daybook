@@ -122,9 +122,11 @@ const Form = ({ WrappedComponent, fields, errors, buttonText }: FormProps) => {
 
       Validation({ value: data, type: field, setStateError });
 
-      if (field === 'password' && typeof data.confirmPassword === 'string') {
-        Validation({ value: data, type: 'confirmPassword', setStateError });
-      }
+      setTimeout(() => {
+        if (field === 'password' && typeof data.confirmPassword === 'string') {
+          Validation({ value: data, type: 'confirmPassword', setStateError });
+        }
+      }, 10);
     };
 
     validateForm() {
