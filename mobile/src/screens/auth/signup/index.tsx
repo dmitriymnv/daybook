@@ -9,7 +9,7 @@ import { apiServer, ResponseAPIError } from '../../../core/constants';
 import { SignIn } from '../../../core/sagas/auth';
 
 interface SignUpScreenProps {
-  SignIn: (data: object) => void;
+  SignIn: (token: string) => void;
   navigation: NavigationScreenProp<Navigator>;
 }
 
@@ -38,7 +38,7 @@ class SignUpScreen extends Component<SignUpScreenProps> {
       if (!!error) {
         setError(error);
       } else {
-        this.props.SignIn(data);
+        this.props.SignIn(data.token);
         this.props.navigation.navigate('Profile');
       }
     });

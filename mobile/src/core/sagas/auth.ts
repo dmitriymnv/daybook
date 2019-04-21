@@ -3,8 +3,6 @@ import { all, take, put } from 'redux-saga/effects';
 
 import {
   AUTH_CHECK_REQUEST,
-  AUTH_CHECK_SUCCESS,
-  AUTH_CHECK_ERROR,
   SIGN_IN_REQUEST,
   SIGN_IN_SUCCESS,
   SIGN_IN_ERRROR
@@ -27,10 +25,10 @@ export function SignIn(toDecodeToken: string) {
 
 export function* SignInSaga() {
   while (true) {
-    const ac = yield take(SIGN_IN_REQUEST);
     const {
       payload: { token, email }
     } = yield take(SIGN_IN_REQUEST);
+
     yield AsyncStorage.setItem('user', JSON.stringify({ token, email }));
 
     yield put({
@@ -47,12 +45,14 @@ export function* authCheckSaga() {
   while (true) {
     yield take(AUTH_CHECK_REQUEST);
 
-    const user = yield AsyncStorage.getItem('user');
+    const asyncUser = yield AsyncStorage.getItem('user');
+
+    const user = JSON.parse(asyncUser);
 
     if (user !== null) {
       yield put({
         type: SIGN_IN_SUCCESS,
-        payload: { user }
+        payload: { ...user }
       });
     } else {
       yield put({

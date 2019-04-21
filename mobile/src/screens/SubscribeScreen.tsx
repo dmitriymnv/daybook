@@ -45,6 +45,7 @@ const authCheck = ({
   navigate: (screen: string) => any;
   userToken: string;
 }) => {
+  console.log(123123131312, userToken);
   if (userToken) {
     navigate('Profile');
   } else {
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state: any) => ({
-  userToken: state[authModuleName].token
+  userToken: state[authModuleName]
 });
 
 export default connect(mapStateToProps)(HomeScreen);
