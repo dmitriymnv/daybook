@@ -1,13 +1,13 @@
 import { AsyncStorage } from 'react-native';
 import { all, take, put } from 'redux-saga/effects';
-import decode from 'jwt-decode';
 
 import {
   AUTH_CHECK_REQUEST,
   AUTH_CHECK_SUCCESS,
   AUTH_CHECK_ERROR,
   SIGN_IN_REQUEST,
-  SIGN_IN_SUCCESS
+  SIGN_IN_SUCCESS,
+  SIGN_IN_ERRROR
 } from '../constants';
 
 export function authCheck() {
@@ -16,25 +16,21 @@ export function authCheck() {
   };
 }
 
-export function SignIn(data: object) {
+export function SignIn(toDecodeToken: string) {
   return {
     type: SIGN_IN_REQUEST,
-    payload: { data }
+    payload: {
+      toDecodeToken
+    }
   };
 }
 
 export function* SignInSaga() {
   while (true) {
+    const ac = yield take(SIGN_IN_REQUEST);
     const {
-      payload: {
-        data: { token }
-      }
-    }: {
-      payload: { data: { token: string } };
+      payload: { token, email }
     } = yield take(SIGN_IN_REQUEST);
-
-    const { email }: { email: string } = decode(token);
-
     yield AsyncStorage.setItem('user', JSON.stringify({ token, email }));
 
     yield put({
@@ -51,21 +47,21 @@ export function* authCheckSaga() {
   while (true) {
     yield take(AUTH_CHECK_REQUEST);
 
-    const user = yield AsyncStorage.getItem('USER');
+    const user = yield AsyncStorage.getItem('user');
 
     if (user !== null) {
       yield put({
-        type: AUTH_CHECK_SUCCESS,
+        type: SIGN_IN_SUCCESS,
         payload: { user }
       });
     } else {
       yield put({
-        type: AUTH_CHECK_ERROR
+        type: SIGN_IN_ERRROR
       });
     }
   }
 }
 
 export const saga = function*() {
-  yield all([SignInSaga()]);
+  yield all([SignInSaga(), authCheckSaga()]);
 };
