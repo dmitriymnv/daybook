@@ -49,7 +49,7 @@ export function* authCheckSaga() {
 
     const user = JSON.parse(asyncUser);
 
-    if (user !== null) {
+    if (asyncUser !== null) {
       yield put({
         type: SIGN_IN_SUCCESS,
         payload: { ...user }
