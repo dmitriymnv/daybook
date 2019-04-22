@@ -84,9 +84,10 @@ const Form = ({ WrappedComponent, fields, errors, buttonText }: FormProps) => {
               });
             }
           }
-          this.setState({ loading: false });
         }
       });
+
+      this.setState({ loading: false });
     };
 
     onChange = (
