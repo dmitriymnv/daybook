@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator, Text, StyleSheet } from 'react-native';
 
 import Validation from './Validation';
 import DefaultButton from '../button/Default';
 import { ResponseAPIError } from '../../core/constants';
+import { textError } from '../../constants/Style';
 
 interface FormProps {
   WrappedComponent: any;
@@ -39,7 +40,8 @@ const Form = ({ WrappedComponent, fields, errors, buttonText }: FormProps) => {
         ...fields
       },
       errors: {
-        ...errors
+        ...errors,
+        global: ''
       },
       formValid: false,
       loading: false
@@ -52,6 +54,9 @@ const Form = ({ WrappedComponent, fields, errors, buttonText }: FormProps) => {
       } else {
         return (
           <View>
+            {!!errors.global && (
+              <Text style={styles.error}>{errors.global}</Text>
+            )}
             <WrappedComponent
               {...this.props}
               data={data}
@@ -74,16 +79,12 @@ const Form = ({ WrappedComponent, fields, errors, buttonText }: FormProps) => {
       this.props.onSubmit({
         data: this.state.data,
         setError: ({ code, error_code, error_message }: ResponseAPIError) => {
-          if (code === 400) {
-            if (error_code === 1) {
-              this.setState({
-                errors: {
-                  ...this.state.errors,
-                  email: error_message
-                }
-              });
+          this.setState({
+            errors: {
+              ...this.state.errors,
+              global: error_message
             }
-          }
+          });
         }
       });
 
@@ -153,5 +154,12 @@ const Form = ({ WrappedComponent, fields, errors, buttonText }: FormProps) => {
     }
   };
 };
+
+const styles = StyleSheet.create({
+  error: {
+    ...textError,
+    marginBottom: 10
+  }
+});
 
 export default Form;
