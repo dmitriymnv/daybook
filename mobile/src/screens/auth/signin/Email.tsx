@@ -31,8 +31,9 @@ class SignInScreen extends Component<SignInScreenProps> {
     );
   }
 
-  onSubmit = ({ data: { email } }: { data: { email: string } }) => {
+  onSubmit = ({ email }: { email?: string }) => {
     this.props.navigation.navigate('Password', { email });
+    return Promise.resolve();
   };
 }
 

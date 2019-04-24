@@ -31,12 +31,12 @@ class SignUpScreen extends Component<SignUpScreenProps> {
     );
   }
 
-  onSubmit = async ({ data: { email, password }, setError }: any) => {
+  onSubmit = async ({ email, password }: any) => {
     await Axios.post(`${apiServer}/auth/signup`, {
       data: { email, password }
     }).then(({ data: { data, error } }: ResponseAPISignUp) => {
       if (!!error) {
-        setError(error);
+        throw error;
       } else {
         this.props.SignIn(data.token);
         this.props.navigation.navigate('Profile');

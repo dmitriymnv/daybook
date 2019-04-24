@@ -27,43 +27,23 @@ class SignInScreen extends Component<SignInScreenProps> {
       </View>
     );
   }
-  //Задать типы
-  onSubmit = async ({
-    data: { password },
-    setError
-  }: {
-    data: { password: string };
-  }) => {
-    const email = this.props.navigation.getParam('email');
+
+  onSubmit = async ({ password }: { password?: string }) => {
+    const email: string = this.props.navigation.getParam('email');
 
     await Axios.post(`${apiServer}/auth/signin`, {
       data: {
         email,
         password
       }
-    })
-      .then(({ data: { data, error } }) => {
-        if (!!error) {
-          setError(error);
-        } else {
-          this.props.SignIn(data.token);
-          this.props.navigation.navigate('Profile');
-        }
-      })
-      .catch(error => {
-        if (error.response) {
-          setError({
-            code: 404,
-            error_code: 0,
-            error_message:
-              'Проблемы с доступном к серверу, обратитесь к нашей поддержке'
-          });
-        } else if (error.request) {
-          console.warn(error.request);
-        } else {
-          console.warn('Error', error.message);
-        }
-      });
+    }).then(({ data: { data, error } }) => {
+      if (!!error) {
+        throw error;
+      } else {
+        this.props.SignIn(data.token);
+        this.props.navigation.navigate('Profile');
+      }
+    });
   };
 }
 

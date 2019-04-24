@@ -25,12 +25,12 @@ interface FormProps {
 
 interface FormHOCProps {
   onSubmit: ({
-    data,
-    setError
+    email,
+    password
   }: {
-    data: any;
-    setError?: ({ code, error_message, error_code }: ResponseAPIError) => void;
-  }) => void;
+    email?: string;
+    password?: string;
+  }) => Promise<void>;
 }
 
 const Form = ({ WrappedComponent, fields, errors, buttonText }: FormProps) => {
@@ -76,17 +76,20 @@ const Form = ({ WrappedComponent, fields, errors, buttonText }: FormProps) => {
     onPress = () => {
       this.setState({ loading: true });
 
-      this.props.onSubmit({
-        data: this.state.data,
-        setError: ({ code, error_code, error_message }: ResponseAPIError) => {
-          this.setState({
-            errors: {
-              ...this.state.errors,
-              global: error_message
+      this.props
+        .onSubmit(this.state.data)
+        .catch(({ code, error_code, error_message }: ResponseAPIError) => {
+          if (code === 400) {
+            if (error_code === 1) {
+              this.setState({
+                errors: {
+                  ...this.state.errors,
+                  email: error_message
+                }
+              });
             }
-          });
-        }
-      });
+          }
+        });
 
       this.setState({ loading: false });
     };
