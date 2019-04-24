@@ -87,6 +87,13 @@ const Form = ({ WrappedComponent, fields, errors, buttonText }: FormProps) => {
                   email: error_message
                 }
               });
+            } else if (error_code === 2) {
+              this.setState({
+                errors: {
+                  ...this.state.errors,
+                  password: error_message
+                }
+              });
             }
           }
         });

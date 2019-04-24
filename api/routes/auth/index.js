@@ -1,29 +1,30 @@
 const express = require('express');
 
 const signup = require('./signup');
+const signin = require('./signin');
+const { resUser } = require('../../models/User');
 
 const router = express.Router();
 
-router.post('/emailCheck', ({ body }, res) => {
-  const { email } = body.data;
-  const emailRequest = `SELECT \`email\` FROM \`users\` WHERE \`email\` = '${email.toLowerCase()}'`;
-
-  db.query(emailRequest, (err, result) => {
-    if (err) {
-      console.warn(err);
-      res.statusCode(400).json({
-        errors: 'Ошибка с получением данных, пожалуйста попробуйте позже'
+router.post('/emailCheck', ({ body: { data: { email } } }, res) => {
+  resUser(email, result => {
+    if (result) {
+      res.json({
+        data: { email }
       });
     } else {
-      if (result[0]) {
-        res.json({ email: true });
-      } else {
-        res.json({ email: false });
-      }
+      res.json({
+        error: {
+          code: 400,
+          error_message: 'Электронная почта не найдена',
+          error_code: 1
+        }
+      });
     }
   });
 });
 
 router.use('/signup', signup);
+router.use('/signin', signin);
 
 module.exports = router;

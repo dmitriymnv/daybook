@@ -2,13 +2,13 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 
 const { toAuthJSON } = require('../../../models/User');
-const { checkEmail } = require('../../../Common/Auth');
+const { resUser } = require('../../../models/User');
 
 const router = express.Router();
 
 router.post('/', ({ body: { data: { email, password } } }, res) => {
-  checkEmail(email, resEmail => {
-    if (resEmail) {
+  resUser(email, result => {
+    if (result) {
       res.json({
         error: {
           code: 400,
