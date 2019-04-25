@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Вывод журналов Возврат журналов при удачной загрузки 1`] = `
-<View>
-  <Text>
-    Загрузка...
-  </Text>
-</View>
-`;

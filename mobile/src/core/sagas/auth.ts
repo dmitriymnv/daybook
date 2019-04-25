@@ -29,7 +29,7 @@ export function* SignInSaga() {
       payload: { token, email }
     } = yield take(SIGN_IN_REQUEST);
 
-    yield AsyncStorage.setItem('user', JSON.stringify({ token, email }));
+    AsyncStorage.setItem('user', JSON.stringify({ token, email }));
 
     yield put({
       type: SIGN_IN_SUCCESS,
