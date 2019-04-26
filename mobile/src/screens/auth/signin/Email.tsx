@@ -14,14 +14,14 @@ interface SignInScreenProps {
 class SignInScreen extends Component<SignInScreenProps> {
   render() {
     const {
-      navigation: { navigate }
+      navigation: { push }
     } = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.head}>
           <ButtonWithountBackground
             text={'Регистрация'}
-            onPress={() => navigate('SignUp')}
+            onPress={() => push('SignUp')}
             style={styles.buttonSignup}
           />
         </View>
@@ -39,7 +39,6 @@ class SignInScreen extends Component<SignInScreenProps> {
         email
       }
     }).then(({ data: { data, error } }) => {
-      console.log(data, error);
       if (!!error) {
         throw error;
       } else {

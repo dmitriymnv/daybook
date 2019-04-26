@@ -20,7 +20,8 @@ export const SignInStack = createStackNavigator(
     }
   },
   {
-    initialRouteName: 'Email'
+    initialRouteName: 'Email',
+    mode: 'modal'
   }
 );
 
