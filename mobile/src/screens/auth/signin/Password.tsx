@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 import { View, StyleSheet } from 'react-native';
-import { NavigationScreenProp } from 'react-navigation';
+import {
+  NavigationScreenProp,
+  StackActions,
+  NavigationActions
+} from 'react-navigation';
 import { connect } from 'react-redux';
 
 import PasswordForm from '../../../components/auth/signin/PasswordForm';
@@ -41,7 +45,12 @@ class SignInScreen extends Component<SignInScreenProps> {
         throw error;
       } else {
         this.props.SignIn(data.token);
-        this.props.navigation.navigate('Profile');
+        this.props.navigation.dispatch(
+          StackActions.reset({
+            index: 0,
+            actions: [NavigationActions.navigate({ routeName: 'Main' })]
+          })
+        );
       }
     });
   };

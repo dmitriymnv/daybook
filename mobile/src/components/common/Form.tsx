@@ -35,6 +35,7 @@ interface FormHOCProps {
 
 const Form = ({ WrappedComponent, fields, errors, buttonText }: FormProps) => {
   return class extends Component<FormHOCProps> {
+    _isMounted = false;
     state = {
       data: {
         ...fields
@@ -46,6 +47,10 @@ const Form = ({ WrappedComponent, fields, errors, buttonText }: FormProps) => {
       formValid: false,
       loading: false
     };
+
+    componentWillUnmount() {
+      this._isMounted = false;
+    }
 
     render() {
       const { data, formValid, loading, errors } = this.state;
@@ -73,13 +78,15 @@ const Form = ({ WrappedComponent, fields, errors, buttonText }: FormProps) => {
       }
     }
 
-    onPress = () => {
+    onPress = async () => {
       this.setState({ loading: true });
 
-      this.props
+      this._isMounted = true;
+
+      await this.props
         .onSubmit(this.state.data)
         .catch(({ code, error_code, error_message }: ResponseAPIError) => {
-          if (code === 400) {
+          if (code === 400 && this._isMounted) {
             if (error_code === 1) {
               this.setState({
                 errors: {
@@ -87,7 +94,7 @@ const Form = ({ WrappedComponent, fields, errors, buttonText }: FormProps) => {
                   email: error_message
                 }
               });
-            } else if (error_code === 2) {
+            } else if (error_code === 2 && this._isMounted) {
               this.setState({
                 errors: {
                   ...this.state.errors,
@@ -96,9 +103,10 @@ const Form = ({ WrappedComponent, fields, errors, buttonText }: FormProps) => {
               });
             }
           }
+        })
+        .then(() => {
+          this._isMounted && this.setState({ loading: false });
         });
-
-      this.setState({ loading: false });
     };
 
     onChange = (

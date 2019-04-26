@@ -48,7 +48,7 @@ const authCheck = ({
   navigate: (screen: string) => any;
   isAuth: boolean;
 }) => {
-  if (!isAuth) {
+  if (isAuth) {
     navigate('Profile');
   } else {
     navigate('SignIn');

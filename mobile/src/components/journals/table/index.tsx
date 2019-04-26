@@ -37,6 +37,7 @@ const TableJournals = ({
       onEndReachedThreshold={0.5}
       numColumns={2}
       contentContainerStyle={styles.list}
+      showsVerticalScrollIndicator={false}
     />
   );
 };
