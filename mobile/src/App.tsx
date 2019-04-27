@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { AppLoading, Font } from 'expo';
+import { AppLoading, Font, Constants } from 'expo';
 import { View, StyleSheet } from 'react-native';
 import { Provider } from 'react-redux';
 
 import AppNavigator from './navigation/AppNavigator';
 import store from './core';
 import { authCheck } from '../src/core/sagas/auth';
+import { tintColor } from './constants/Colors';
 
 store.dispatch(authCheck());
 
@@ -26,6 +27,7 @@ class App extends Component {
     } else {
       return (
         <View style={styles.container}>
+          <View style={styles.statusBar} />
           <Provider store={store}>
             <AppNavigator />
           </Provider>
@@ -51,6 +53,10 @@ class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  statusBar: {
+    backgroundColor: tintColor,
+    height: Constants.statusBarHeight
   }
 });
 
