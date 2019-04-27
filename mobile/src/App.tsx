@@ -27,7 +27,6 @@ class App extends Component {
     } else {
       return (
         <View style={styles.container}>
-          <View style={styles.statusBar} />
           <Provider store={store}>
             <AppNavigator />
           </Provider>
@@ -52,11 +51,8 @@ class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
-  },
-  statusBar: {
-    backgroundColor: tintColor,
-    height: Constants.statusBarHeight
+    flex: 1,
+    marginTop: -Constants.statusBarHeight
   }
 });
 
