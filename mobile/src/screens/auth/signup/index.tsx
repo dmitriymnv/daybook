@@ -35,7 +35,13 @@ class SignUpScreen extends Component<SignUpScreenProps> {
     );
   }
 
-  onSubmit = async ({ email, password }: any) => {
+  onSubmit = async ({
+    email,
+    password
+  }: {
+    email?: string;
+    password?: string;
+  }) => {
     await Axios.post(`${apiServer}/auth/signup`, {
       data: { email, password }
     }).then(({ data: { data, error } }: ResponseAPISignUp) => {
