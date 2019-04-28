@@ -1,7 +1,10 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 
-import Colors from '../constants/Colors';
+import {
+  tabIconSelected as tabIconSelectedColor,
+  dark as darkColor
+} from '../constants/Colors';
 import { TabBarIconProps } from './MainNavigator';
 
 const TabBarIcon = ({ name, focused, style }: TabBarIconProps) => {
@@ -10,7 +13,7 @@ const TabBarIcon = ({ name, focused, style }: TabBarIconProps) => {
       name={name}
       size={26}
       style={style}
-      color={focused ? Colors.tabIconSelected : Colors.darkColor}
+      color={focused ? tabIconSelectedColor : darkColor}
     />
   );
 };

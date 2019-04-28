@@ -10,7 +10,7 @@ import {
 import PreviewItemJournal, {
   PreviewItemJournalProps
 } from './PreviewItemJournal';
-import { tintColor } from '../../../constants/Colors';
+import { main as mainColor } from '../../../constants/Colors';
 
 interface JournalTableItem extends PreviewItemJournalProps {
   id: number;
@@ -55,7 +55,7 @@ const onPress = (id: number) => {};
 const renderFooter = (loading: boolean) => {
   return loading ? (
     <View style={styles.loader}>
-      <ActivityIndicator size="large" color={tintColor} />
+      <ActivityIndicator size="large" color={mainColor} />
     </View>
   ) : null;
 };

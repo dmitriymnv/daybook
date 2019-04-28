@@ -1,4 +1,8 @@
-import Colors, { tintColor, grayColor } from './Colors';
+import {
+  main as mainColor,
+  gray as grayColor,
+  errorText as errorTextColor
+} from './Colors';
 
 export const wrapperBottomTabNavigator = {
   flex: 1,
@@ -21,7 +25,7 @@ export const title = {
 };
 
 export const textError = {
-  color: Colors.errorText,
+  color: errorTextColor,
   paddingTop: 10,
   paddingBottom: 10
 };
@@ -35,7 +39,7 @@ export const Input = {
   paddingLeft: 10,
   paddingRight: 10,
   borderWidth: 1,
-  borderColor: tintColor,
+  borderColor: mainColor,
   borderRadius: 1
 };
 
@@ -44,9 +48,9 @@ export const dispabledButton = {
 };
 
 export const activeButton = {
-  backgroundColor: tintColor
+  backgroundColor: mainColor
 };
 
 export const checkBox = {
-  borderColor: tintColor
+  borderColor: mainColor
 };

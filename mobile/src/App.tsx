@@ -6,14 +6,15 @@ import { Provider } from 'react-redux';
 import AppNavigator from './navigation/AppNavigator';
 import store from './core';
 import { authCheck } from '../src/core/sagas/auth';
-import { tintColor } from './constants/Colors';
-
-store.dispatch(authCheck());
 
 class App extends Component {
   state = {
     loading: true
   };
+
+  componentWillMount() {
+    store.dispatch(authCheck());
+  }
 
   render() {
     if (this.state.loading) {

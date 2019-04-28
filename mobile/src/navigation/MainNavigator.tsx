@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from 'react-navigation';
 import TabBarIcon from './TopBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import SubscribeScreen from '../screens/SubscribeScreen';
-import Colors from '../constants/Colors';
+import { mainColor } from '../constants/Colors';
 
 export interface TabBarIconProps {
   focused: boolean;
@@ -41,7 +41,7 @@ export default createBottomTabNavigator(
   },
   {
     tabBarOptions: {
-      activeTintColor: Colors.tintColor,
+      activeTintColor: mainColor,
       style: {
         height: '7%'
       },

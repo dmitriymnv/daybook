@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 
-import { tintColor } from '../../constants/Colors';
+import { main as mainColor } from '../../constants/Colors';
 import { headerTitle } from '../../constants/Style';
 
 interface HeadlineProps {
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   text: {
     ...headerTitle,
     borderBottomWidth: 5,
-    borderBottomColor: tintColor
+    borderBottomColor: mainColor
   }
 });
 

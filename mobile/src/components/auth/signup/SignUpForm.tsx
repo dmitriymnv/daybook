@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 
 import InputLabel from '../../common/InputLabel';
-import { tintColor } from '../../../constants/Colors';
+import { main as mainColor } from '../../../constants/Colors';
 import Form from '../../common/Form';
 
 interface SignUpFormProps {
@@ -77,7 +77,7 @@ class SignUpForm extends Component<SignUpFormProps> {
             согласие DayBook на обработку моей персональной информации на
             условиях, определенных Политикой конфиденциальности."
           containerStyle={styles.userAgreement}
-          checkedColor={tintColor}
+          checkedColor={mainColor}
           textStyle={{
             fontWeight: '300'
           }}

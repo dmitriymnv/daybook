@@ -1,12 +1,8 @@
-export const tintColor = '#422498';
-export const grayColor = '#edeef0';
+export const main = '#422498';
 
-export default {
-  tintColor,
-  cardBackroundColor: grayColor,
-  tabIconSelected: tintColor,
-  darkColor: '#000a12',
-  grayColor: grayColor,
-  grayText: '#dcdcdc',
-  errorText: 'red'
-};
+export const dark = '#000a12';
+export const gray = '#f5f5f5';
+export const errorText = '#f44336';
+
+export const cardBackground = gray;
+export const tabIconSelected = main;

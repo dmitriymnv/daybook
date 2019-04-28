@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet, Platform } from 'react-native';
 
 import Ionicons from '../../../navigation/TopBarIcon';
-import Colors from '../../../constants/Colors';
+import { cardBackground as cardBackgroundColor } from '../../../constants/Colors';
 import { title } from '../../../constants/Style';
 
 interface ButtonProps {
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     width: 140,
     height: 45,
     borderRadius: 5,
-    backgroundColor: Colors.cardBackroundColor
+    backgroundColor: cardBackgroundColor
   },
   title: {
     ...title,
