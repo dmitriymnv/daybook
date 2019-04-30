@@ -57,7 +57,9 @@ const authCheck = ({
 
 const styles = StyleSheet.create({
   icon: {
-    paddingLeft: 40
+    paddingBottom: '4%',
+    paddingLeft: 100,
+    paddingRight: 20
   }
 });
 

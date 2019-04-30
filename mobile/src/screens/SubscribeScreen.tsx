@@ -27,8 +27,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'baseline',
     flexDirection: 'row',
-    height: '8%',
-    paddingRight: 20
+    height: '8%'
   },
   body: {
     height: '92%'
