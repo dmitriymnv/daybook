@@ -20,7 +20,7 @@ class HomeScreen extends Component {
         </View>
 
         <View style={styles.body}>
-          <Journals />
+          <Journals categories={2} />
         </View>
       </View>
     );

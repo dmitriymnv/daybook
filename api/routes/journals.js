@@ -1,42 +1,37 @@
 const express = require('express');
 
+const {
+  journals,
+  journalsOffset,
+  countJournals
+} = require('../common/constants');
+const { dbQuery } = require('../models/Error');
+
 const router = express.Router();
 
 router.post('/', ({ body }, res) => {
   const { from, categories } = body.data;
-
   if (from == 0) {
-    const journalsRequest =
-      'SELECT title, id FROM `journals` ORDER BY `id` DESC LIMIT 10';
-    const countRequest = 'SELECT COUNT(*) count FROM `journals`';
-
-    db.query(countRequest, (err, result) => {
+    db.query(countJournals, (err, result) => {
       if (err) {
-        console.warn(err);
-        res.statusCode(400).json({
-          errors: 'Ошибка с получением данных, пожалуйста попробуйте позже'
-        });
+        dbQuery(res);
       } else {
         let { count } = result[0];
-        db.query(journalsRequest, (err, result) => {
+        console.log(2, count);
+        db.query(journals(categories), (err, result) => {
           if (err) {
-            console.warn(err);
-            res.statusCode(400).json({
-              errors: 'Ошибка с получением данных, пожалуйста попробуйте позже'
-            });
+            dbQuery(res);
           } else {
+            console.log(3, result);
             res.json({ count, result });
           }
         });
       }
     });
   } else {
-    const journalsRequest = `SELECT title, id FROM \`journals\` ORDER BY \`id\` DESC LIMIT 10 OFFSET ${from}`;
-    db.query(journalsRequest, (err, result) => {
+    db.query(journalsOffset(categories, from), (err, result) => {
       if (err) {
-        res.statusCode(400).json({
-          errors: 'Ошибка с получением данных, пожалуйста попробуйте позже'
-        });
+        dbQuery(res);
       } else {
         res.json({ result });
       }
