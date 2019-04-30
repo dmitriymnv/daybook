@@ -15,8 +15,8 @@ const SelectMenu = ({ style }: SelectMenuProps) => {
       showsHorizontalScrollIndicator={false}
       style={{ ...styles.container, ...style }}
     >
-      {categoriesList.map(({ name, text, icon }) => (
-        <TouchableOpacity onPress={() => onPress({ name })} key={name}>
+      {categoriesList.map(({ id, text, icon }) => (
+        <TouchableOpacity onPress={() => onPress({ id })} key={id}>
           <Button text={text} icon={icon} />
         </TouchableOpacity>
       ))}
@@ -24,7 +24,9 @@ const SelectMenu = ({ style }: SelectMenuProps) => {
   );
 };
 
-const onPress = ({ name }: { name: string }) => {};
+const onPress = ({ id }: { id: string }) => {
+  console.log(id);
+};
 
 const styles = StyleSheet.create({
   container: {

@@ -5,7 +5,7 @@ import { apiServer } from '../../core/constants';
 import TableJournals from './table';
 
 interface JournalsProps {
-  categories?: string;
+  categories?: 0 | 1 | 2 | 3 | 4;
 }
 
 class Journals extends Component<JournalsProps> {
@@ -35,7 +35,8 @@ class Journals extends Component<JournalsProps> {
     return axios
       .post(`${apiServer}/journals`, {
         data: {
-          to: this.state.data.length
+          from: this.state.data.length,
+          categories: this.props.categories
         }
       })
       .then(({ data }) => {

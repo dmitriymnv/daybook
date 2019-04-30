@@ -3,8 +3,9 @@ const express = require('express');
 const router = express.Router();
 
 router.post('/', ({ body }, res) => {
-  const { to } = body.data;
-  if (to == 0) {
+  const { from, categories } = body.data;
+
+  if (from == 0) {
     const journalsRequest =
       'SELECT title, id FROM `journals` ORDER BY `id` DESC LIMIT 10';
     const countRequest = 'SELECT COUNT(*) count FROM `journals`';
@@ -30,7 +31,7 @@ router.post('/', ({ body }, res) => {
       }
     });
   } else {
-    const journalsRequest = `SELECT title, id FROM \`journals\` ORDER BY \`id\` DESC LIMIT 10 OFFSET ${to}`;
+    const journalsRequest = `SELECT title, id FROM \`journals\` ORDER BY \`id\` DESC LIMIT 10 OFFSET ${from}`;
     db.query(journalsRequest, (err, result) => {
       if (err) {
         res.statusCode(400).json({

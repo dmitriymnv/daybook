@@ -2,7 +2,7 @@ export const name = 'DayBook';
 
 export const categoriesList = [
   {
-    name: 'business',
+    id: 0,
     text: 'Бизнес',
     icon: {
       ios: 'ios-business',
@@ -10,7 +10,7 @@ export const categoriesList = [
     }
   },
   {
-    name: 'game',
+    id: 1,
     text: 'Игры',
     icon: {
       ios: 'ios-play',
@@ -18,7 +18,7 @@ export const categoriesList = [
     }
   },
   {
-    name: 'baby',
+    id: 2,
     text: 'Детские',
     icon: {
       ios: 'ios-play',
@@ -26,7 +26,7 @@ export const categoriesList = [
     }
   },
   {
-    name: 'travels',
+    id: 3,
     text: 'Путешествия',
     icon: {
       ios: 'ios-train',
@@ -34,7 +34,7 @@ export const categoriesList = [
     }
   },
   {
-    name: 'auto',
+    id: 4,
     text: 'Авто',
     icon: {
       ios: 'ios-car',
