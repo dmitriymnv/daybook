@@ -35,7 +35,9 @@ interface FormHOCProps {
 
 const Form = ({ WrappedComponent, fields, errors, buttonText }: FormProps) => {
   return class extends Component<FormHOCProps> {
+    //Проверка того что компонент ещё не размонтирован
     _isMounted = false;
+
     state = {
       data: {
         ...fields
