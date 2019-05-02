@@ -2,6 +2,7 @@ import { createAppContainer, createStackNavigator } from 'react-navigation';
 
 import MainTabNavigator from './MainNavigator';
 import ProfileScreen from '../screens/ProfileScreen';
+import CategoriesJournalsScreen from '../screens/CategoriesJournalsScreen';
 import { SignInStack, SignUpStack } from '../screens/auth/index';
 
 export default createAppContainer(
@@ -27,6 +28,9 @@ export default createAppContainer(
       navigationOptions: () => ({
         title: 'Регистрация'
       })
+    },
+    CategoriesJournals: {
+      screen: CategoriesJournalsScreen
     }
   })
 );

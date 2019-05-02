@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
+import { NavigationScreenProp } from 'react-navigation';
 
 import { wrapperBottomTabNavigator as wrapper } from '../constants/Style';
 import CategorySelection from '../components/categories/categorySelection';
@@ -7,7 +8,11 @@ import Headline from '../components/common/Headline';
 import Journals from '../components/journals';
 import { headSubscribeHomeScreen } from '../constants/Style';
 
-class HomeScreen extends Component {
+interface HomeScreen {
+  navigation: NavigationScreenProp<any, any>;
+}
+
+class HomeScreen extends Component<HomeScreen> {
   render() {
     return (
       <View style={styles.wrapper}>
@@ -16,11 +21,11 @@ class HomeScreen extends Component {
             <Headline text="Главная" />
           </View>
 
-          <CategorySelection />
+          <CategorySelection navigation={this.props.navigation} />
         </View>
 
         <View style={styles.body}>
-          <Journals categories={2} />
+          <Journals />
         </View>
       </View>
     );

@@ -17,12 +17,10 @@ router.post('/', ({ body }, res) => {
         dbQuery(res);
       } else {
         let { count } = result[0];
-        console.log(2, count);
         db.query(journals(categories), (err, result) => {
           if (err) {
             dbQuery(res);
           } else {
-            console.log(3, result);
             res.json({ count, result });
           }
         });

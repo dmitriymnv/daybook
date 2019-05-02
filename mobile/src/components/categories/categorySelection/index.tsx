@@ -1,14 +1,16 @@
 import React from 'react';
 import { ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { NavigationScreenProp } from 'react-navigation';
 
 import { categoriesList } from '../../../constants/App';
 import Button from './Button';
 
 interface SelectMenuProps {
   style?: object;
+  navigation: NavigationScreenProp<any, any>;
 }
 
-const SelectMenu = ({ style }: SelectMenuProps) => {
+const SelectMenu = ({ style, navigation }: SelectMenuProps) => {
   return (
     <ScrollView
       horizontal={true}
@@ -16,7 +18,7 @@ const SelectMenu = ({ style }: SelectMenuProps) => {
       style={{ ...styles.container, ...style }}
     >
       {categoriesList.map(({ id, text, icon }) => (
-        <TouchableOpacity onPress={() => onPress({ id })} key={id}>
+        <TouchableOpacity onPress={() => onPress({ id, navigation })} key={id}>
           <Button text={text} icon={icon} />
         </TouchableOpacity>
       ))}
@@ -24,8 +26,14 @@ const SelectMenu = ({ style }: SelectMenuProps) => {
   );
 };
 
-const onPress = ({ id }: { id: string }) => {
-  console.log(id);
+const onPress = ({
+  id,
+  navigation
+}: {
+  id: string;
+  navigation: NavigationScreenProp<any, any>;
+}) => {
+  navigation.navigate('CategoriesJournals', { id });
 };
 
 const styles = StyleSheet.create({
