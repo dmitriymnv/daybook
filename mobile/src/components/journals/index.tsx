@@ -9,6 +9,9 @@ interface JournalsProps {
 }
 
 class Journals extends Component<JournalsProps> {
+  //Проверка того что компонент ещё не размонтирован
+  _isMounted = false;
+
   state = {
     data: [],
     count: 0,
@@ -18,6 +21,10 @@ class Journals extends Component<JournalsProps> {
 
   componentDidMount() {
     this.getData();
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   render() {
@@ -32,6 +39,8 @@ class Journals extends Component<JournalsProps> {
   }
 
   getData = async () => {
+    this._isMounted = true;
+
     return axios
       .post(`${apiServer}/journals`, {
         data: {
@@ -40,15 +49,16 @@ class Journals extends Component<JournalsProps> {
         }
       })
       .then(({ data }) => {
-        this.setState({
-          data: [...this.state.data, ...data.result],
-          count: data.count || this.state.count,
-          errors: data.errors || null,
-          loading: false
-        });
+        this._isMounted &&
+          this.setState({
+            data: [...this.state.data, ...data.result],
+            count: data.count || this.state.count,
+            errors: data.errors || null,
+            loading: false
+          });
       })
       .catch(errors => {
-        this.setState({ errors });
+        this._isMounted && this.setState({ errors });
       });
   };
 
