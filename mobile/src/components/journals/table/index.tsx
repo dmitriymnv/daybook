@@ -50,7 +50,9 @@ const renderItem = ({ item: { id, title } }: { item: JournalTableItem }) => {
   );
 };
 
-const onPress = (id: number) => {};
+const onPress = (id: number) => {
+  console.log(id);
+};
 
 const renderFooter = (loading: boolean) => {
   return loading ? (

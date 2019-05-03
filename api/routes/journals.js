@@ -11,8 +11,9 @@ const router = express.Router();
 
 router.post('/', ({ body }, res) => {
   const { from, categories } = body.data;
+
   if (from == 0) {
-    db.query(countJournals, (err, result) => {
+    db.query(countJournals(categories), (err, result) => {
       if (err) {
         dbQuery(res);
       } else {
