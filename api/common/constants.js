@@ -14,4 +14,7 @@ const countJournals = categories =>
     ? `SELECT COUNT(*) count FROM \`journals\` WHERE \`categories\` = ${categories}`
     : 'SELECT COUNT(*) count FROM `journals`';
 
-module.exports = { journals, journalsOffset, countJournals };
+const createUsers = (email, passwordHash) =>
+  `INSERT INTO \`users\`(\`email\`, \`password\`) VALUES ('${email}', '${passwordHash}')`;
+
+module.exports = { journals, journalsOffset, countJournals, createUsers };

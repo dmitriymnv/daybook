@@ -11,11 +11,13 @@ const router = express.Router();
 router.post('/', ({ body: { data: { email, password } } }, res) => {
   resUser(email, result => {
     if (result) {
-      const validPassword = isValidPassword(password, result['password']);
+      const validPassword = isValidPassword(password, result.password);
+
       if (validPassword) {
+        const { email, subscribers } = result;
         res.json({
           data: {
-            token: toAuthJSON({ email })
+            token: toAuthJSON({ email, subscribers })
           }
         });
       } else {

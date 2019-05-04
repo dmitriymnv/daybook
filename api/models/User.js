@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-function toAuthJSON({ email }) {
-  return jwt.sign({ email }, 'privatekey');
+function toAuthJSON(data) {
+  return jwt.sign({ ...data }, 'privatekey');
 }
 
 function isValidPassword(password, passwordHash) {

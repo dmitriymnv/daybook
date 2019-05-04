@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 
 const { toAuthJSON } = require('../../../models/User');
 const { resUser } = require('../../../models/User');
+const { createUsers } = require('../../../common/constants');
 
 const router = express.Router();
 
@@ -18,9 +19,7 @@ router.post('/', ({ body: { data: { email, password } } }, res) => {
       });
     } else {
       const passwordHash = bcrypt.hashSync(password, 10);
-      const request = `INSERT INTO \`users\`(\`email\`, \`password\`) VALUES ('${email}', '${passwordHash}')`;
-
-      db.query(request, (err, result) => {
+      db.query(createUsers(email, passwordHash), (err, result) => {
         if (err) {
         } else {
           res.json({

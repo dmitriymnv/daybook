@@ -6,7 +6,6 @@ export default () => (next: Dispatch<AnyAction>) => (action: AnyAction) => {
 
   if (payload && payload.toDecodeToken) {
     const decodedToken = decode(payload.toDecodeToken);
-
     next({
       type,
       payload: {
