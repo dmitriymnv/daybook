@@ -62,9 +62,9 @@ class SignUpScreen extends Component<SignUpScreenProps> {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 40,
-    marginLeft: 20,
-    marginRight: 20
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20
   }
 });
 

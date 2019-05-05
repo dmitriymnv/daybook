@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import {
   NavigationScreenProp,
   StackActions,
@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import PasswordForm from '../../../components/auth/signin/PasswordForm';
 import { apiServer } from '../../../core/constants';
 import { SignIn } from '../../../core/sagas/auth';
+import { styles as EmailStyles } from './Email';
 
 interface SignInScreenProps {
   navigation: NavigationScreenProp<any>;
@@ -22,10 +23,10 @@ interface SignInScreenProps {
 class SignInScreen extends Component<SignInScreenProps> {
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.head} />
+      <View style={EmailStyles.container}>
+        <View style={EmailStyles.head} />
 
-        <View style={styles.body}>
+        <View style={EmailStyles.body}>
           <PasswordForm onSubmit={this.onSubmit} />
         </View>
       </View>
@@ -55,22 +56,6 @@ class SignInScreen extends Component<SignInScreenProps> {
     });
   };
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between'
-  },
-  head: {
-    flex: 1,
-    alignItems: 'flex-end'
-  },
-  body: {
-    marginLeft: 20,
-    marginRight: 20,
-    marginBottom: 250
-  }
-});
 
 export default connect(
   state => ({}),

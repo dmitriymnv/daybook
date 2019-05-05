@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 
 import ButtonWithountBackground from '../../../components/button/WithountBackground';
@@ -48,7 +48,7 @@ class SignInScreen extends Component<SignInScreenProps> {
   };
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between'
@@ -58,14 +58,13 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end'
   },
   body: {
+    flex: 1,
+    justifyContent: 'flex-start',
     marginLeft: 20,
-    marginRight: 20,
-    marginBottom: 250
+    marginRight: 20
   },
   buttonSignup: {
-    paddingTop: 15,
-    paddingBottom: 15,
-    paddingRight: 15
+    padding: 20
   }
 });
 
