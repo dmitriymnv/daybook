@@ -4,7 +4,7 @@ import { NavigationScreenProp } from 'react-navigation';
 
 import { wrapperBottomTabNavigator as wrapper } from '../constants/Style';
 import { headSubscribeHomeScreen } from '../constants/Style';
-import HeadScreen from '../components/subscribe/HeadScreen';
+import HeadScreen from '../components/subscribers/HeadScreen';
 
 interface HomeScreenProps {
   navigation: NavigationScreenProp<any, any>;

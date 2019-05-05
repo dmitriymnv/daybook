@@ -1,11 +1,11 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import { createBottomTabNavigator } from 'react-navigation';
+import { createMaterialTopTabNavigator } from 'react-navigation';
 
 import TabBarIcon from './TopBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import SubscribeScreen from '../screens/SubscribeScreen';
-import { mainColor } from '../constants/Colors';
+import SubscribersScreen from '../screens/SubscribersScreen';
+import { main as mainColor, dark as darkColor } from '../constants/Colors';
 
 export interface TabBarIconProps {
   focused: boolean;
@@ -13,11 +13,12 @@ export interface TabBarIconProps {
   style?: object;
 }
 
-export default createBottomTabNavigator(
+export default createMaterialTopTabNavigator(
   {
     Home: {
       screen: HomeScreen,
       navigationOptions: {
+        tabBarLabel: 'Главная',
         tabBarIcon: ({ focused }: TabBarIconProps) => (
           <TabBarIcon
             focused={focused}
@@ -27,9 +28,10 @@ export default createBottomTabNavigator(
       }
     },
 
-    Subscibe: {
-      screen: SubscribeScreen,
+    Subscribers: {
+      screen: SubscribersScreen,
       navigationOptions: {
+        tabBarLabel: 'Подписки',
         tabBarIcon: ({ focused }: TabBarIconProps) => (
           <TabBarIcon
             focused={focused}
@@ -40,12 +42,22 @@ export default createBottomTabNavigator(
     }
   },
   {
+    tabBarPosition: 'bottom',
     tabBarOptions: {
       activeTintColor: mainColor,
+      inactiveTintColor: darkColor,
       style: {
-        height: '7%'
+        height: '7%',
+        backgroundColor: 'white'
       },
-      showLabel: false
+      labelStyle: {
+        marginTop: 2,
+        fontSize: 10
+      },
+      indicatorStyle: {
+        height: 0
+      },
+      showIcon: true
     }
   }
 );
