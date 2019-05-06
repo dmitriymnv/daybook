@@ -50,22 +50,27 @@ class Journals extends Component<JournalsProps> {
       })
       .then(({ data }) => {
         this._isMounted &&
-          this.setState({
-            data: [...this.state.data, ...data.result],
+          this.setState((state: { data: [] }) => ({
+            data: [...state.data, ...data.result],
             count: data.count || this.state.count,
             errors: data.errors || null,
             loading: false
-          });
+          }));
       })
       .catch(errors => {
-        this._isMounted && this.setState({ errors });
+        this._isMounted && this.setState(() => ({ errors }));
       });
   };
 
   handleLoadMore = () => {
     const { data, count, loading } = this.state;
     if (data.length < count && !loading) {
-      this.setState({ loading: true }, () => this.getData());
+      this.setState(
+        () => ({
+          loading: false
+        }),
+        () => this.getData()
+      );
     }
   };
 }

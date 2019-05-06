@@ -81,7 +81,9 @@ const Form = ({ WrappedComponent, fields, errors, buttonText }: FormProps) => {
     }
 
     onPress = async () => {
-      this.setState({ loading: true });
+      this.setState(() => ({
+        loading: true
+      }));
 
       this._isMounted = true;
 
@@ -90,24 +92,24 @@ const Form = ({ WrappedComponent, fields, errors, buttonText }: FormProps) => {
         .catch(({ code, error_code, error_message }: ResponseAPIError) => {
           if (code === 400 && this._isMounted) {
             if (error_code === 1) {
-              this.setState({
+              this.setState((state: { errors: object }) => ({
                 errors: {
-                  ...this.state.errors,
+                  ...state.errors,
                   email: error_message
                 }
-              });
+              }));
             } else if (error_code === 2 && this._isMounted) {
-              this.setState({
+              this.setState((state: { errors: object }) => ({
                 errors: {
-                  ...this.state.errors,
+                  ...state.errors,
                   password: error_message
                 }
-              });
+              }));
             }
           }
         })
         .then(() => {
-          this._isMounted && this.setState({ loading: false });
+          this._isMounted && this.setState(() => ({ loading: false }));
         });
     };
 
@@ -132,12 +134,12 @@ const Form = ({ WrappedComponent, fields, errors, buttonText }: FormProps) => {
 
       const setStateError = (error: string | boolean, type: string) => {
         this.setState(
-          {
+          () => ({
             errors: {
               ...this.state.errors,
               [type]: error
             }
-          },
+          }),
           () => this.validateForm()
         );
       };
@@ -163,13 +165,13 @@ const Form = ({ WrappedComponent, fields, errors, buttonText }: FormProps) => {
         (typeof data.email === 'string' && data.email.length === 0) ||
         (typeof data.password === 'string' && data.password.length === 0)
       ) {
-        this.setState({
+        this.setState(() => ({
           formValid: false
-        });
+        }));
       } else {
-        this.setState({
+        this.setState(() => ({
           formValid: !email && !password && !confirmPassword && !userAgreement
-        });
+        }));
       }
     }
   };

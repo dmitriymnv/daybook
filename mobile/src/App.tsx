@@ -22,7 +22,11 @@ class App extends Component {
         <AppLoading
           startAsync={this.loadResourcesAsync}
           onError={console.warn}
-          onFinish={() => this.setState({ loading: false })}
+          onFinish={() =>
+            this.setState(() => ({
+              loading: false
+            }))
+          }
         />
       );
     } else {
