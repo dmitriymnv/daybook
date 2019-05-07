@@ -3,7 +3,7 @@ import { ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 
 import { categoriesList } from '../../../constants/App';
-import Button from './Button';
+import ButtonSelection from './Button';
 
 interface SelectMenuProps {
   style?: object;
@@ -19,7 +19,7 @@ const SelectMenu = ({ style, navigation }: SelectMenuProps) => {
     >
       {categoriesList.map(({ id, text, icon }) => (
         <TouchableOpacity onPress={() => onPress({ id, navigation })} key={id}>
-          <Button text={text} icon={icon} />
+          <ButtonSelection text={text} icon={icon} />
         </TouchableOpacity>
       ))}
     </ScrollView>

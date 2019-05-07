@@ -47,11 +47,11 @@ export default createMaterialTopTabNavigator(
       activeTintColor: mainColor,
       inactiveTintColor: darkColor,
       style: {
-        height: '7%',
         backgroundColor: 'white'
       },
       labelStyle: {
         marginTop: 2,
+        marginBottom: 0,
         fontSize: 10
       },
       indicatorStyle: {

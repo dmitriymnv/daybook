@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, Platform } from 'react-native';
 
 import Ionicons from '../../../navigation/TopBarIcon';
 import { cardBackground as cardBackgroundColor } from '../../../constants/Colors';
-import { title } from '../../../constants/Style';
+import { title as titleStyle } from '../../../constants/Style';
 
 interface ButtonProps {
   text: string;
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     backgroundColor: cardBackgroundColor
   },
   title: {
-    ...title,
+    ...titleStyle,
     lineHeight: 45
   },
   icon: {

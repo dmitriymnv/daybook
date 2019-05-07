@@ -11,7 +11,7 @@ const TabBarIcon = ({ name, focused, style }: TabBarIconProps) => {
   return (
     <Ionicons
       name={name}
-      size={26}
+      size={23}
       style={style}
       color={focused ? tabIconSelectedColor : darkColor}
     />
