@@ -7,7 +7,7 @@ import TableJournals from './table';
 interface JournalsProps {
   loading?: {
     categories?: 0 | 1 | 2 | 3 | 4;
-    publisher?: string;
+    publisher?: [String];
   };
 }
 

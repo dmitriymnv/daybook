@@ -3,14 +3,15 @@ import { SIGN_IN_SUCCESS } from '../constants';
 
 const defaultState = {
   email: '',
-  token: ''
+  token: '',
+  publisher: []
 };
 
 export default (state = defaultState, { type, payload }: Reducer) => {
   switch (type) {
     case SIGN_IN_SUCCESS:
-      const { token, email } = payload;
-      return { ...state, token, email };
+      const { token, email, subscribers } = payload;
+      return { ...state, token, email, subscribers };
 
     default:
       return state;

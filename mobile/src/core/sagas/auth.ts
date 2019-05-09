@@ -48,11 +48,10 @@ export function* authCheckSaga() {
     const asyncUser = yield AsyncStorage.getItem('user');
 
     const user = JSON.parse(asyncUser);
-
     if (asyncUser !== null) {
       yield put({
         type: SIGN_IN_SUCCESS,
-        payload: { ...user }
+        payload: { toDecodeToken: user.token }
       });
     } else {
       yield put({
