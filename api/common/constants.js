@@ -1,18 +1,34 @@
 //sql запросы
-const journals = categories =>
-  categories !== undefined
-    ? `SELECT id, title, publisher FROM \`journals\` WHERE \`categories\` = ${categories} ORDER BY \`id\` DESC LIMIT 10`
-    : 'SELECT id, title, publisher FROM `journals` ORDER BY `id` DESC LIMIT 10';
+const journals = (categories, publisher) => {
+  if (categories !== undefined) {
+    return `SELECT id, title, publisher FROM \`journals\` WHERE \`categories\` = ${categories} ORDER BY \`id\` DESC LIMIT 10`;
+  } else if (publisher) {
+    const regexpPublisher = JSON.parse(publisher).join('|');
+    return `SELECT id, title, publisher 
+            FROM \`journals\` 
+            WHERE \`publisher\` REGEXP '${regexpPublisher}'
+            ORDER BY \`id\` 
+            DESC LIMIT 10`;
+  } else {
+    return 'SELECT id, title, publisher FROM `journals` ORDER BY `id` DESC LIMIT 10';
+  }
+};
 
-const journalsOffset = (categories, from) =>
-  categories !== undefined
-    ? `${journals(categories)} OFFSET ${from}`
+const journalsOffset = (categories, from, publisher) =>
+  categories && publisher !== undefined
+    ? `${journals(categories, publisher)} OFFSET ${from}`
     : `${journals()} OFFSET ${from}`;
 
-const countJournals = categories =>
-  categories !== undefined
-    ? `SELECT COUNT(*) count FROM \`journals\` WHERE \`categories\` = ${categories}`
-    : 'SELECT COUNT(*) count FROM `journals`';
+const countJournals = (categories, publisher) => {
+  if (categories !== undefined) {
+    return `SELECT COUNT(*) count FROM \`journals\` WHERE \`categories\` = ${categories}`;
+  } else if (publisher) {
+    const regexpPublisher = JSON.parse(publisher).join('|');
+    return `SELECT COUNT(*) count FROM \`journals\` WHERE \`publisher\` REGEXP '${regexpPublisher}'`;
+  } else {
+    return 'SELECT COUNT(*) count FROM `journals`';
+  }
+};
 
 const createUsers = (email, passwordHash) =>
   `INSERT INTO \`users\`(\`email\`, \`password\`) VALUES ('${email}', '${passwordHash}')`;
