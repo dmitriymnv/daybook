@@ -1,6 +1,6 @@
 import React from 'react';
-import { Platform } from 'react-native';
-import { createMaterialTopTabNavigator } from 'react-navigation';
+import { Platform, Dimensions } from 'react-native';
+import { createBottomTabNavigator } from 'react-navigation';
 
 import TabBarIcon from './TopBarIcon';
 import HomeScreen from '../screens/HomeScreen';
@@ -13,7 +13,7 @@ export interface TabBarIconProps {
   style?: object;
 }
 
-export default createMaterialTopTabNavigator(
+export default createBottomTabNavigator(
   {
     Home: {
       screen: HomeScreen,
@@ -42,20 +42,15 @@ export default createMaterialTopTabNavigator(
     }
   },
   {
-    tabBarPosition: 'bottom',
     tabBarOptions: {
       activeTintColor: mainColor,
       inactiveTintColor: darkColor,
       style: {
-        backgroundColor: 'white'
+        height: Dimensions.get('window').height * 0.07
       },
       labelStyle: {
-        marginTop: 2,
-        marginBottom: 0,
+        marginBottom: 5,
         fontSize: 10
-      },
-      indicatorStyle: {
-        height: 0
       },
       showIcon: true
     }
