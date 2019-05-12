@@ -20,7 +20,6 @@ const journalsOffset = (categories, from, publisher) =>
     : `${journals()} OFFSET ${from}`;
 
 const countJournals = (categories, publisher) => {
-  console.log(1111111111, categories, publisher);
   if (categories !== undefined) {
     return `SELECT COUNT(*) count FROM \`journals\` WHERE \`categories\` = ${categories}`;
   } else if (publisher) {

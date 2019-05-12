@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 
 import { wrapperBottomTabNavigator as wrapper } from '../constants/Style';
@@ -11,18 +11,24 @@ import { authModuleName } from '../core/constants';
 
 interface SubscribersScreenProps {
   navigation: NavigationScreenProp<any, any>;
-  subscribersUser: [String];
+  userSubscribers: [String];
 }
 
 const SubscribersScreen = ({
   navigation,
-  subscribersUser
+  userSubscribers
 }: SubscribersScreenProps) => {
   return (
     <View style={wrapper}>
       <HeadScreen styleWrapper={styles.head} navigation={navigation} />
       <View style={styles.body}>
-        <Journals loading={{ publisher: subscribersUser }} />
+        {userSubscribers.length ? (
+          <Journals loading={{ publisher: userSubscribers }} />
+        ) : (
+          <View>
+            <Text>Подписки отсутствуют</Text>
+          </View>
+        )}
       </View>
     </View>
   );
@@ -44,5 +50,5 @@ const styles = StyleSheet.create({
 });
 
 export default connect((state: { auth: { subscribers: [String] } }) => ({
-  subscribersUser: state[authModuleName].subscribers
+  userSubscribers: state[authModuleName].subscribers
 }))(SubscribersScreen);

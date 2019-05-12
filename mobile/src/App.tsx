@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { AppLoading, Font, Constants } from 'expo';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, AsyncStorage } from 'react-native';
 import { Provider } from 'react-redux';
 
 import AppNavigator from './navigation/AppNavigator';
@@ -12,7 +12,7 @@ class App extends Component {
     loading: true
   };
 
-  componentWillMount() {
+  async componentWillMount() {
     store.dispatch(authCheck());
   }
 

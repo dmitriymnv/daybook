@@ -14,11 +14,11 @@ export function authCheck() {
   };
 }
 
-export function SignIn(toDecodeToken: string) {
+export function SignIn(token: string) {
   return {
     type: SIGN_IN_REQUEST,
     payload: {
-      toDecodeToken
+      token
     }
   };
 }
@@ -26,17 +26,14 @@ export function SignIn(toDecodeToken: string) {
 export function* SignInSaga() {
   while (true) {
     const {
-      payload: { token, email }
+      payload: { token }
     } = yield take(SIGN_IN_REQUEST);
 
-    AsyncStorage.setItem('user', JSON.stringify({ token, email }));
+    AsyncStorage.setItem('user', JSON.stringify({ token }));
 
     yield put({
       type: SIGN_IN_SUCCESS,
-      payload: {
-        email,
-        token
-      }
+      payload: { toDecodeToken: token }
     });
   }
 }
@@ -47,11 +44,12 @@ export function* authCheckSaga() {
 
     const asyncUser = yield AsyncStorage.getItem('user');
 
-    const user = JSON.parse(asyncUser);
+    const { token } = JSON.parse(asyncUser);
+
     if (asyncUser !== null) {
       yield put({
         type: SIGN_IN_SUCCESS,
-        payload: { toDecodeToken: user.token }
+        payload: { toDecodeToken: token }
       });
     } else {
       yield put({
