@@ -11,7 +11,7 @@ import { authModuleName } from '../core/constants';
 
 interface SubscribersScreenProps {
   navigation: NavigationScreenProp<any, any>;
-  userSubscribers: [String];
+  userSubscribers: Array<string>;
 }
 
 const SubscribersScreen = ({
@@ -23,7 +23,7 @@ const SubscribersScreen = ({
       <HeadScreen styleWrapper={styles.head} navigation={navigation} />
       <View style={styles.body}>
         {userSubscribers.length ? (
-          <Journals loading={{ publisher: userSubscribers }} />
+          <Journals options={{ publishers: userSubscribers }} />
         ) : (
           <View>
             <Text>Подписки отсутствуют</Text>
@@ -49,6 +49,8 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect((state: { auth: { subscribers: [String] } }) => ({
-  userSubscribers: state[authModuleName].subscribers
-}))(SubscribersScreen);
+export default connect(
+  (state: { [authModuleName]: { subscribers: Array<string> } }) => ({
+    userSubscribers: state[authModuleName].subscribers
+  })
+)(SubscribersScreen);

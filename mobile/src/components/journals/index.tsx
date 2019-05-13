@@ -5,9 +5,9 @@ import { apiServer } from '../../core/constants';
 import TableJournals from './table';
 
 interface JournalsProps {
-  loading?: {
+  options?: {
     categories?: 0 | 1 | 2 | 3 | 4;
-    publisher?: [String];
+    publishers?: Array<string>;
   };
 }
 
@@ -48,7 +48,7 @@ class Journals extends Component<JournalsProps> {
       .post(`${apiServer}/journals`, {
         data: {
           from: this.state.data.length,
-          ...this.props.loading
+          ...this.props.options
         }
       })
       .then(({ data }) => {

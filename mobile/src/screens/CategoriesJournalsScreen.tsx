@@ -37,7 +37,7 @@ class CategoriesJournalsScreen extends Component<
     const categoriesId = this.props.navigation.getParam('id');
     return (
       <View style={styles.container}>
-        <Journals loading={{ categories: categoriesId }} />
+        <Journals options={{ categories: categoriesId }} />
       </View>
     );
   }

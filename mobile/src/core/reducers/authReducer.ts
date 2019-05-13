@@ -1,6 +1,12 @@
 import { Reducer } from './index';
 import { SIGN_IN_SUCCESS } from '../constants';
 
+export interface authType {
+  email: string;
+  token: string;
+  subscribers: Array<string>;
+}
+
 const defaultState = {
   email: '',
   token: '',
