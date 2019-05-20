@@ -1,5 +1,5 @@
 import { Reducer } from './index';
-import { SIGN_IN_SUCCESS } from '../constants';
+import { SignInType, AuthCheckType } from '../constants';
 
 export interface authType {
   email: string;
@@ -13,9 +13,13 @@ const defaultState = {
   subscribers: []
 };
 
-export default (state = defaultState, { type, payload }: Reducer) => {
+interface ReducerAuth extends Reducer {
+  type: SignInType | AuthCheckType;
+}
+
+export default (state = defaultState, { type, payload }: ReducerAuth) => {
   switch (type) {
-    case SIGN_IN_SUCCESS:
+    case SignInType.SIGN_IN_SUCCESS:
       return {
         ...state,
         ...payload

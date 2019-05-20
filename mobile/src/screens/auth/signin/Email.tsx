@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, KeyboardAvoidingView } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 
 import ButtonWithountBackground from '../../../components/button/WithountBackground';
 import EmailForm from '../../../components/auth/signin/EmailForm';
 import Axios from 'axios';
-import { apiServer } from '../../../core/constants';
+import { AppType } from '../../../core/constants';
 
 interface SignInScreenProps {
   navigation: NavigationScreenProp<Navigator>;
@@ -34,7 +34,7 @@ class SignInScreen extends Component<SignInScreenProps> {
   }
 
   onSubmit = async ({ email }: { email?: string }) => {
-    await Axios.post(`${apiServer}/auth/emailCheck`, {
+    await Axios.post(`${AppType.apiServer}/auth/emailCheck`, {
       data: {
         email
       }

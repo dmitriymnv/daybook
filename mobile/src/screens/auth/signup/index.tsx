@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import Axios from 'axios';
 
 import SignUpForm from '../../../components/auth/signup/SignUpForm';
-import { apiServer, ResponseAPIError } from '../../../core/constants';
+import { AppType, ResponseAPIError } from '../../../core/constants';
 import { SignIn } from '../../../core/sagas/auth';
 
 interface SignUpScreenProps {
@@ -42,7 +42,7 @@ class SignUpScreen extends Component<SignUpScreenProps> {
     email?: string;
     password?: string;
   }) => {
-    await Axios.post(`${apiServer}/auth/signup`, {
+    await Axios.post(`${AppType.apiServer}/auth/signup`, {
       data: { email, password }
     }).then(({ data: { data, error } }: ResponseAPISignUp) => {
       if (!!error) {

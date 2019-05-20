@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import { apiServer } from '../../core/constants';
+import { AppType } from '../../core/constants';
 import TableJournals from './table';
 
 interface JournalsProps {
@@ -45,7 +45,7 @@ class Journals extends Component<JournalsProps> {
     this._isMounted = true;
 
     return axios
-      .post(`${apiServer}/journals`, {
+      .post(`${AppType.apiServer}/journals`, {
         data: {
           from: this.state.data.length,
           ...this.props.options

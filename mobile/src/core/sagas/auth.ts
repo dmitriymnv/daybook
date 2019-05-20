@@ -1,22 +1,17 @@
 import { AsyncStorage } from 'react-native';
 import { all, take, put } from 'redux-saga/effects';
 
-import {
-  AUTH_CHECK_REQUEST,
-  SIGN_IN_REQUEST,
-  SIGN_IN_SUCCESS,
-  SIGN_IN_ERRROR
-} from '../constants';
+import { SignInType, AuthCheckType } from '../constants';
 
 export function authCheck() {
   return {
-    type: AUTH_CHECK_REQUEST
+    type: AuthCheckType.AUTH_CHECK_REQUEST
   };
 }
 
 export function SignIn(token: string) {
   return {
-    type: SIGN_IN_REQUEST,
+    type: SignInType.SIGN_IN_REQUEST,
     payload: {
       token
     }
@@ -27,12 +22,12 @@ export function* SignInSaga() {
   while (true) {
     const {
       payload: { token }
-    } = yield take(SIGN_IN_REQUEST);
+    } = yield take(SignInType.SIGN_IN_REQUEST);
 
     AsyncStorage.setItem('user', JSON.stringify({ token }));
 
     yield put({
-      type: SIGN_IN_SUCCESS,
+      type: SignInType.SIGN_IN_SUCCESS,
       payload: { toDecodeToken: token }
     });
   }
@@ -40,7 +35,7 @@ export function* SignInSaga() {
 
 export function* authCheckSaga() {
   while (true) {
-    yield take(AUTH_CHECK_REQUEST);
+    yield take(AuthCheckType.AUTH_CHECK_REQUEST);
 
     const asyncUser = yield AsyncStorage.getItem('user');
 
@@ -48,12 +43,12 @@ export function* authCheckSaga() {
 
     if (asyncUser !== null) {
       yield put({
-        type: SIGN_IN_SUCCESS,
+        type: SignInType.SIGN_IN_SUCCESS,
         payload: { toDecodeToken: token }
       });
     } else {
       yield put({
-        type: SIGN_IN_ERRROR
+        type: SignInType.SIGN_IN_ERRROR
       });
     }
   }

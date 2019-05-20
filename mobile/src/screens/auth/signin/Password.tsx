@@ -9,7 +9,7 @@ import {
 import { connect } from 'react-redux';
 
 import PasswordForm from '../../../components/auth/signin/PasswordForm';
-import { apiServer } from '../../../core/constants';
+import { apiServer, AppType } from '../../../core/constants';
 import { SignIn } from '../../../core/sagas/auth';
 import { styles as EmailStyles } from './Email';
 
@@ -36,7 +36,7 @@ class SignInScreen extends Component<SignInScreenProps> {
   onSubmit = async ({ password }: { password?: string }) => {
     const email: string = this.props.navigation.getParam('email');
 
-    await Axios.post(`${apiServer}/auth/signin`, {
+    await Axios.post(`${AppType.apiServer}/auth/signin`, {
       data: {
         email,
         password

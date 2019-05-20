@@ -12,7 +12,7 @@ import {
 
 import Headline from '../common/Headline';
 import Ionicons from '../../navigation/TopBarIcon';
-import { authModuleName } from '../../core/constants';
+import { authModuleName, AuthTypeRequest } from '../../core/constants';
 
 interface HeadScreenProps {
   styleWrapper: StyleProp<ViewStyle>;
