@@ -12,7 +12,8 @@ import {
 
 import Headline from '../common/Headline';
 import Ionicons from '../../navigation/TopBarIcon';
-import { authModuleName, AuthTypeRequest } from '../../core/constants';
+import { authModuleName } from '../../core/constants';
+import { AppState } from '../../core';
 
 interface HeadScreenProps {
   styleWrapper: StyleProp<ViewStyle>;
@@ -63,6 +64,8 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect((state: any) => ({
+const mapStateToProps = (state: AppState) => ({
   isAuth: !!state[authModuleName].token
-}))(HeadScreen);
+});
+
+export default connect(mapStateToProps)(HeadScreen);

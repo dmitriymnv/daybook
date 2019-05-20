@@ -4,8 +4,10 @@ import { View, StyleSheet } from 'react-native';
 import { Provider } from 'react-redux';
 
 import AppNavigator from './navigation/AppNavigator';
-import store from './core';
+import configureStore from './core';
 import { authCheck } from '../src/core/sagas/auth';
+
+const store = configureStore();
 
 class App extends Component {
   state = {

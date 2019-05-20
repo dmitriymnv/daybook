@@ -8,6 +8,7 @@ import { headSubscribeHomeScreen } from '../constants/Style';
 import HeadScreen from '../components/subscribers/HeadScreen';
 import Journals from '../components/journals';
 import { authModuleName } from '../core/constants';
+import { AppState } from '../core';
 
 interface SubscribersScreenProps {
   navigation: NavigationScreenProp<any, any>;
@@ -49,8 +50,8 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(
-  (state: { [authModuleName]: { subscribers: Array<string> } }) => ({
-    userSubscribers: state[authModuleName].subscribers
-  })
-)(SubscribersScreen);
+const mapStateToProps = (state: AppState) => ({
+  userSubscribers: state[authModuleName].subscribers
+});
+
+export default connect(mapStateToProps)(SubscribersScreen);

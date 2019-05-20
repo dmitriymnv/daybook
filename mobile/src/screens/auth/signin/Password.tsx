@@ -9,15 +9,13 @@ import {
 import { connect } from 'react-redux';
 
 import PasswordForm from '../../../components/auth/signin/PasswordForm';
-import { apiServer, AppType } from '../../../core/constants';
+import { AppType } from '../../../core/constants';
 import { SignIn } from '../../../core/sagas/auth';
 import { styles as EmailStyles } from './Email';
 
 interface SignInScreenProps {
   navigation: NavigationScreenProp<any>;
-  SignIn: (
-    toDecodeToken: string
-  ) => { type: string; payload: { toDecodeToken: string } };
+  SignIn: typeof SignIn;
 }
 
 class SignInScreen extends Component<SignInScreenProps> {
@@ -58,6 +56,6 @@ class SignInScreen extends Component<SignInScreenProps> {
 }
 
 export default connect(
-  state => ({}),
+  null,
   { SignIn }
 )(SignInScreen);

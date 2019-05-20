@@ -1,16 +1,21 @@
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
-import reducers from './reducers';
+import rootReducer from './reducers';
 import rootSaga from './sagas';
-//midlewares
 import decodedToken from './middlewares/token';
 
 const sagaMiddleware = createSagaMiddleware();
 
-const middlewares = applyMiddleware(decodedToken, sagaMiddleware);
+export type AppState = ReturnType<typeof rootReducer>;
 
-const store = createStore(reducers, middlewares);
-sagaMiddleware.run(rootSaga);
+export default () => {
+  const middlewares = [decodedToken, sagaMiddleware];
+  const middleWareEnhancer = applyMiddleware(...middlewares);
 
-export default store;
+  const store = createStore(rootReducer, middleWareEnhancer);
+
+  sagaMiddleware.run(rootSaga);
+
+  return store;
+};

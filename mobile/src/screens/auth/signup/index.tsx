@@ -13,7 +13,7 @@ import { AppType, ResponseAPIError } from '../../../core/constants';
 import { SignIn } from '../../../core/sagas/auth';
 
 interface SignUpScreenProps {
-  SignIn: (token: string) => void;
+  SignIn: typeof SignIn;
   navigation: NavigationScreenProp<Navigator>;
 }
 
@@ -69,6 +69,6 @@ const styles = StyleSheet.create({
 });
 
 export default connect(
-  () => ({}),
+  null,
   { SignIn }
 )(SignUpScreen);
