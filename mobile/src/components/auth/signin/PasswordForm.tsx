@@ -22,7 +22,8 @@ const PasswordForm = ({ data, errors, onChange }: PasswordFormProps) => {
         value: data.password,
         keyboardType: 'default',
         secureTextEntry: true,
-        onChangeText: onChange('password')
+        onChangeText: onChange('password'),
+        autoFocus: true
       }}
     />
   );

@@ -10,14 +10,14 @@ const { dbQuery } = require('../models/Error');
 const router = express.Router();
 
 router.post('/', ({ body }, res) => {
-  const { from, categories, publisher } = body.data;
+  const { from, categories, publishers } = body.data;
   if (from == 0) {
-    db.query(countJournals(categories, publisher), (err, result) => {
+    db.query(countJournals(categories, publishers), (err, result) => {
       if (err) {
         dbQuery(res);
       } else {
         let { count } = result[0];
-        db.query(journals(categories, publisher), (err, result) => {
+        db.query(journals(categories, publishers), (err, result) => {
           if (err) {
             dbQuery(res);
           } else {
@@ -27,7 +27,7 @@ router.post('/', ({ body }, res) => {
       }
     });
   } else {
-    db.query(journalsOffset(categories, from, publisher), (err, result) => {
+    db.query(journalsOffset(categories, from, publishers), (err, result) => {
       if (err) {
         dbQuery(res);
       } else {
