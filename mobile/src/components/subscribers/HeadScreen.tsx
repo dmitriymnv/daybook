@@ -12,7 +12,6 @@ import {
 
 import Headline from '../common/Headline';
 import Ionicons from '../../navigation/TopBarIcon';
-import { authModuleName } from '../../core/constants';
 import { AppState } from '../../core';
 
 interface HeadScreenProps {
@@ -65,7 +64,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state: AppState) => ({
-  isAuth: !!state[authModuleName].token
+  isAuth: !!state.auth.token
 });
 
 export default connect(mapStateToProps)(HeadScreen);

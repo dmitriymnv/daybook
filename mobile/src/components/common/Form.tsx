@@ -3,7 +3,7 @@ import { View, ActivityIndicator, Text, StyleSheet } from 'react-native';
 
 import Validation from './Validation';
 import DefaultButton from '../button/Default';
-import { ResponseAPIError } from '../../core/constants';
+import { ResponseAPIError } from '../../core/system/types';
 import { textError } from '../../constants/Style';
 
 interface FormProps {

@@ -5,7 +5,7 @@ import { NavigationScreenProp } from 'react-navigation';
 import ButtonWithountBackground from '../../../components/button/WithountBackground';
 import EmailForm from '../../../components/auth/signin/EmailForm';
 import Axios from 'axios';
-import { AppType } from '../../../core/constants';
+import { apiServer } from '../../../core/system/types';
 
 interface SignInScreenProps {
   navigation: NavigationScreenProp<Navigator>;
@@ -34,7 +34,7 @@ class SignInScreen extends Component<SignInScreenProps> {
   }
 
   onSubmit = async ({ email }: { email?: string }) => {
-    await Axios.post(`${AppType.apiServer}/auth/emailCheck`, {
+    await Axios.post(`${apiServer}/auth/emailCheck`, {
       data: {
         email
       }

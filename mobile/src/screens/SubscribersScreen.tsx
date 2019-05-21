@@ -7,7 +7,6 @@ import { wrapperBottomTabNavigator as wrapper } from '../constants/Style';
 import { headSubscribeHomeScreen } from '../constants/Style';
 import HeadScreen from '../components/subscribers/HeadScreen';
 import Journals from '../components/journals';
-import { authModuleName } from '../core/constants';
 import { AppState } from '../core';
 
 interface SubscribersScreenProps {
@@ -51,7 +50,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state: AppState) => ({
-  userSubscribers: state[authModuleName].subscribers
+  userSubscribers: state.auth.subscribers
 });
 
 export default connect(mapStateToProps)(SubscribersScreen);

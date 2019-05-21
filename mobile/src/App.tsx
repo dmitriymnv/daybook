@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 
 import AppNavigator from './navigation/AppNavigator';
 import configureStore from './core';
-import { authCheck } from '../src/core/sagas/auth';
+import { authCheck } from '../src/core/auth/actions';
 
 const store = configureStore();
 
