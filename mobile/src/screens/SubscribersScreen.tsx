@@ -11,7 +11,7 @@ import { AppState } from '../core';
 
 interface SubscribersScreenProps {
   navigation: NavigationScreenProp<any, any>;
-  userSubscribers: Array<string>;
+  userSubscribers: String[];
 }
 
 const SubscribersScreen = ({

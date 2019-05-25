@@ -1,11 +1,13 @@
-const enum Directions {
-  Up,
-  Down
+export class Observable<t> {
+  // ... все еще не реализовано ...
 }
 
-const enum Some {
-  One = 1,
-  Two = Directions.Down // Error. Cannot convert type 'Directions' to type 'Some'
+declare global {
+  interface Array<t> {
+    toObservable(): Observable<t>;
+  }
 }
 
-let val = Some.One == Directions.Up;
+Array.prototype.toObservable = function() {
+  // ...
+};
