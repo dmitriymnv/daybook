@@ -1,40 +1,16 @@
 const express = require('express');
 
-const {
-  journals,
-  journalsOffset,
-  countJournals
-} = require('../common/constants');
-const { dbQuery } = require('../models/Error');
+// const {
+//   journals,
+//   journalsOffset,
+//   countJournals
+// } = require('../common/constants');
+const { queryJournals } = require('../models/Journals');
 
 const router = express.Router();
 
 router.post('/', ({ body }, res) => {
-  const { from, categories, publishers } = body.data;
-  if (from == 0) {
-    db.query(countJournals(categories, publishers), (err, result) => {
-      if (err) {
-        dbQuery(res);
-      } else {
-        let { count } = result[0];
-        db.query(journals(categories, publishers), (err, result) => {
-          if (err) {
-            dbQuery(res);
-          } else {
-            res.json({ count, result });
-          }
-        });
-      }
-    });
-  } else {
-    db.query(journalsOffset(categories, from, publishers), (err, result) => {
-      if (err) {
-        dbQuery(res);
-      } else {
-        res.json({ result });
-      }
-    });
-  }
+  queryJournals(body, res);
 });
 
 module.exports = router;

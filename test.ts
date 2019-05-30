@@ -1,13 +1,51 @@
-export class Observable<t> {
-  // ... все еще не реализовано ...
-}
+$(document).ready(function() {
+  var event_textUpdated = new Event();
 
-declare global {
-  interface Array<t> {
-    toObservable(): Observable<t>;
+  function Preview(jQuery) {
+    this._root = jQuery;
+    this._text = this._root.find('.text');
+    this._button = this._root.find('.updating_control');
+    this._isSubscribed = false;
+
+    this.init();
   }
-}
+  Preview.prototype = {
+    constructor: Preview,
 
-Array.prototype.toObservable = function() {
-  // ...
-};
+    _onButtonClick: function() {
+      if (this._isSubscribed) {
+        this.unsubscribe();
+        this._button.text('Subscribe!');
+        return;
+      }
+
+      this.subscribe();
+      this._button.text('Unsubscribe!');
+    },
+
+    init: function() {
+      this._button.click($.proxy(this._onButtonClick, this));
+      this.subscribe();
+    },
+    update: function(data) {
+      this._text.text(data);
+    },
+    subscribe: function() {
+      event_textUpdated.subscribe(this.update, this);
+      this._isSubscribed = true;
+    },
+    unsubscribe: function() {
+      event_textUpdated.unsubscribe(this.update, this);
+      this._isSubscribed = false;
+    }
+  };
+
+  var preview1 = new Preview($('#preview1'));
+  var preview2 = new Preview($('#preview2'));
+
+  preview1.update($('#textbox').val());
+  preview2.update($('#textbox').val());
+  $('#textbox').keyup(function() {
+    event_textUpdated.raise($(this).val());
+  });
+});
