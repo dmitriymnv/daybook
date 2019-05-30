@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
     height: '8%'
   },
   body: {
-    marginTop: 20,
     height: '92%'
   }
 });

@@ -1,10 +1,12 @@
 import React from 'react';
 import {
   View,
+  Text,
   TouchableOpacity,
   StyleSheet,
   FlatList,
-  ActivityIndicator
+  ActivityIndicator,
+  Dimensions
 } from 'react-native';
 
 import PreviewItemJournal, {
@@ -38,6 +40,11 @@ const TableJournals = ({
       numColumns={2}
       contentContainerStyle={styles.list}
       showsVerticalScrollIndicator={false}
+      ListEmptyComponent={() => (
+        <View>
+          <Text>Список журналов пуст</Text>
+        </View>
+      )}
     />
   );
 };
@@ -68,10 +75,11 @@ const renderFooter = (loading: boolean) => {
 
 const styles = StyleSheet.create({
   list: {
-    flexDirection: 'column'
+    margin: 20,
+    alignItems: 'center'
   },
   item: {
-    width: '50%'
+    width: Dimensions.get('window').width / 2
   },
   loader: {
     padding: 20

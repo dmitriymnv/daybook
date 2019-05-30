@@ -15,7 +15,7 @@ interface HomeScreen {
 class HomeScreen extends Component<HomeScreen> {
   render() {
     return (
-      <View style={styles.wrapper}>
+      <View style={wrapper}>
         <View style={styles.head}>
           <View style={styles.headline}>
             <Headline text="Главная" />
@@ -33,7 +33,6 @@ class HomeScreen extends Component<HomeScreen> {
 }
 
 const styles = StyleSheet.create({
-  wrapper,
   head: {
     ...headSubscribeHomeScreen,
     height: '18%'

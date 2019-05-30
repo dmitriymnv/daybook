@@ -24,12 +24,12 @@ const PreviewItemJournal = ({ title, publisher }: PreviewItemJournalProps) => (
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    marginBottom: 25,
-    paddingLeft: 30,
-    paddingRight: 30
+    marginBottom: 20,
+    paddingLeft: 20,
+    paddingRight: 20
   },
   image: {
-    width: 140,
+    width: '100%',
     height: 180
   },
   title: {

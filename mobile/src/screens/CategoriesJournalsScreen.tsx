@@ -35,18 +35,10 @@ class CategoriesJournalsScreen extends Component<
 
   render() {
     const categoriesId = this.props.navigation.getParam('id');
-    return (
-      <View style={styles.container}>
-        <Journals options={{ categories: categoriesId }} />
-      </View>
-    );
+    return <Journals options={{ categories: categoriesId }} />;
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 20
-  }
-});
+const styles = StyleSheet.create({});
 
 export default CategoriesJournalsScreen;
