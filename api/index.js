@@ -1,9 +1,10 @@
 const express = require('express');
 const BodyParser = require('body-parser');
 
+const db = require('./db');
 const journals = require('./routes/journals');
 const auth = require('./routes/auth');
-const db = require('./db');
+const media = require('./routes/media');
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use(BodyParser.json());
 //routes
 app.use('/journals', journals);
 app.use('/auth', auth);
+app.use('/media', media);
 
 //middleware
 
