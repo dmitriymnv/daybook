@@ -2,17 +2,23 @@ import React from 'react';
 import { Text, View, StyleSheet, Image } from 'react-native';
 
 import { grayText as grayTextColor } from '../../../constants/Colors';
+import { apiServer } from '../../../core/system/types';
 
 export interface PreviewItemJournalProps {
+  id: number;
   title: string;
   publisher: string;
 }
 
-const PreviewItemJournal = ({ title, publisher }: PreviewItemJournalProps) => (
+const PreviewItemJournal = ({
+  id,
+  title,
+  publisher
+}: PreviewItemJournalProps) => (
   <View style={styles.container}>
     <Image
       source={{
-        uri: 'https://cv02.twirpx.net/2425/2425139.jpg?t=20180106012559'
+        uri: `${apiServer}/media/journal/${id}/0`
       }}
       style={styles.image}
     />

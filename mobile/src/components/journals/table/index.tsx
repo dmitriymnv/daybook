@@ -50,13 +50,13 @@ const TableJournals = ({
 };
 
 const renderItem = ({
-  item: { title, id, publisher }
+  item: { id, title, publisher }
 }: {
   item: JournalTableItem;
 }) => {
   return (
     <TouchableOpacity onPress={() => onPress(id)} style={styles.item}>
-      <PreviewItemJournal title={title} publisher={publisher} />
+      <PreviewItemJournal id={id} title={title} publisher={publisher} />
     </TouchableOpacity>
   );
 };
