@@ -14,12 +14,12 @@ function queryJournals(body, res) {
 }
 
 function queryJournalsFirst(categories, publishers, res) {
-  db.query(countJournals(categories, publishers), (err, result) => {
+  database.query(countJournals(categories, publishers), (err, result) => {
     if (err) {
       dbQuery(res);
     } else {
       let { count } = result[0];
-      db.query(journals(categories, publishers), (err, result) => {
+      database.query(journals(categories, publishers), (err, result) => {
         if (err) {
           dbQuery(res);
         } else {
@@ -31,13 +31,16 @@ function queryJournalsFirst(categories, publishers, res) {
 }
 
 function queryJournalsFrom(categories, publishers, from, res) {
-  db.query(journalsOffset(categories, from, publishers), (err, result) => {
-    if (err) {
-      dbQuery(res);
-    } else {
-      res.json({ result });
+  database.query(
+    journalsOffset(categories, from, publishers),
+    (err, result) => {
+      if (err) {
+        dbQuery(res);
+      } else {
+        res.json({ result });
+      }
     }
-  });
+  );
 }
 
 module.exports = { queryJournals };

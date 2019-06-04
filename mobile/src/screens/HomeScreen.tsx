@@ -3,10 +3,9 @@ import { View, StyleSheet } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 
 import { wrapperBottomTabNavigator as wrapper } from '../constants/Style';
-import CategorySelection from '../components/categories/categorySelection';
-import Headline from '../components/common/Headline';
 import Journals from '../components/journals';
 import { headSubscribeHomeScreen } from '../constants/Style';
+import HeadScreen from '../components/home/headScreen';
 
 interface HomeScreen {
   navigation: NavigationScreenProp<any, any>;
@@ -16,14 +15,10 @@ class HomeScreen extends Component<HomeScreen> {
   render() {
     return (
       <View style={wrapper}>
-        <View style={styles.head}>
-          <View style={styles.headline}>
-            <Headline text="Главная" />
-          </View>
-
-          <CategorySelection navigation={this.props.navigation} />
-        </View>
-
+        <HeadScreen
+          styleWrapper={styles.head}
+          navigation={this.props.navigation}
+        />
         <View style={styles.body}>
           <Journals />
         </View>

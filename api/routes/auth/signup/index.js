@@ -19,7 +19,7 @@ router.post('/', ({ body: { data: { email, password } } }, res) => {
       });
     } else {
       const passwordHash = bcrypt.hashSync(password, 10);
-      db.query(createUsers(email, passwordHash), (err, result) => {
+      database.query(createUsers(email, passwordHash), (err, result) => {
         if (err) {
         } else {
           res.json({

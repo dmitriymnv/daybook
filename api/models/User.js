@@ -16,7 +16,7 @@ function isValidPassword(password, passwordHash) {
 }
 
 async function resUser(email, res) {
-  db.query(
+  database.query(
     `SELECT * FROM \`users\` WHERE \`email\` = '${email.toLowerCase()}'`,
     (err, result) => {
       if (err) {

@@ -14,12 +14,8 @@ import PreviewItemJournal, {
 } from './PreviewItemJournal';
 import { main as mainColor } from '../../../constants/Colors';
 
-interface JournalTableItem extends PreviewItemJournalProps {
-  id: number;
-}
-
 interface TableJournalsProps {
-  data: Array<JournalTableItem>;
+  data: Array<PreviewItemJournalProps>;
   handleLoadMore: () => void;
   loading: boolean;
 }
@@ -52,7 +48,7 @@ const TableJournals = ({
 const renderItem = ({
   item: { id, title, publisher }
 }: {
-  item: JournalTableItem;
+  item: PreviewItemJournalProps;
 }) => {
   return (
     <TouchableOpacity onPress={() => onPress(id)} style={styles.item}>
