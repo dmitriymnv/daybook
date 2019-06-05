@@ -17,20 +17,23 @@ const SelectMenu = ({ style, navigation }: SelectMenuProps) => {
       showsHorizontalScrollIndicator={false}
       style={{ ...styles.container, ...style }}
     >
-      {categoriesList.map(({ id, text, icon }) => (
-        <TouchableOpacity onPress={() => onPress({ id, navigation })} key={id}>
-          <ButtonSelection text={text} icon={icon} />
-        </TouchableOpacity>
-      ))}
+      {CategoriesList(navigation)}
     </ScrollView>
   );
 };
+
+const CategoriesList = (navigation: SelectMenuProps['navigation']) =>
+  categoriesList.map(({ id, text, icon }) => (
+    <TouchableOpacity onPress={() => onPress({ id, navigation })} key={id}>
+      <ButtonSelection text={text} icon={icon} />
+    </TouchableOpacity>
+  ));
 
 const onPress = ({
   id,
   navigation
 }: {
-  id: string;
+  id: number;
   navigation: NavigationScreenProp<any, any>;
 }) => {
   navigation.navigate('CategoriesJournals', { id });
