@@ -5,7 +5,7 @@ import { NavigationScreenProp } from 'react-navigation';
 
 import { wrapperBottomTabNavigator as wrapper } from '../constants/Style';
 import { headSubscribeHomeScreen } from '../constants/Style';
-import HeadScreen from '../components/subscribers/HeadScreen';
+import Header from '../components/subscribers/Header';
 import Journals from '../components/journals';
 import { AppState } from '../core';
 
@@ -20,7 +20,7 @@ const SubscribersScreen = ({
 }: SubscribersScreenProps) => {
   return (
     <View style={wrapper}>
-      <HeadScreen styleWrapper={styles.head} navigation={navigation} />
+      <Header style={styles.head} navigation={navigation} />
       <View style={styles.body}>
         {userSubscribers.length ? (
           <Journals options={{ publishers: userSubscribers }} />

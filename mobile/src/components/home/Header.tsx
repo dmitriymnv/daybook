@@ -6,13 +6,13 @@ import Headline from '../common/Headline';
 import CategorySelection from '../categories/categorySelection';
 
 interface HeadScreenProps {
-  styleWrapper: StyleProp<ViewStyle>;
+  style: StyleProp<ViewStyle>;
   navigation: NavigationScreenProp<any, any>;
 }
 
-const HeadScreen = ({ styleWrapper, navigation }: HeadScreenProps) => {
+const HeadScreen = ({ style, navigation }: HeadScreenProps) => {
   return (
-    <View style={styleWrapper}>
+    <View style={style}>
       <View style={styles.headline}>
         <Headline text="Главная" />
       </View>

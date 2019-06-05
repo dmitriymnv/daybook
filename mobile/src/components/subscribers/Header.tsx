@@ -15,18 +15,18 @@ import Ionicons from '../../navigation/TopBarIcon';
 import { AppState } from '../../core';
 
 interface HeadScreenProps {
-  styleWrapper: StyleProp<ViewStyle>;
+  style: StyleProp<ViewStyle>;
   navigation: NavigationScreenProp<any, any>;
   isAuth: boolean;
 }
 
 const HeadScreen = ({
-  styleWrapper,
+  style,
   navigation: { navigate },
   isAuth
 }: HeadScreenProps) => {
   return (
-    <View style={styleWrapper}>
+    <View style={style}>
       <Headline text="Подписки" />
       <TouchableOpacity
         style={styles.icon}
