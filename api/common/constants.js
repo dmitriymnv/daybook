@@ -3,7 +3,7 @@ const journals = (categories, publisher) => {
   if (categories !== undefined) {
     return `SELECT id, title, publisher FROM \`journals\` WHERE \`categories\` = ${categories} ORDER BY \`id\` DESC LIMIT 10`;
   } else if (publisher) {
-    const regexpPublisher = JSON.parse(publisher).join('|');
+    const regexpPublisher = publisher.join('|');
     return `SELECT id, title, publisher 
             FROM \`journals\` 
             WHERE \`publisher\` REGEXP '${regexpPublisher}'
@@ -23,7 +23,7 @@ const countJournals = (categories, publisher) => {
   if (categories !== undefined) {
     return `SELECT COUNT(*) count FROM \`journals\` WHERE \`categories\` = ${categories}`;
   } else if (publisher) {
-    const regexpPublisher = JSON.parse(publisher).join('|');
+    const regexpPublisher = publisher.join('|');
     return `SELECT COUNT(*) count FROM \`journals\` WHERE \`publisher\` REGEXP '${regexpPublisher}'`;
   } else {
     return 'SELECT COUNT(*) count FROM `journals`';

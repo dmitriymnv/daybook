@@ -13,30 +13,38 @@ import {
 import Headline from '../common/Headline';
 import Ionicons from '../../navigation/TopBarIcon';
 import { AppState } from '../../core';
+import PublisherSelections from './PublisherSelection';
+import { AuthState } from '../../core/auth/types';
 
 interface HeadScreenProps {
   style: StyleProp<ViewStyle>;
   navigation: NavigationScreenProp<any, any>;
   isAuth: boolean;
+  userSubscribers: AuthState['subscribers'];
 }
 
 const HeadScreen = ({
   style,
   navigation: { navigate },
-  isAuth
+  isAuth,
+  userSubscribers
 }: HeadScreenProps) => {
   return (
     <View style={style}>
-      <Headline text="Подписки" />
-      <TouchableOpacity
-        style={styles.icon}
-        onPress={() => authCheck({ navigate, isAuth })}
-      >
-        <Ionicons
-          name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'}
-          focused={false}
-        />
-      </TouchableOpacity>
+      <View style={styles.headlineProfile}>
+        <Headline text="Подписки" />
+        <TouchableOpacity
+          style={styles.icon}
+          onPress={() => authCheck({ navigate, isAuth })}
+        >
+          <Ionicons
+            name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'}
+            focused={false}
+          />
+        </TouchableOpacity>
+      </View>
+
+      <PublisherSelections userSubscribers={userSubscribers} />
     </View>
   );
 };
@@ -60,6 +68,12 @@ const styles = StyleSheet.create({
     paddingLeft: 100,
     paddingRight: 20,
     paddingBottom: 20
+  },
+  headlineProfile: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'baseline',
+    flexDirection: 'row'
   }
 });
 

@@ -9,11 +9,12 @@ const initialState: AuthState = {
 export default (state = initialState, action: AuthAction) => {
   switch (action.type) {
     case SIGN_IN_SUCCESS:
+      const { subscribers, ...payload } = action.payload;
       return {
         ...state,
-        ...action.payload
+        subscribers: JSON.parse(subscribers),
+        ...payload
       };
-
     default:
       return state;
   }

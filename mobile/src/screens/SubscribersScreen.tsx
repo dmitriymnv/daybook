@@ -8,10 +8,11 @@ import { headSubscribeHomeScreen } from '../constants/Style';
 import Header from '../components/subscribers/Header';
 import Journals from '../components/journals';
 import { AppState } from '../core';
+import { AuthState } from '../core/auth/types';
 
 interface SubscribersScreenProps {
   navigation: NavigationScreenProp<any, any>;
-  userSubscribers: String[];
+  userSubscribers: AuthState['subscribers'];
 }
 
 const SubscribersScreen = ({
@@ -20,16 +21,30 @@ const SubscribersScreen = ({
 }: SubscribersScreenProps) => {
   return (
     <View style={wrapper}>
-      <Header style={styles.head} navigation={navigation} />
-      <View style={styles.body}>
-        {userSubscribers.length ? (
-          <Journals options={{ publishers: userSubscribers }} />
-        ) : (
-          <View>
-            <Text>Подписки отсутствуют</Text>
-          </View>
-        )}
-      </View>
+      <Header
+        style={styles.head}
+        navigation={navigation}
+        userSubscribers={userSubscribers}
+      />
+      <Body userSubscribers={userSubscribers} />
+    </View>
+  );
+};
+
+const Body = ({
+  userSubscribers
+}: {
+  userSubscribers: AuthState['subscribers'];
+}) => {
+  return (
+    <View style={styles.body}>
+      {userSubscribers.length ? (
+        <Journals options={{ publishers: userSubscribers }} />
+      ) : (
+        <View>
+          <Text>Подписки отсутствуют</Text>
+        </View>
+      )}
     </View>
   );
 };
@@ -37,14 +52,10 @@ const SubscribersScreen = ({
 const styles = StyleSheet.create({
   head: {
     ...headSubscribeHomeScreen,
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'baseline',
-    flexDirection: 'row',
-    height: '8%'
+    height: '15%'
   },
   body: {
-    height: '92%'
+    height: '85%'
   }
 });
 

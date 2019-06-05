@@ -10,11 +10,17 @@ export interface AuthState {
   subscribers: String[];
 }
 
+interface payloadSignInAction {
+  email: AuthState['email'];
+  token: AuthState['token'];
+  subscribers: string;
+}
+
 //ACTION
 
 export interface SignInAction {
   type: typeof SIGN_IN_SUCCESS;
-  payload: AuthState;
+  payload: payloadSignInAction;
 }
 
 export type AuthAction = SignInAction;
