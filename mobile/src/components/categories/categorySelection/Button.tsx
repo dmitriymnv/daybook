@@ -1,9 +1,8 @@
 import React from 'react';
-import { Text, View, StyleSheet, Platform } from 'react-native';
+import { Text, View, Platform } from 'react-native';
 
 import Ionicons from '../../../navigation/TopBarIcon';
-import { cardBackground as cardBackgroundColor } from '../../../constants/Colors';
-import { title as titleStyle } from '../../../constants/Style';
+import { grayIconText as styles } from '../../button/style';
 
 interface ButtonProps {
   text: string;
@@ -16,31 +15,12 @@ const Button = ({ text, icon: { ios, md } }: ButtonProps) => {
       <Ionicons
         name={Platform.OS === 'ios' ? ios : md}
         focused={false}
-        style={styles.title}
+        style={styles.icon}
       />
-      <Text style={styles.icon}>{text}</Text>
+
+      <Text style={styles.title}>{text}</Text>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginRight: 10,
-    width: 140,
-    height: 45,
-    borderRadius: 5,
-    backgroundColor: cardBackgroundColor
-  },
-  title: {
-    ...titleStyle,
-    lineHeight: 45
-  },
-  icon: {
-    lineHeight: 45,
-    marginLeft: 10
-  }
-});
 
 export default Button;

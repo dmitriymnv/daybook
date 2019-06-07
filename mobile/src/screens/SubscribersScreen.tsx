@@ -52,10 +52,10 @@ const Body = ({
 const styles = StyleSheet.create({
   head: {
     ...headSubscribeHomeScreen,
-    height: '15%'
+    height: '20%'
   },
   body: {
-    height: '85%'
+    height: '80%'
   }
 });
 

@@ -7,7 +7,7 @@ export const AUTH_CHECK_REQUEST = 'AUTH_CHECK_REQUEST';
 export interface AuthState {
   email: string;
   token: string;
-  subscribers: String[];
+  subscribers: string[];
 }
 
 interface payloadSignInAction {
