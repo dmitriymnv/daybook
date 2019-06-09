@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 
 import Journals from '../components/journals';
@@ -39,10 +38,8 @@ class CategoriesJournalsScreen extends Component<
 
     render() {
         const categoriesId = this.props.navigation.getParam('id');
-        return <Journals options={{ publishers: categoriesId }} />;
+        return <Journals options={{ categories: categoriesId }} />;
     }
 }
-
-const styles = StyleSheet.create({});
 
 export default CategoriesJournalsScreen;
