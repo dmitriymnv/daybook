@@ -44,7 +44,10 @@ const HeadScreen = ({
         </TouchableOpacity>
       </View>
 
-      <PublisherSelections userSubscribers={userSubscribers} />
+      <PublisherSelections
+        userSubscribers={userSubscribers}
+        navigate={navigate}
+      />
     </View>
   );
 };

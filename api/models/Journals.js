@@ -6,6 +6,7 @@ const {
 
 function queryJournals(body, res) {
   const { from, categories, publishers } = body.data;
+  console.log('TCL: queryJournals -> publishers', publishers);
   if (from == 0) {
     queryJournalsFirst(categories, publishers, res);
   } else {
