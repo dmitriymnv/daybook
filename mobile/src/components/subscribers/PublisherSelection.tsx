@@ -61,8 +61,7 @@ const onPress = ({
 const styles = StyleSheet.create({
     container: {
         display: 'flex',
-        flexDirection: 'row',
-        marginTop: 20
+        flexDirection: 'row'
     }
 });
 

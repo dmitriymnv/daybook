@@ -1,40 +1,24 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 
-import { wrapperBottomTabNavigator as wrapper } from '../constants/Style';
+import { wrapperHomeSubscribersScreen } from '../constants/Style';
 import Journals from '../components/journals';
-import { headSubscribeHomeScreen } from '../constants/Style';
 import Header from '../components/home/Header';
 
 interface HomeScreen {
-  navigation: NavigationScreenProp<any, any>;
+    navigation: NavigationScreenProp<any, any>;
 }
 
 class HomeScreen extends Component<HomeScreen> {
-  render() {
-    return (
-      <View style={wrapper}>
-        <Header style={styles.head} navigation={this.props.navigation} />
-        <View style={styles.body}>
-          <Journals />
-        </View>
-      </View>
-    );
-  }
+    render() {
+        return (
+            <View style={wrapperHomeSubscribersScreen}>
+                <Header navigation={this.props.navigation} />
+                <Journals />
+            </View>
+        );
+    }
 }
-
-const styles = StyleSheet.create({
-  head: {
-    ...headSubscribeHomeScreen,
-    height: '18%'
-  },
-  body: {
-    height: '82%'
-  },
-  headline: {
-    alignItems: 'flex-start'
-  }
-});
 
 export default HomeScreen;
