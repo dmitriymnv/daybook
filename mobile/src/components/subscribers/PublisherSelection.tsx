@@ -55,7 +55,7 @@ const onPress = ({
     publishers: string;
     navigate: NavigationScreenProp<any>['navigate'];
 }) => {
-    navigate('CategoriesJournals', { publishers });
+    navigate('CategoriesPublishers', { publishers });
 };
 
 const styles = StyleSheet.create({

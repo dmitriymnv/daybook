@@ -30,13 +30,13 @@ const CategoriesList = (navigation: SelectMenuProps['navigation']) =>
     ));
 
 const onPress = ({
-    id,
+    id: categories,
     navigation
 }: {
     id: number;
     navigation: NavigationScreenProp<any, any>;
 }) => {
-    navigation.navigate('CategoriesJournals', { id });
+    navigation.navigate('CategoriesPublishers', { categories });
 };
 
 const styles = StyleSheet.create({
