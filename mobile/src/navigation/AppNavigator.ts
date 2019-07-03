@@ -3,6 +3,7 @@ import { createAppContainer, createStackNavigator } from 'react-navigation';
 import MainTabNavigator from './MainNavigator';
 import ProfileScreen from '../screens/ProfileScreen';
 import CategoriesPublishersScreen from '../screens/CategoriesPublishersScreen';
+import JournalScreen from '../screens/JournalScreen';
 import { SignInStack, SignUpStack } from '../screens/auth/index';
 
 export default createAppContainer(
@@ -31,6 +32,9 @@ export default createAppContainer(
         },
         CategoriesPublishers: {
             screen: CategoriesPublishersScreen
+        },
+        Journal: {
+            screen: JournalScreen
         }
     })
 );
