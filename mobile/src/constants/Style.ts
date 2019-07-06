@@ -1,4 +1,4 @@
-import { StatusBar } from 'react-native';
+import { Constants } from 'expo';
 
 import {
     main as mainColor,
@@ -8,7 +8,7 @@ import {
 
 export const wrapperHomeSubscribersScreen = {
     flex: 1,
-    paddingTop: (StatusBar.currentHeight || 27) + 20
+    paddingTop: Constants.statusBarHeight
 };
 
 export const headSubscribeHomeScreen = {
