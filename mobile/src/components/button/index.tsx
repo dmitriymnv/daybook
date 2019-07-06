@@ -1,6 +1,6 @@
 export interface ButtonProps {
-  text: string;
-  onPress: () => any;
-  style?: object;
-  disabled?: boolean;
+    text: string;
+    onPress: (props: any) => any;
+    style?: object;
+    disabled?: boolean;
 }
