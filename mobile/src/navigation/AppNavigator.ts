@@ -4,31 +4,27 @@ import MainTabNavigator from './MainNavigator';
 import ProfileScreen from '../screens/ProfileScreen';
 import CategoriesPublishersScreen from '../screens/CategoriesPublishersScreen';
 import JournalScreen from '../screens/JournalScreen';
-import { SignInStack, SignUpStack } from '../screens/auth/index';
+import SignInScreen from '../screens/auth/signin';
+import SignUpScreen from '../screens/auth/signup';
 
 export default createAppContainer(
     createStackNavigator({
         // bottom navigator
         Main: {
             screen: MainTabNavigator,
-            navigationOptions: () => ({
+            navigationOptions: {
                 header: null
-            })
+            }
         },
+
         Profile: {
             screen: ProfileScreen
         },
         SignIn: {
-            screen: SignInStack,
-            navigationOptions: () => ({
-                title: 'Авторизация'
-            })
+            screen: SignInScreen
         },
         SignUp: {
-            screen: SignUpStack,
-            navigationOptions: () => ({
-                title: 'Регистрация'
-            })
+            screen: SignUpScreen
         },
         CategoriesPublishers: {
             screen: CategoriesPublishersScreen
