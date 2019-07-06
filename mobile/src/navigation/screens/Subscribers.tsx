@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { View, Text } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 
-import { wrapperHomeSubscribersScreen } from '../constants/Style';
-import Header from '../components/subscribers/Header';
-import Journals from '../components/journals';
-import { AppState } from '../core';
-import { AuthState } from '../core/auth/types';
+import { wrapperHomeSubscribersScreen } from '../../constants/Style';
+import Header from '../../components/subscribers/Header';
+import Journals from '../../components/journals';
+import { AppState } from '../../core';
+import { AuthState } from '../../core/auth/types';
 
 interface SubscribersScreenProps {
     navigation: NavigationScreenProp<any, any>;

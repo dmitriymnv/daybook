@@ -3,8 +3,8 @@ import { Platform, Dimensions } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation';
 
 import TabBarIcon from './TopBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import SubscribersScreen from '../screens/SubscribersScreen';
+import HomeScreen from './screens/Home';
+import SubscribersScreen from './screens/Subscribers';
 import { main as mainColor, dark as darkColor } from '../constants/Colors';
 
 export interface TabBarIconProps {

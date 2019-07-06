@@ -1,11 +1,11 @@
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 
 import MainTabNavigator from './MainNavigator';
-import ProfileScreen from '../screens/ProfileScreen';
-import CategoriesPublishersScreen from '../screens/CategoriesPublishersScreen';
-import JournalScreen from '../screens/JournalScreen';
-import SignInScreen from '../screens/auth/signin';
-import SignUpScreen from '../screens/auth/signup';
+import ProfileScreen from './screens/Profile';
+import CategoriesPublishersScreen from './screens/CategoriesPublishers';
+import JournalScreen from './screens/Journal';
+import SignInScreen from './screens/auth/SignIn';
+import SignUpScreen from './screens/auth/SignUp';
 
 export default createAppContainer(
     createStackNavigator({

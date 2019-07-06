@@ -7,9 +7,9 @@ import {
 } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
-import EmailScreen from './Email';
-import PasswordScreen from './Password';
-import Ionicons from '../../../navigation/TopBarIcon';
+import EmailScreen from './SignInEmail';
+import PasswordScreen from './SignInPassword';
+import Ionicons from '../../TopBarIcon';
 import ButtonWithountBackground from '../../../components/button/WithountBackground';
 
 export default createStackNavigator(

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { NavigationScreenProp } from 'react-navigation';
 
-import Journals from '../components/journals';
-import { categoriesList } from '../constants/App';
+import Journals from '../../components/journals';
+import { categoriesList } from '../../constants/App';
 
 interface CategoriesJournalsScreenProps {
     navigation: NavigationScreenProp<any>;
