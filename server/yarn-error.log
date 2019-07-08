@@ -1,0 +1,57 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js init
+
+PATH: 
+  C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Users\minae\AppData\Local\Microsoft\WindowsApps;;C:\Users\minae\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\minae\AppData\Roaming\npm;C:\Users\minae\AppData\Local\Yarn\bin
+
+Yarn version: 
+  1.13.0
+
+Node version: 
+  11.10.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: canceled
+      at Interface.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:125657:13)
+      at Interface.emit (events.js:197:13)
+      at Interface._ttyWrite (readline.js:799:16)
+      at ReadStream.onkeypress (readline.js:184:10)
+      at ReadStream.emit (events.js:197:13)
+      at emitKeys (internal/readline.js:424:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (readline.js:1071:36)
+      at ReadStream.emit (events.js:197:13)
+      at addChunk (_stream_readable.js:288:12)
+
+npm manifest: 
+  {
+    "name": "api-daybook",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "start": "nodemon index.js",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "bcrypt": "^3.0.6",
+      "body-parser": "^1.18.3",
+      "express": "^4.16.4",
+      "jsonwebtoken": "^8.5.1",
+      "mysql": "^2.16.0"
+    },
+    "devDependencies": {
+      "nodemon": "^1.18.10"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

@@ -1,3 +1,3 @@
 node_modules
 .vscode/
-mobile/.expo/packager-info.json
+client/.expo/packager-info.json
