@@ -39,4 +39,12 @@ const countJournals = (categories, publishers) => {
 const createUsers = (email, passwordHash) =>
     `INSERT INTO \`users\`(\`email\`, \`password\`) VALUES ('${email}', '${passwordHash}')`;
 
-module.exports = { journals, journalsOffset, countJournals, createUsers };
+const journal = id => `SELECT content FROM \`journals\` WHERE \`id\` = ${id}`;
+
+module.exports = {
+    journals,
+    journalsOffset,
+    countJournals,
+    createUsers,
+    journal
+};
