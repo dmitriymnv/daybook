@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { NavigationScreenProp } from 'react-navigation';
 import { View, TouchableOpacity, Platform, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 import Headline from '../common/Headline';
-import Ionicons from '../../navigation/TopBarIcon';
 import { AppState } from '../../core';
 import PublisherSelections from './PublisherSelection';
 import { AuthState } from '../../core/auth/types';
@@ -33,7 +33,7 @@ const HeadScreen = ({
                         name={
                             Platform.OS === 'ios' ? 'ios-person' : 'md-person'
                         }
-                        focused={false}
+                        size={25}
                     />
                 </TouchableOpacity>
             </View>
@@ -53,7 +53,7 @@ const authCheck = ({
     navigate: (screen: string) => any;
     isAuth: boolean;
 }) => {
-    if (isAuth) {
+    if (!isAuth) {
         navigate('Profile');
     } else {
         navigate('SignIn');

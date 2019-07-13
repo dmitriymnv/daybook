@@ -1,26 +1,26 @@
 import React from 'react';
 import { Text, View, Platform } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-import Ionicons from '../../../navigation/TopBarIcon';
 import { grayIconText as styles } from '../../button/style';
 
 interface ButtonProps {
-  text: string;
-  icon: { ios: string; md: string };
+    text: string;
+    icon: { ios: string; md: string };
 }
 
 const Button = ({ text, icon: { ios, md } }: ButtonProps) => {
-  return (
-    <View style={styles.container}>
-      <Ionicons
-        name={Platform.OS === 'ios' ? ios : md}
-        focused={false}
-        style={styles.icon}
-      />
+    return (
+        <View style={styles.container}>
+            <Ionicons
+                name={Platform.OS === 'ios' ? ios : md}
+                size={15}
+                style={styles.icon}
+            />
 
-      <Text style={styles.title}>{text}</Text>
-    </View>
-  );
+            <Text style={styles.title}>{text}</Text>
+        </View>
+    );
 };
 
 export default Button;
