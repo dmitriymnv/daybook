@@ -1,16 +1,10 @@
 import React from 'react';
-import {
-    TouchableOpacity,
-    Platform,
-    GestureResponderEvent,
-    View
-} from 'react-native';
+import { View } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
 import EmailScreen from './SignInEmail';
 import PasswordScreen from './SignInPassword';
-import Ionicons from '../../TopBarIcon';
-import ButtonWithountBackground from '../../../components/button/WithountBackground';
+import { LeftBack, RightSignUp } from '../../../components/button/ScreenHeader';
 
 export default createStackNavigator(
     {
@@ -29,39 +23,13 @@ export default createStackNavigator(
         },
         navigationOptions: ({
             navigation: {
-                state: { index },
-                goBack,
-                navigate
+                state: { index }
             }
         }) => {
             return {
-                headerLeft: <Left onPress={() => goBack(null)} />,
-                headerRight:
-                    index === 0 ? (
-                        <Right onPress={() => navigate('SignUp')} />
-                    ) : (
-                        <View />
-                    )
+                headerLeft: <LeftBack />,
+                headerRight: index === 0 ? <RightSignUp /> : <View />
             };
         }
     }
 );
-
-const Left = ({
-    onPress
-}: {
-    onPress: (event: GestureResponderEvent) => void;
-}) => (
-    <TouchableOpacity onPress={onPress} style={{ padding: 15 }}>
-        <Ionicons
-            name={Platform.OS === 'ios' ? 'ios-arrow-back' : 'md-arrow-back'}
-            focused={false}
-        />
-    </TouchableOpacity>
-);
-
-const Right = ({
-    onPress
-}: {
-    onPress: (event: GestureResponderEvent) => void;
-}) => <ButtonWithountBackground text={'Регистрация'} onPress={onPress} />;
